@@ -2,7 +2,9 @@ def binary_search(arr, start, end, key):
     if start > end:
         return -1
 
-    mid = (start + end)//2
+    # (instead of (start +end)/2)
+    mid = start + (end - start)//2  # to handle memory overflow for large start and end.
+
     if key == arr[mid]:
         return mid
 
