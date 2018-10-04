@@ -34,4 +34,4 @@ arrival_time_arr = [900, 940, 950, 1100, 1500, 1800]
 departure_time_arr = [910, 1200, 1120, 1130, 1900, 2000]
 
 min_tracks_required = calculate_min_platforms(arrival_time_arr, departure_time_arr)
-print(min_tracks_required)
+print('minimum tracks required = ', min_tracks_required)
