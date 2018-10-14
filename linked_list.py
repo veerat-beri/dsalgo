@@ -2,19 +2,19 @@ from builtins import NotImplementedError
 
 
 class _LinkedListNode:
-    def __init__(self, data):
+    def __init__(self, data, **kwargs):
         self.data = data
 
 
 class SinglyLinkedListNode(_LinkedListNode):
-    def __init__(self, data):
-        super(SinglyLinkedListNode, self).__init__(data)
+    def __init__(self, data, **kwargs):
+        super(SinglyLinkedListNode, self).__init__(data, **kwargs)
         self.next = None
 
 
 class DoublyLinkedListNode(SinglyLinkedListNode):
-    def __init__(self, data):
-        super(DoublyLinkedListNode, self).__init__(data)
+    def __init__(self, data, **kwargs):
+        super(DoublyLinkedListNode, self).__init__(data, **kwargs)
         self.previous = None
 
 
@@ -36,32 +36,58 @@ class _LinkedList:
 
 
 class SinglyLinkedList(_LinkedList):
-    def insert_at_begin(self, node: DoublyLinkedListNode):
+    def __init__(self, **kwargs):
+        super(SinglyLinkedList, self).__init__(**kwargs)
+
+    def insert_at_begin(self, node: SinglyLinkedListNode):
         node.next = self.head
         self.head = node
 
 
 class DoublyLinkedList(_LinkedList):
+    def __init__(self, **kwargs):
+        super(DoublyLinkedList, self).__init__(**kwargs)
+
     def insert_at_begin(self, node: DoublyLinkedListNode):
         node.next = self.head
+        self.head.previous = node
         self.head = node
 
-    # def insert_at_end(self, node: Node):
-    #     self.end.next = node
-    #     self.end = node
+
+class _BuildLinkedList:
+    def __init__(self, list_of_nodes: [_LinkedListNode]=None, auto_populate=True, **kwargs):
+        self.auto_populate = auto_populate
+        self.list_of_nodes = list_of_nodes + ([SinglyLinkedListNode(4), SinglyLinkedListNode(6), SinglyLinkedListNode(5)] if self.auto_populate else [])
+
+    def build(self):
+        raise NotImplementedError
 
 
-class BuildLinkedList:
-    def __init__(self, singly_linked_list=None, doubly_linked_list=None, list_of_nodes: [_LinkedListNode]=None):
-        self.doubly_linked_list = doubly_linked_list
+class BuildSinglyLinkedList(_BuildLinkedList):
+    def __init__(self, singly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=None, auto_populate=True, **kwargs):
+        super(BuildSinglyLinkedList, self).__init__(list_of_nodes, auto_populate, **kwargs)
         self.singly_linked_list = singly_linked_list
-        self.list_of_nodes = list_of_nodes
+
+    def build(self):
+        if not self.singly_linked_list:
+            self.singly_linked_list = SinglyLinkedList()
+
+        for node in self.list_of_nodes:
+            self.singly_linked_list.insert_at_begin(node)
+
+        return self.singly_linked_list
+
+
+class BuildDoublyLinkedList(_BuildLinkedList):
+    def __init__(self, doubly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=None, auto_populate=True, **kwargs):
+        super(BuildDoublyLinkedList, self).__init__(list_of_nodes, auto_populate, **kwargs)
+        self.doubly_linked_list = doubly_linked_list
 
     def build(self):
         if not self.doubly_linked_list:
             self.doubly_linked_list = DoublyLinkedList()
-        if not self.list_of_nodes:
-            self.list_of_nodes = [Node(4), Node(6), Node(5)]
+        if not self.list_of_nodes and self.auto_populate:
+            self.list_of_nodes = [DoublyLinkedListNode(4), DoublyLinkedListNode(5), DoublyLinkedListNode(6)]
 
         for node in self.list_of_nodes:
             self.doubly_linked_list.insert_at_begin(node)
@@ -71,9 +97,9 @@ class BuildLinkedList:
 
 # driver code
 def run():
-    list_of_nodes = [Node(1), Node(2), Node(3)]
-    doubly_linked_list = BuildDoublyLinkedList(list_of_nodes=list_of_nodes).build()
-    doubly_linked_list.print_linked_list()
+    list_of_nodes = [SinglyLinkedListNode(1), SinglyLinkedListNode(2), SinglyLinkedListNode(3)]
+    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes, auto_populate=False).build()
+    singly_linked_list.print_linked_list()
 
 
 if __name__ == '__main__':
