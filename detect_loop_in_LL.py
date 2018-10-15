@@ -3,7 +3,7 @@ from linked_list import SinglyLinkedListNode, SinglyLinkedList, BuildSinglyLinke
 
 def detect_loop(singly_linked_list: SinglyLinkedList):
     current_node = singly_linked_list.head
-
+    print(current_node)
     while current_node:
         next_node = current_node.next
         if not next_node:
@@ -29,10 +29,13 @@ def run():
     n4 = SinglyLinkedListNode(40)
     n3.next = n4
     n5 = SinglyLinkedListNode(50)
+    n4.next = n5
+
     n5.next = n3
 
     singly_linked_list = SinglyLinkedList(head=n1)
 
+    singly_linked_list.print_linked_list()
     is_loop_present = detect_loop(singly_linked_list)
     if is_loop_present:
         print('Yes loop exists')
