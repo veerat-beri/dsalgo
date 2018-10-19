@@ -26,7 +26,7 @@ class CustomLinkedList(SinglyLinkedList):
     def print_linked_list(self):
         current_node = self.head
         while current_node:
-            print(current_node.data, f'({current_node.random.data})', sep='', end='  ')
+            print(current_node.data, f'({current_node})', f'({current_node.random.data})', sep='', end='  ')
             current_node = current_node.next
 
 
@@ -46,26 +46,23 @@ class CloneLinkedList:
         self.old_node_new_node_map = OrderedDict()
 
         self._linked_list = linked_list
-        self.new_linked_list = CustomLinkedList()
 
     def __clone_data(self):
         current_node = self._linked_list.head
-
         while current_node:
             new_node = CustomNode(current_node.data)
             self.old_node_new_node_map[current_node] = new_node
+            current_node = current_node.next
 
     def __clone_ptrs(self):
         for (old_node, new_node) in self.old_node_new_node_map.items():
-            print(old_node.data, new_node.data)
-            new_node.next = self.old_node_new_node_map[old_node.next]
-            new_node.random = self.old_node_new_node_map[old_node.random]
+            new_node.next = self.old_node_new_node_map.get(old_node.next)
+            new_node.random = self.old_node_new_node_map.get(old_node.random)
 
     def clone(self):
         self.__clone_data()
         self.__clone_ptrs()
-        self.new_linked_list = next(iter(self.old_node_new_node_map))
-        return self.new_linked_list
+        return CustomLinkedList(head=self.old_node_new_node_map[next(iter(self.old_node_new_node_map))])
 
 
 # driver code
@@ -83,10 +80,10 @@ def run():
     n4.random = n3
     n5.random = n2
 
-    # custom_linked_list.print_linked_list()
+    custom_linked_list.print_linked_list()
     new_custom_linked_list = CloneLinkedList(custom_linked_list).clone()
     print('New Cloned Linked List: ')
-    # new_custom_linked_list.print_linked_list()
+    new_custom_linked_list.print_linked_list()
 
 
 if __name__ == '__main__':
