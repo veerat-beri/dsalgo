@@ -1,4 +1,4 @@
-from linked_list import SinglyLinkedListNode, SinglyLinkedList, BuildSinglyLinkedList
+from linkedlist.linked_list import SinglyLinkedListNode, SinglyLinkedList, BuildSinglyLinkedList
 
 
 def remove_duplicates(sorted_linked_list: SinglyLinkedList):

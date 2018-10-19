@@ -1,4 +1,6 @@
-from linked_list import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlist.linked_list import BuildSinglyLinkedList, SinglyLinkedListNode
+
+
 
 
 MAX_LINKED_LIST_SIZE = 4

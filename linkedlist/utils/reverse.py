@@ -1,7 +1,8 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/reverse-a-linked-list/
 
-from linked_list import SinglyLinkedList, BuildSinglyLinkedList
+from linkedlist.linked_list import SinglyLinkedList
+
 
 #############################################
 # Iterative approach
