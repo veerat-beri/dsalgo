@@ -2,8 +2,8 @@
 # https://www.geeksforgeeks.org/detect-and-remove-loop-in-a-linked-list/
 
 
-from linkedlist.build_linked_list import BuildSinglyLinkedListWithLoop
-from linkedlist import check_loop_exists
+from linkedlist import BuildSinglyLinkedListWithLoop
+from linkedlist.utils import check_loop_exists
 from linkedlist import SinglyLinkedListNode, SinglyLinkedList
 
 
