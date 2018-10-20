@@ -1,3 +1,7 @@
+# Problem Statement
+# https://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/
+
+
 from linkedlist import SinglyLinkedListNode, SinglyLinkedList, BuildSinglyLinkedList
 
 
