@@ -50,3 +50,15 @@ class BuildDoublyLinkedList(_BuildLinkedList):
             self._linked_list = DoublyLinkedList()
 
 
+class BuildSinglyLinkedListWithLoop(BuildSinglyLinkedList):
+    def build(self):
+        super(BuildSinglyLinkedListWithLoop, self).build()
+        if self._linked_list.head and self._linked_list.tail:
+            loop_start_elem = self._linked_list.head
+            if loop_start_elem.next:
+                loop_start_elem = loop_start_elem.next
+                if loop_start_elem.next:
+                    loop_start_elem = loop_start_elem.next
+
+            self._linked_list.tail.next = loop_start_elem
+        return self._linked_list

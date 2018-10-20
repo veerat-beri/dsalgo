@@ -10,7 +10,16 @@ def remove_loop(singly_linked_list: SinglyLinkedList, node_in_loop: SinglyLinked
     slow_ptr = singly_linked_list.head
     fast_ptr = node_in_loop
 
-    while fast_ptr != slow_ptr:
+    while fast_ptr.next != slow_ptr.next:
         slow_ptr = slow_ptr.next
         fast_ptr = fast_ptr.next
+
+    fast_ptr.next = None
+
+
+# driver code
+def run():
+    pass
+
+
 
