@@ -26,7 +26,7 @@ class CustomLinkedList(SinglyLinkedList):
     def print_linked_list(self):
         current_node = self.head
         while current_node:
-            print(current_node.data, f'({current_node})', f'({current_node.random.data})', sep='', end='  ')
+            print(current_node.data, f'({id(current_node)})', f'({current_node.random.data})', sep='', end='  ')
             current_node = current_node.next
 
 
@@ -73,6 +73,7 @@ def run():
     n4 = CustomNode(4)
     n5 = CustomNode(5)
 
+    print('Old Linked List: ')
     custom_linked_list = BuildCustomLinkedList(list_of_nodes=[n1, n2, n3, n4, n5]).build()
     n1.random = n3
     n2.random = n1
@@ -82,7 +83,7 @@ def run():
 
     custom_linked_list.print_linked_list()
     new_custom_linked_list = CloneLinkedList(custom_linked_list).clone()
-    print('New Cloned Linked List: ')
+    print('\n\nNew Cloned Linked List: ')
     new_custom_linked_list.print_linked_list()
 
 

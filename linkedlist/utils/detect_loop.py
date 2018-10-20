@@ -5,6 +5,7 @@
 from linkedlist import SinglyLinkedListNode, SinglyLinkedList
 
 
+# Using Floyd’s Cycle-Finding Algorithm
 def check_loop_exists(singly_linked_list: SinglyLinkedList):
     slow_ptr = singly_linked_list.head
     fast_ptr = singly_linked_list.head
@@ -14,7 +15,8 @@ def check_loop_exists(singly_linked_list: SinglyLinkedList):
         fast_ptr = fast_ptr.next.next
 
         if slow_ptr == fast_ptr:
-            return True
+            return True, slow_ptr
+    return False
 
 
 # driver code

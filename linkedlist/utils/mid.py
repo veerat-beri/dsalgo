@@ -1,4 +1,8 @@
-from linkedlist.linked_list import SinglyLinkedListNode, BuildSinglyLinkedList, SinglyLinkedList
+# Problem Statement
+# https://www.geeksforgeeks.org/write-a-c-function-to-print-the-middle-of-the-linked-list/
+
+
+from linkedlist import SinglyLinkedListNode, BuildSinglyLinkedList, SinglyLinkedList
 
 
 def find_mid_of_linked_list(linked_list: SinglyLinkedList):
