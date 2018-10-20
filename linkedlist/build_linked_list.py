@@ -31,10 +31,10 @@ class BuildSinglyLinkedList(_BuildLinkedList):
         super(BuildSinglyLinkedList, self).__init__(singly_linked_list, list_of_nodes, insert_at_end, auto_populate, **kwargs)
 
     def _create_list_of_nodes(self):
-        self.list_of_nodes += [
+        self.list_of_nodes = ([
             SinglyLinkedListNode(10), SinglyLinkedListNode(20), SinglyLinkedListNode(30),
             SinglyLinkedListNode(40), SinglyLinkedListNode(50),
-        ] if self.auto_populate else []
+        ] if self.auto_populate else []) + self.list_of_nodes
 
     def _create_linked_list(self):
         if not self._linked_list:
@@ -46,10 +46,10 @@ class BuildDoublyLinkedList(_BuildLinkedList):
         super(BuildDoublyLinkedList, self).__init__(doubly_linked_list, list_of_nodes, insert_at_end, auto_populate, **kwargs)
 
     def _create_list_of_nodes(self):
-        self.list_of_nodes += [
+        self.list_of_nodes = ([
             DoublyLinkedListNode(10), DoublyLinkedListNode(20), DoublyLinkedListNode(30),
             DoublyLinkedListNode(40), DoublyLinkedListNode(50),
-        ] if self.auto_populate else []
+        ] if self.auto_populate else []) + self.list_of_nodes
 
     def _create_linked_list(self):
         if not self._linked_list:

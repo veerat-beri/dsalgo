@@ -34,7 +34,7 @@ def reverse_linked_list(linked_list: SinglyLinkedList):
 def run():
     singly_linked_list = BuildSinglyLinkedList(auto_populate=True).build()
 
-    print('Linked List before reversal: ')
+    print('Given Linked List: ')
     singly_linked_list.print_linked_list()
 
     print('\n\nLinked List after reversal: ')
