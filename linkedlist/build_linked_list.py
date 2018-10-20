@@ -3,7 +3,7 @@ from linkedlist.linked_list import _LinkedList, _LinkedListNode
 
 
 class _BuildLinkedList:
-    def __init__(self, linked_list: _LinkedList=None, list_of_nodes: [_LinkedListNode]=None, insert_at_end=True, auto_populate=False, **kwargs):
+    def __init__(self, linked_list: _LinkedList=None, list_of_nodes: [_LinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
         self.auto_populate = auto_populate
         self.list_of_nodes = list_of_nodes
         self.insert_at_end = insert_at_end
@@ -27,11 +27,14 @@ class _BuildLinkedList:
 
 
 class BuildSinglyLinkedList(_BuildLinkedList):
-    def __init__(self, singly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=None, insert_at_end=True, auto_populate=False, **kwargs):
+    def __init__(self, singly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
         super(BuildSinglyLinkedList, self).__init__(singly_linked_list, list_of_nodes, insert_at_end, auto_populate, **kwargs)
 
     def _create_list_of_nodes(self):
-        self.list_of_nodes += ([SinglyLinkedListNode(4), SinglyLinkedListNode(6), SinglyLinkedListNode(5)] if self.auto_populate else [])
+        self.list_of_nodes += [
+            SinglyLinkedListNode(10), SinglyLinkedListNode(20), SinglyLinkedListNode(30),
+            SinglyLinkedListNode(40), SinglyLinkedListNode(50),
+        ] if self.auto_populate else []
 
     def _create_linked_list(self):
         if not self._linked_list:
@@ -39,11 +42,14 @@ class BuildSinglyLinkedList(_BuildLinkedList):
 
 
 class BuildDoublyLinkedList(_BuildLinkedList):
-    def __init__(self, doubly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=None, insert_at_end=True, auto_populate=False, **kwargs):
+    def __init__(self, doubly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
         super(BuildDoublyLinkedList, self).__init__(doubly_linked_list, list_of_nodes, insert_at_end, auto_populate, **kwargs)
 
     def _create_list_of_nodes(self):
-        self.list_of_nodes += ([DoublyLinkedListNode(4), DoublyLinkedListNode(6), DoublyLinkedListNode(5)] if self.auto_populate else [])
+        self.list_of_nodes += [
+            DoublyLinkedListNode(10), DoublyLinkedListNode(20), DoublyLinkedListNode(30),
+            DoublyLinkedListNode(40), DoublyLinkedListNode(50),
+        ] if self.auto_populate else []
 
     def _create_linked_list(self):
         if not self._linked_list:
