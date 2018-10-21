@@ -1,6 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
-from linkedlist import SinglyLinkedList, BuildSinglyLinkedList
+from linkedlist import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
 
 
 def point_of_intersection_of_two_lists(linked_list_1: SinglyLinkedList, linked_list_2: SinglyLinkedList):
@@ -46,14 +46,14 @@ def point_of_intersection_of_two_lists(linked_list_1: SinglyLinkedList, linked_l
 
 # driver code
 def run():
+    common_node = SinglyLinkedListNode(60)
     list_nodes_of_list_1 = [
-
+        common_node, SinglyLinkedListNode(70), SinglyLinkedListNode(80),
+        SinglyLinkedListNode(90), SinglyLinkedListNode(100), SinglyLinkedListNode(60),
     ]
-    list_nodes_of_list_2 =[
 
-    ]
-    singly_linked_list1 = BuildSinglyLinkedList(list_of_nodes=list_nodes_of_list_1).build()
-    singly_linked_list2 = BuildSinglyLinkedList(list_of_nodes=list_nodes_of_list_2).build()
+    singly_linked_list1 = BuildSinglyLinkedList(list_of_nodes=list_nodes_of_list_1, auto_populate=True).build()
+    singly_linked_list2 = BuildSinglyLinkedList(list_of_nodes=list_nodes_of_list_1).build()
     point_of_intersection_of_two_lists(singly_linked_list1, singly_linked_list2)
 
 
