@@ -36,10 +36,10 @@ class _LinkedList:
     def insert_at_end(self, node: _LinkedListNode):
         raise NotImplementedError('func insert_at_end() must be implemented')
 
-    def print_linked_list(self):
+    def print_linked_list(self, with_address=False):
         current_node = self.head
         while current_node:
-            print(current_node.data, end='  ')
+            print(current_node.data, f'({id(current_node)})' if with_address else '', end='  ', sep='')
             current_node = current_node.next
 
 

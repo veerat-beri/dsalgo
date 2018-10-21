@@ -1,60 +1,82 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
+
+
 from linkedlist import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
 
 
-def point_of_intersection_of_two_lists(linked_list_1: SinglyLinkedList, linked_list_2: SinglyLinkedList):
-    current_node_1 = linked_list_1.head
-    current_node_2 = linked_list_2.head
+# Based on Method 3 (Using difference of node counts)
+def point_of_intersection_of_two_lists(singly_linked_list_1: SinglyLinkedList, singly_linked_list_2: SinglyLinkedList):
 
-    no_of_nodes_in_list_1 = 0
-    no_of_nodes_in_list_2 = 0
-
-    while current_node_1:
-        no_of_nodes_in_list_1 += 1
-        current_node_1 = current_node_1.next
-
-    while current_node_2:
-        no_of_nodes_in_list_2 += 1
-        current_node_2 = current_node_2.next
-
-    difference_in_count = no_of_nodes_in_list_1 - no_of_nodes_in_list_2
-
-    start_point_of_one_list = None
-    start_point_of_other_list = None
-
-    if difference_in_count:
-        linked_to_head_start = linked_list_2 if difference_in_count < 0 else linked_list_1
-        current_node = linked_to_head_start.head
-
-        for _ in range(difference_in_count):
+    def calc_no_node_in_list(singly_linked_list: SinglyLinkedList):
+        no_of_nodes_in_list = 0
+        current_node = singly_linked_list.head
+        while current_node:
+            no_of_nodes_in_list += 1
             current_node = current_node.next
 
-        start_point_of_one_list = (linked_to_head_start ^ (linked_list_1 ^ linked_list_2)).head
-        start_point_of_other_list = current_node
+        return no_of_nodes_in_list
 
-    current_node_1 = start_point_of_one_list or linked_list_1.head
-    current_node_2 = start_point_of_other_list or linked_list_2.head
+    def get_right_start_nodes_in_each_list(no_of_nodes_in_list_1, no_of_nodes_in_list_2):
+        difference_in_count = no_of_nodes_in_list_1 - no_of_nodes_in_list_2
 
-    while current_node_1 and current_node_2:
-        if current_node_1 == current_node_2:
-            return current_node_1
+        node_in_one_list = singly_linked_list_1.head
+        node_in_other_list = singly_linked_list_2.head
 
-        current_node_2 = current_node_2.next
-        current_node_1 = current_node_1.next
+        if difference_in_count < 0:
+            current_node = singly_linked_list_2.head
+            for _ in range(abs(difference_in_count)):
+                current_node = current_node.next
+
+            node_in_other_list = current_node
+
+        elif difference_in_count > 0:
+            current_node = singly_linked_list_1.head
+            for _ in range(abs(difference_in_count)):
+                current_node = current_node.next
+
+            node_in_one_list = current_node
+
+        return node_in_one_list, node_in_other_list
+
+    no_of_nodes_in_list_1 = calc_no_node_in_list(singly_linked_list_1)
+    no_of_nodes_in_list_2 = calc_no_node_in_list(singly_linked_list_2)
+
+    node_in_one_list, node_in_other_list = get_right_start_nodes_in_each_list(
+        no_of_nodes_in_list_1, no_of_nodes_in_list_2
+    )
+
+    while node_in_one_list and node_in_other_list:
+        if node_in_one_list == node_in_other_list:
+            return node_in_one_list
+
+        node_in_one_list = node_in_one_list.next
+        node_in_other_list = node_in_other_list.next
+
+    return None
 
 
 # driver code
 def run():
-    common_node = SinglyLinkedListNode(60)
     list_nodes_of_list_1 = [
-        common_node, SinglyLinkedListNode(70), SinglyLinkedListNode(80),
-        SinglyLinkedListNode(90), SinglyLinkedListNode(100), SinglyLinkedListNode(60),
+        SinglyLinkedListNode(60), SinglyLinkedListNode(70), SinglyLinkedListNode(80),
+        SinglyLinkedListNode(90),
     ]
 
     singly_linked_list1 = BuildSinglyLinkedList(list_of_nodes=list_nodes_of_list_1, auto_populate=True).build()
-    singly_linked_list2 = BuildSinglyLinkedList(list_of_nodes=list_nodes_of_list_1).build()
-    point_of_intersection_of_two_lists(singly_linked_list1, singly_linked_list2)
+    singly_linked_list2 = BuildSinglyLinkedList(list_of_nodes=[SinglyLinkedListNode(5)] + list_nodes_of_list_1).build()
+    intersection_node = point_of_intersection_of_two_lists(singly_linked_list1, singly_linked_list2)
+
+    print('Given Linked List 1: ')
+    singly_linked_list1.print_linked_list(with_address=True)
+
+    print('\n\nGiven Linked List 2: ')
+    singly_linked_list2.print_linked_list(with_address=True)
+
+    if intersection_node:
+        print('\n\nIntersection Node: ', intersection_node.data, f'({id(intersection_node)})', sep='')
+    else:
+        print('\n\nNo Intersection Node exists')
 
 
 if __name__ == '__main__':
