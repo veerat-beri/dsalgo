@@ -1,16 +1,24 @@
-# Problem statement
+# Problem Statement
 # https://www.geeksforgeeks.org/nth-node-from-the-end-of-a-linked-list/
+
+
 from linkedlist import SinglyLinkedList, BuildSinglyLinkedList
 
 
 def find_kth_node_from_end(singly_linked_list: SinglyLinkedList, k):
-    len_of_list = len(singly_linked_list)
-    current_node = singly_linked_list.head
+    slow_ptr = singly_linked_list.head
+    fast_ptr = singly_linked_list.head
 
-    for _ in range(len_of_list - k):
-        current_node = current_node.next
+    for _ in range(k):
+        if not fast_ptr:
+            return
+        fast_ptr = fast_ptr.next
 
-    return current_node
+    while fast_ptr:
+        slow_ptr = slow_ptr.next
+        fast_ptr = fast_ptr.next
+
+    return slow_ptr
 
 
 # driver code
@@ -22,8 +30,11 @@ def run():
     singly_linked_list.print_linked_list()
 
     required_node = find_kth_node_from_end(singly_linked_list, k)
-    print('\n\nKth ode from end: ', required_node)
+    if required_node:
+        print('\n\nKth node from end: ', required_node.data)
+    else:
+        print(f'\n\n{k} is greater than len of list')
 
 
-
-
+if __name__ == '__main__':
+    run()
