@@ -8,14 +8,16 @@ from linkedlist import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedList
 # Based on Method 3 (Using difference of node counts)
 def point_of_intersection_of_two_lists(singly_linked_list_1: SinglyLinkedList, singly_linked_list_2: SinglyLinkedList):
 
-    def calc_no_node_in_list(singly_linked_list: SinglyLinkedList):
-        no_of_nodes_in_list = 0
-        current_node = singly_linked_list.head
-        while current_node:
-            no_of_nodes_in_list += 1
-            current_node = current_node.next
+    # This functionality already built-in base linked_list class
 
-        return no_of_nodes_in_list
+    # def calc_no_node_in_list(singly_linked_list: SinglyLinkedList):
+    #     no_of_nodes_in_list = 0
+    #     current_node = singly_linked_list.head
+    #     while current_node:
+    #         no_of_nodes_in_list += 1
+    #         current_node = current_node.next
+    #
+    #     return no_of_nodes_in_list
 
     def get_right_start_nodes_in_each_list(no_of_nodes_in_list_1, no_of_nodes_in_list_2):
         difference_in_count = no_of_nodes_in_list_1 - no_of_nodes_in_list_2
@@ -39,8 +41,8 @@ def point_of_intersection_of_two_lists(singly_linked_list_1: SinglyLinkedList, s
 
         return node_in_one_list, node_in_other_list
 
-    no_of_nodes_in_list_1 = calc_no_node_in_list(singly_linked_list_1)
-    no_of_nodes_in_list_2 = calc_no_node_in_list(singly_linked_list_2)
+    no_of_nodes_in_list_1 = len(singly_linked_list_1)  # calc_no_node_in_list(singly_linked_list_1)
+    no_of_nodes_in_list_2 = len(singly_linked_list_2)  # calc_no_node_in_list(singly_linked_list_2)
 
     node_in_one_list, node_in_other_list = get_right_start_nodes_in_each_list(
         no_of_nodes_in_list_1, no_of_nodes_in_list_2

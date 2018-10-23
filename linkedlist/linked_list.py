@@ -23,6 +23,15 @@ class _LinkedList:
         self.head = head
         self.tail = None
 
+    def __len__(self):
+        no_of_nodes_in_list = 0
+        current_node = self.head
+        while current_node:
+            no_of_nodes_in_list += 1
+            current_node = current_node.next
+
+        return no_of_nodes_in_list
+
     def _set_head_tail(self, node):
         if not self.tail or not self.head:
             self.tail = node
