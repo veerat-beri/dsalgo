@@ -51,6 +51,9 @@ class Tree:
             node = self.root()
         return self._height(node)
 
+    def _make_node(self, node_data):
+        raise NotImplementedError('Has to be Implemented by sub class')
+
 
 class BinaryTree(Tree):
     def left(self, node):
@@ -90,20 +93,20 @@ class LinkedBinaryTree(BinaryTree):
         if self._root is not None:
             raise ValueError('Root Exists')
         self._size += 1
-        self._root = self.BinaryTreeNode(node_data)
+        self._root = self._make_node(node_data)
         return self._root
 
-    def _add_left(self, node, new_node_data):
+    def _add_left(self, node: BinaryTreeNode, new_node_data):
         if node._left is not None:
             raise ValueError('Left child exists')
-        node._left = self.BinaryTreeNode(new_node_data)
+        node._left = self._make_node(new_node_data)
         self._size += 1
         return node._left
 
-    def _add_right(self, node, new_node_data):
+    def _add_right(self, node: BinaryTreeNode, new_node_data):
         if node._right is not None:
             raise ValueError('Right child exists')
-        node._right = self.BinaryTreeNode(new_node_data)
+        node._right = self._make_node(new_node_data)
         self._size += 1
         return node._right
 
@@ -115,6 +118,9 @@ class LinkedBinaryTree(BinaryTree):
 
     # def _delete(self, node: BinaryTreeNode):
     #     if self.is_leaf(node)
+
+    def _make_node(self, node_data):
+        return self.BinaryTreeNode(node_data)
 
     def _num_descendants(self, node: BinaryTreeNode):
         if node is None:
@@ -191,6 +197,15 @@ class LinkedBinaryTree(BinaryTree):
                 return
         return self._sibling(self.root(), sibling_node_data)
 
+    def add_root(self, node_data):
+        return self._add_root(node_data)
+
+    def add_left_child(self, parent_node: BinaryTreeNode, new_node_data):
+        return self._add_left(parent_node, new_node_data)
+
+    def add_right_child(self, parent_node: BinaryTreeNode, new_node_data):
+        return self._add_right(parent_node, new_node_data)
+
 
 class LinkedBinaryTreeWithParent(LinkedBinaryTree):
 
@@ -219,4 +234,3 @@ class LinkedBinaryTreeWithParent(LinkedBinaryTree):
         if node == self.left(parent_node):
             return self.right(parent_node)
         return self.left(parent_node)
-    
