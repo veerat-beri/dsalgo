@@ -1,3 +1,4 @@
+from tree.decorators import set_default_node
 
 
 class Tree:
@@ -55,7 +56,90 @@ class Tree:
         raise NotImplementedError('Has to be Implemented by sub class')
 
 
-class BinaryTree(Tree):
+class BinaryTreeTraversalMixin:
+    @set_default_node
+    def pre_order(self, node: BinaryTreeNode = None):
+        # if node is None:
+        #     node = self.root()
+        if node is not None:
+            for node in self._subtree_preorder(node):
+                yield node
+
+    def _subtree_preorder(self, node: BinaryTreeNode):
+        ###############
+        # 1st Approach
+        yield node
+        for child in self.children(node):
+            for other_node in self._subtree_preorder(child):
+                yield other_node
+        ###############
+        # 2nd Approach
+        # if node is None:
+        #     return None
+        #
+        # yield node
+        # self._subtree_preorder(self.left(node))
+        # self._subtree_preorder(self.right(node))
+        ###############
+
+    @set_default_node
+    def in_order(self, node: BinaryTreeNode = None):
+        if node is not None:
+            for node in self._subtree_inorder(node):
+                yield node
+
+    def _subtree_inorder(self, node: BinaryTreeNode):
+        ###############
+        # 1st Approach
+        # for child in self.children(node):
+        #     for other_node in self._subtree_preorder(child):
+        #         yield other_node
+        # yield node
+        if self.left(node):
+            for other_node in self._subtree_preorder(self.left(node)):
+                yield other_node
+        yield node
+        if self.right(node):
+            for other_node in self._subtree_preorder(self.right(node)):
+                yield other_node
+        ###############
+        # 2nd Approach
+        # if node is None:
+        #     return None
+        #
+        # self._subtree_preorder(self.left(node))
+        # yield node
+        # self._subtree_preorder(self.right(node))
+        ###############
+
+    @set_default_node
+    def post_order(self, node: BinaryTreeNode = None):
+        if node is not None:
+            for node in self._subtree_postorder(node):
+                yield node
+
+    def _subtree_postorder(self, node: BinaryTreeNode):
+        ###############
+        # 1st Approach
+        for child in self.children(node):
+            for other_node in self._subtree_preorder(child):
+                yield other_node
+        yield node
+        ###############
+        # 2nd Approach
+        # if node is None:
+        #     return None
+        #
+        # self._subtree_preorder(self.left(node))
+        # self._subtree_preorder(self.right(node))
+        # yield node
+        ###############
+
+
+class BinaryTree(BinaryTreeTraversalMixin, Tree):
+    class BinaryTreeNode:
+        raise NotImplementedError('Has to be Implemented by sub class')
+
     def left(self, node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
@@ -180,9 +264,10 @@ class LinkedBinaryTree(BinaryTree):
         ###############
         return no_of_children
 
+    @set_default_node
     def num_descendants(self, node=None):
-        if not node:
-            node = self.root()
+        # if not node:
+        #     node = self.root()
         return self._num_descendants(node)
 
     def is_sibling(self, node_1_data, node_2_data) -> bool:
