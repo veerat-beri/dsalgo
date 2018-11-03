@@ -113,10 +113,12 @@ class BinaryTreeTraversalMixin:
         # self._subtree_inorder(self.right(node))
         ###############
 
-    @set_default_node
+    # @set_default_node
     def pre_order(self, node=None):
-        # if node is None:
-        #     node = self.root()
+        if node is None:
+            node = self.root()
+
+        print(node._data)
         if node is not None:
             for node in self._subtree_preorder(node):
                 yield node
@@ -158,7 +160,8 @@ class BinaryTreeTraversalMixin:
 
 class BinaryTree(BinaryTreeTraversalMixin, Tree):
     class BinaryTreeNode:
-        raise NotImplementedError('Has to be Implemented by sub class')
+        def __init__(self):
+            raise NotImplementedError('Has to be Implemented by sub class')
 
     def left(self, node):
         raise NotImplementedError('Has to be Implemented by sub class')
