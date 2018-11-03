@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/
 
 
-from linkedlist import SinglyLinkedListNode, SinglyLinkedList, BuildSinglyLinkedList
+from linkedlists import SinglyLinkedListNode, SinglyLinkedList, BuildSinglyLinkedList
 
 
 def remove_duplicates_from_sorted_list(sorted_linked_list: SinglyLinkedList):

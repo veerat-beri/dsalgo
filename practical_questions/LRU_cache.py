@@ -1,4 +1,4 @@
-from linkedlist.linked_list import BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlists.linked_list import BuildSinglyLinkedList, SinglyLinkedListNode
 
 
 

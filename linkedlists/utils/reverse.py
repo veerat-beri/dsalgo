@@ -2,8 +2,8 @@
 # https://www.geeksforgeeks.org/reverse-a-linked-list/
 
 
-from linkedlist import BuildSinglyLinkedList
-from linkedlist.linked_list import SinglyLinkedList
+from linkedlists import BuildSinglyLinkedList
+from linkedlists.linked_list import SinglyLinkedList
 
 
 ######################################

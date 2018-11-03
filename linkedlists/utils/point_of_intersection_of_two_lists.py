@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
 
 
-from linkedlist import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlists import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
 
 
 # Based on Method 3 (Using difference of node counts)

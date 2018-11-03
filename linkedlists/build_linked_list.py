@@ -1,5 +1,5 @@
-from linkedlist import DoublyLinkedListNode, SinglyLinkedListNode, SinglyLinkedList, DoublyLinkedList
-from linkedlist.linked_list import _LinkedList, _LinkedListNode
+from linkedlists import DoublyLinkedListNode, SinglyLinkedListNode, SinglyLinkedList, DoublyLinkedList
+from linkedlists.linked_list import _LinkedList, _LinkedListNode
 
 
 class _BuildLinkedList:

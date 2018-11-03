@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/reverse-a-list-in-groups-of-given-size/
 
 
-from linkedlist import SinglyLinkedListNode, BuildSinglyLinkedList
+from linkedlists import SinglyLinkedListNode, BuildSinglyLinkedList
 
 
 def reverse_in_group_of_k(head: SinglyLinkedListNode, k):

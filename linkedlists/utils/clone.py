@@ -3,8 +3,8 @@
 
 
 from collections import OrderedDict
-from linkedlist import SinglyLinkedList, SinglyLinkedListNode
-from linkedlist.build_linked_list import _BuildLinkedList
+from linkedlists import SinglyLinkedList, SinglyLinkedListNode
+from linkedlists.build_linked_list import _BuildLinkedList
 
 
 class BuildCustomLinkedList(_BuildLinkedList):

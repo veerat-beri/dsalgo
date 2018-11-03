@@ -86,7 +86,7 @@ class DoublyLinkedList(_LinkedList):
 
 # driver code
 def run():
-    from linkedlist.build_linked_list import BuildSinglyLinkedList
+    from linkedlists.build_linked_list import BuildSinglyLinkedList
 
     list_of_nodes = [SinglyLinkedListNode(1), SinglyLinkedListNode(2), SinglyLinkedListNode(3)]
     singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes, auto_populate=False).build()

@@ -1,4 +1,4 @@
-from tree.decorators import set_default_node
+from trees.decorators import set_default_node
 
 
 class Tree:
@@ -58,7 +58,7 @@ class Tree:
 
 class BinaryTreeTraversalMixin:
     @set_default_node
-    def pre_order(self, node: BinaryTreeNode = None):
+    def pre_order(self, node = None):
         # if node is None:
         #     node = self.root()
         if node is not None:

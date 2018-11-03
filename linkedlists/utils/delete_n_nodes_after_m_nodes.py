@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/
 
 
-from linkedlist import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlists import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
 
 
 def delete_n_nodes_after_every_m_nodes(singly_linked_list: SinglyLinkedList, m, n):

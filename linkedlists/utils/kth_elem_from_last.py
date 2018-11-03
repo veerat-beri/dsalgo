@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/nth-node-from-the-end-of-a-linked-list/
 
 
-from linkedlist import SinglyLinkedList, BuildSinglyLinkedList
+from linkedlists import SinglyLinkedList, BuildSinglyLinkedList
 
 
 def find_kth_node_from_end(singly_linked_list: SinglyLinkedList, k):

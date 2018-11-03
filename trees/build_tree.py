@@ -1,4 +1,4 @@
-from tree.tree import LinkedBinaryTree
+from trees.tree import LinkedBinaryTree
 from collections import deque
 
 

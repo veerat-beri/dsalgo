@@ -1,4 +1,4 @@
-from linkedlist import BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlists import BuildSinglyLinkedList, SinglyLinkedListNode
 
 
 def recursively_print_linked_list(current_node: SinglyLinkedListNode):

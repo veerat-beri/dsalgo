@@ -1,4 +1,4 @@
-from tree.tree import BinaryTree
+from trees.tree import BinaryTree
 
 
 def set_default_node(func):
