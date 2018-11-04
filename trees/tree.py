@@ -159,6 +159,12 @@ class BinaryTree(BinaryTreeTraversalMixin, Tree):
         def __init__(self):
             raise NotImplementedError('Has to be Implemented by sub class')
 
+    def _get_tree_size(self, root_node):
+        count = 0
+        for _ in self.in_order(root_node):
+            count += 1
+        return count
+
     def left(self, node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
@@ -186,8 +192,8 @@ class LinkedBinaryTree(BinaryTree):
             self._right = right
 
     def __init__(self, *args, **kwargs):
-        self._root = None
-        self._size = 0
+        self._root = kwargs.get('root', None)
+        self._size = (kwargs.get('size', 0) or self._get_tree_size(self._root)) if self._root else 0
 
     def __len__(self):
         return self._size
