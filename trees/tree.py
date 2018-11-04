@@ -80,7 +80,7 @@ class BinaryTreeTraversalMixin:
         ###############
         # 1st Approach
         for child in self.children(node):
-            for other_node in self._subtree_preorder(child):
+            for other_node in self._subtree_postorder(child):
                 yield other_node
         yield node
         ###############
@@ -97,11 +97,11 @@ class BinaryTreeTraversalMixin:
         ###############
         # 1st Approach
         if self.left(node):
-            for other_node in self._subtree_preorder(self.left(node)):
+            for other_node in self._subtree_inorder(self.left(node)):
                 yield other_node
         yield node
         if self.right(node):
-            for other_node in self._subtree_preorder(self.right(node)):
+            for other_node in self._subtree_inorder(self.right(node)):
                 yield other_node
         ###############
         # 2nd Approach
@@ -113,12 +113,8 @@ class BinaryTreeTraversalMixin:
         # self._subtree_inorder(self.right(node))
         ###############
 
-    # @set_default_node
+    @set_default_node
     def pre_order(self, node=None):
-        if node is None:
-            node = self.root()
-
-        print(node._data)
         if node is not None:
             for node in self._subtree_preorder(node):
                 yield node
