@@ -1,5 +1,6 @@
 # Problem statement
-#
+# https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+
 import sys
 
 
@@ -19,6 +20,11 @@ def find_max_sub_array_sum(arr):
 
 
 # driver code
-arr = [-2, -3, 4, -1, -2, 1, 5, -3]
-max_sub_array_sum = find_max_sub_array_sum(arr)
-print('max sub-array sum: ', max_sub_array_sum)
+def run():
+    arr = [-2, -3, 4, -1, -2, 1, 5, -3]
+    max_sub_array_sum = find_max_sub_array_sum(arr)
+    print('max sub-array sum: ', max_sub_array_sum)
+
+
+if __name__ == '__main__':
+    run()
