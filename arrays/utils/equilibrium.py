@@ -13,12 +13,15 @@ def find_equilibrium(arr):
 
 
 def run():
-    # arr = [10, 5, 3, 6, 1]
-    arr = [-1, 2, -1, -1]
+    arr = [10, 5, 3, 6, 1]
+    # arr = [1, 2, 3, 4]
+    # arr = [-1, 2, -1, -1]
 
     equilibrium_point = find_equilibrium(arr)
-
-    print(equilibrium_point)
+    if equilibrium_point:
+        print(f'Equilibrium point is: {equilibrium_point[0]} \nat index {equilibrium_point[1]}')
+    else:
+        print('No Equilibrium exists!')
 
 
 if __name__ == '__main__':
