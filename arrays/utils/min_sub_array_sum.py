@@ -16,7 +16,7 @@ def find_min_sub_array_sum(arr):
     # to store the minimum value encountered so far
     min_sum_globally = sys.maxsize
 
-    global_start_index, start_index, end_index = 0, 0, 0
+    global_start_index, start_index, global_end_index = 0, 0, 0
 
     # traverse the array elements
     for index in range(len(arr)):
@@ -34,9 +34,9 @@ def find_min_sub_array_sum(arr):
         if min_sum_globally > min_sum_till_point:
             min_sum_globally = min_sum_till_point
             global_start_index = start_index
-            end_index = index
+            global_end_index = index
 
-    return global_start_index, end_index, min_sum_globally
+    return global_start_index, global_end_index, min_sum_globally
 
 
 # Driver code

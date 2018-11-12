@@ -5,25 +5,33 @@ import sys
 
 
 def find_max_sub_array_sum(arr):
-    max_sum_globally = - sys.maxsize - 1
-    max_sum_till_point = - sys.maxsize - 1
+    max_sum_globally = -sys.maxsize - 1
+    max_sum_till_point = -sys.maxsize - 1
 
-    for elem in arr:
+    start_index, global_end_index, global_start_index = 0, 0, 0
+    for index in range(len(arr)):
         if max_sum_till_point < 0:
-            max_sum_till_point = elem
+            max_sum_till_point = arr[index]
+            start_index = index
+
         else:
-            max_sum_till_point += elem
+            max_sum_till_point += arr[index]
 
-        max_sum_globally = max(max_sum_globally, max_sum_till_point)
+        if max_sum_globally < max_sum_till_point:
+            max_sum_globally = max_sum_till_point
+            global_start_index = start_index
+            global_end_index = index
 
-    return max_sum_globally
+        # max_sum_globally = max(max_sum_globally, max_sum_till_point)
+
+    return global_start_index, global_end_index, max_sum_globally
 
 
 # driver code
 def run():
     arr = [-2, -3, 4, -1, -2, 1, 5, -3]
-    max_sub_array_sum = find_max_sub_array_sum(arr)
-    print('max sub-array sum: ', max_sub_array_sum)
+    start_index, end_index, max_sum = find_max_sub_array_sum(arr)
+    print(f'Sub-array with maximum sum({max_sum}): \n{arr[start_index: end_index + 1]}')
 
 
 if __name__ == '__main__':
