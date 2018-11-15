@@ -1,7 +1,7 @@
+
+
 # Problem Statement
 # https://www.geeksforgeeks.org/find-if-there-is-a-subarray-with-0-sum/
-
-
 def check_zero_sum_subarray_exists(arr):
     prefix_sum = set()
     arr_sum_till_point = 0
@@ -17,6 +17,8 @@ def check_zero_sum_subarray_exists(arr):
     return False
 
 
+# Problem Statement
+# https://www.geeksforgeeks.org/find-the-largest-subarray-with-0-sum/
 def find_zero_sum_subarray(arr):
     indexed_prefix_sum = {}
     arr_sum_till_point = 0
@@ -26,11 +28,8 @@ def find_zero_sum_subarray(arr):
         if arr_sum_till_point in indexed_prefix_sum:
             zero_subarray_indexes = indexed_prefix_sum[arr_sum_till_point]
             zero_subarray_indexes.append(index)
-            if not max_length_zero_sum_subarray
-            if max_length_zero_sum_subarray:
-                if max_length_zero_sum_subarray[1] - max_length_zero_sum_subarray[0] < zero_subarray_indexes[-1] - zero_subarray_indexes[0]:
-                    max_length_zero_sum_subarray = (zero_subarray_indexes[0], zero_subarray_indexes[-1])
-            else:
+            if not max_length_zero_sum_subarray or (max_length_zero_sum_subarray[1] - max_length_zero_sum_subarray[0] <
+                                                    zero_subarray_indexes[-1] - zero_subarray_indexes[0]):
                 max_length_zero_sum_subarray = (zero_subarray_indexes[0], zero_subarray_indexes[-1])
 
         indexed_prefix_sum[arr_sum_till_point] = [index]
