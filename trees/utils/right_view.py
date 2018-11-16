@@ -110,8 +110,8 @@ def run():
     #                                    2   3
     #                                    \   /
     #                                     4 5
-    #                                      \/
-    #                                       6
+    #                                      /
+    #                                     7  6
     root = LinkedBinaryTree.BinaryTreeNode(1)
     root._left = LinkedBinaryTree.BinaryTreeNode(2)
     root._right = LinkedBinaryTree.BinaryTreeNode(3)
