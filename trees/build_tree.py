@@ -36,3 +36,35 @@ class BuildLinkedBinaryTree:
 
         return self._tree
 
+    def get_diamond_tree(self):
+        ###############
+        # Make a complex test-tree
+        #                                      1
+        #                                     / \
+        #                                    2   3
+        #                                    \   /
+        #                                     4 5
+        #                                      \
+        #                                     / 6
+        #                                    7
+        #
+        self._tree.add_root(1)
+        root_left = self._tree.add_left_child(self._tree.root(), 2)
+        root_right = self._tree.add_right_child(self._tree.root(), 3)
+        root_left_right = self._tree.add_right_child(root_left, 4)
+        root_right_left = self._tree.add_left_child(root_right, 5)
+        root_left_right_right = self._tree.add_right_child()
+
+        root = self._tree.BinaryTreeNode(1)
+        root._left = self._tree.BinaryTreeNode(2)
+        root._right = self._tree.BinaryTreeNode(3)
+        root._left._right = self._tree.BinaryTreeNode(4)
+        root._right._left = self._tree.BinaryTreeNode(5)
+        root._left._right._right = self._tree.BinaryTreeNode(6)
+        root._right._left._left = self._tree.BinaryTreeNode(7)
+        ###############
+        # self._tree._root = root
+        # self._tree._size = 7
+        return self._tree
+
+

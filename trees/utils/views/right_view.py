@@ -91,8 +91,8 @@ def right_view(tree: LinkedBinaryTree):
                 level_first_node[node_level] = node, node_hd
         else:
             level_first_node[node_level] = node, node_hd
-        _right_view(tree.left(node), node_level + 1, node_hd - 1)
         _right_view(tree.right(node), node_level + 1, node_hd + 1)
+        _right_view(tree.left(node), node_level + 1, node_hd - 1)
 
     _right_view(tree.root(), 0, 0)
     for node, node_hd in level_first_node.values():
@@ -102,26 +102,17 @@ def right_view(tree: LinkedBinaryTree):
 # driver code
 def run():
     # tree = BuildLinkedBinaryTree(auto_populate=True).build()
-
-    ###############
-    # Make a complex test-tree
-    #                                      1
-    #                                     / \
-    #                                    2   3
-    #                                    \   /
-    #                                     4 5
-    #                                      /
-    #                                     7  6
-    root = LinkedBinaryTree.BinaryTreeNode(1)
-    root._left = LinkedBinaryTree.BinaryTreeNode(2)
-    root._right = LinkedBinaryTree.BinaryTreeNode(3)
-    root._left._right = LinkedBinaryTree.BinaryTreeNode(4)
-    root._right._left = LinkedBinaryTree.BinaryTreeNode(5)
-    root._left._right._right = LinkedBinaryTree.BinaryTreeNode(6)
-    root._right._left._left = LinkedBinaryTree.BinaryTreeNode(7)
+    tree = BuildLinkedBinaryTree().get_diamond_tree()
+    # root = LinkedBinaryTree.BinaryTreeNode(1)
+    # root._left = LinkedBinaryTree.BinaryTreeNode(2)
+    # root._right = LinkedBinaryTree.BinaryTreeNode(3)
+    # root._left._right = LinkedBinaryTree.BinaryTreeNode(4)
+    # root._right._left = LinkedBinaryTree.BinaryTreeNode(5)
+    # root._left._right._right = LinkedBinaryTree.BinaryTreeNode(6)
+    # root._right._left._left = LinkedBinaryTree.BinaryTreeNode(7)
     ###############
 
-    tree = BuildLinkedBinaryTree(root=root).build()
+    # tree = BuildLinkedBinaryTree(root=root).build()
     print('Right-view: ')
     for node in right_view(tree):
         print(tree.element(node), end=' ')
