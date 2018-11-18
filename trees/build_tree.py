@@ -53,18 +53,9 @@ class BuildLinkedBinaryTree:
         root_right = self._tree.add_right_child(self._tree.root(), 3)
         root_left_right = self._tree.add_right_child(root_left, 4)
         root_right_left = self._tree.add_left_child(root_right, 5)
-        root_left_right_right = self._tree.add_right_child()
-
-        root = self._tree.BinaryTreeNode(1)
-        root._left = self._tree.BinaryTreeNode(2)
-        root._right = self._tree.BinaryTreeNode(3)
-        root._left._right = self._tree.BinaryTreeNode(4)
-        root._right._left = self._tree.BinaryTreeNode(5)
-        root._left._right._right = self._tree.BinaryTreeNode(6)
-        root._right._left._left = self._tree.BinaryTreeNode(7)
+        self._tree.add_right_child(root_left_right, 6)
+        self._tree.add_left_child(root_right_left, 7)
         ###############
-        # self._tree._root = root
-        # self._tree._size = 7
         return self._tree
 
 

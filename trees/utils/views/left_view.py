@@ -4,6 +4,7 @@
 from collections import deque, OrderedDict
 
 from trees.build_tree import BuildLinkedBinaryTree
+from trees.mixins import BinaryTreeTraversalMixin
 from trees.tree import LinkedBinaryTree, BinaryTree
 
 
@@ -43,45 +44,45 @@ from trees.tree import LinkedBinaryTree, BinaryTree
 #
 
 # Full-proof Solution
-def left_view(tree: LinkedBinaryTree):
+def left_view(tree: LinkedBinaryTree, traversal_choice=BinaryTreeTraversalMixin.BFS):
     if tree.is_empty():
         raise ValueError('Tree is Empty')
     level_first_node = OrderedDict()
 
     ##############
     # 1st Approach: BFS
-    # def _left_view(node: BinaryTree.BinaryTreeNode, traversal_level, horizontal_distance):
-    #     bfs_queue = deque()
-    #     bfs_queue.append((node, traversal_level, horizontal_distance))
-    #     level_first_node[traversal_level] = node, horizontal_distance
-    #     while bfs_queue:
-    #         node, node_level, node_hd = bfs_queue.popleft()
-    #
-    #         ###############
-    #         # First Node selection Logic
-    #         if node_level > traversal_level:
-    #             traversal_level = node_level
-    #             level_first_node[traversal_level] = node, node_hd
-    #
-    #         first_node_in_level = level_first_node.get(node_level)
-    #
-    #         if first_node_in_level:
-    #             if first_node_in_level[1] > node_hd:
-    #                 level_first_node[traversal_level] = node, node_hd
-    #
-    #         ###############
-    #         # Queue Append Logic
-    #         left_child = tree.left(node)
-    #         right_child = tree.right(node)
-    #         if left_child is not None:
-    #             bfs_queue.append((left_child, node_level + 1, node_hd - 1))
-    #         if right_child is not None:
-    #             bfs_queue.append((right_child, node_level + 1, node_hd + 1))
-    #         ###############
+    def _left_view_bfs(node: BinaryTree.BinaryTreeNode, traversal_level, horizontal_distance):
+        bfs_queue = deque()
+        bfs_queue.append((node, traversal_level, horizontal_distance))
+        level_first_node[traversal_level] = node, horizontal_distance
+        while bfs_queue:
+            node, node_level, node_hd = bfs_queue.popleft()
+
+            ###############
+            # First Node selection Logic
+            if node_level > traversal_level:
+                traversal_level = node_level
+                level_first_node[traversal_level] = node, node_hd
+
+            first_node_in_level = level_first_node.get(node_level)
+
+            if first_node_in_level:
+                if first_node_in_level[1] > node_hd:
+                    level_first_node[traversal_level] = node, node_hd
+
+            ###############
+            # Queue Append Logic
+            left_child = tree.left(node)
+            right_child = tree.right(node)
+            if left_child is not None:
+                bfs_queue.append((left_child, node_level + 1, node_hd - 1))
+            if right_child is not None:
+                bfs_queue.append((right_child, node_level + 1, node_hd + 1))
+            ###############
 
     #############
     # 2nd Approach: DFS
-    def _left_view(node: BinaryTree.BinaryTreeNode, node_level, node_hd):
+    def _left_view_dfs(node: BinaryTree.BinaryTreeNode, node_level, node_hd):
         if node is None:
             return
 
@@ -91,10 +92,12 @@ def left_view(tree: LinkedBinaryTree):
                 level_first_node[node_level] = node, node_hd
         else:
             level_first_node[node_level] = node, node_hd
-        _left_view(tree.left(node), node_level + 1, node_hd - 1)
-        _left_view(tree.right(node), node_level + 1, node_hd + 1)
+        _left_view_dfs(tree.left(node), node_level + 1, node_hd - 1)
+        _left_view_dfs(tree.right(node), node_level + 1, node_hd + 1)
 
-    _left_view(tree.root(), 0, 0)
+    #############
+    implementation_func = _left_view_bfs if traversal_choice == BinaryTreeTraversalMixin.BFS else _left_view_dfs
+    implementation_func(tree.root(), 0, 0)
     for node, node_hd in level_first_node.values():
         yield node
 
@@ -102,26 +105,16 @@ def left_view(tree: LinkedBinaryTree):
 # driver code
 def run():
     # tree = BuildLinkedBinaryTree(auto_populate=True).build()
+    # tree = BuildLinkedBinaryTree(root=root).build()
+    tree = BuildLinkedBinaryTree().get_diamond_tree()
 
-    ###############
-    # Make a complex test-tree
-    root = LinkedBinaryTree.BinaryTreeNode(1)
-    root._left = LinkedBinaryTree.BinaryTreeNode(2)
-    root._right = LinkedBinaryTree.BinaryTreeNode(3)
-    root._left._right = LinkedBinaryTree.BinaryTreeNode(4)
-    root._right._left = LinkedBinaryTree.BinaryTreeNode(5)
-    root._left._right._right = LinkedBinaryTree.BinaryTreeNode(6)
-    root._right._left._left = LinkedBinaryTree.BinaryTreeNode(7)
-    ###############
-
-    tree = BuildLinkedBinaryTree(root=root).build()
     print('Left-view: ')
     for node in left_view(tree):
         print(tree.element(node), end=' ')
 
-    print('\n\nBFS: ')
-    for node in tree.bfs():
-        print(tree.element(node), end=' ')
+    # print('\n\nBFS: ')
+    # for node in tree.bfs():
+    #     print(tree.element(node), end=' ')
 
 
 if __name__ == '__main__':
