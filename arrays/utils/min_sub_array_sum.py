@@ -4,7 +4,7 @@
 import sys
 
 
-def find_min_sub_array_sum(arr):
+def get_min_sub_array_sum(arr):
     """
     Function to find the smallest sum contiguous sub-array
     :param arr: input array
@@ -45,7 +45,7 @@ def run():
     # arr = [2, 6, -5, 4, 1, 9]
     # arr = [4, -1, -1, -1, -1, -1]
 
-    start_index, end_index, min_sum = find_min_sub_array_sum(arr)
+    start_index, end_index, min_sum = get_min_sub_array_sum(arr)
     print(f'Sub-array with minimum sum({min_sum}): \n{arr[start_index: end_index + 1]}')
 
 

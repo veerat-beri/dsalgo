@@ -4,7 +4,7 @@
 import sys
 
 
-def find_max_sub_array_sum(arr):
+def get_max_sub_array_sum(arr):
     max_sum_globally = -sys.maxsize - 1
     max_sum_till_point = -sys.maxsize - 1
 
@@ -30,7 +30,7 @@ def find_max_sub_array_sum(arr):
 # driver code
 def run():
     arr = [-2, -3, 4, -1, -2, 1, 5, -3]
-    start_index, end_index, max_sum = find_max_sub_array_sum(arr)
+    start_index, end_index, max_sum = get_max_sub_array_sum(arr)
     print(f'Sub-array with maximum sum({max_sum}): \n{arr[start_index: end_index + 1]}')
 
 
