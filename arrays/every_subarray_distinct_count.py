@@ -22,6 +22,9 @@ def get_every_subarray_distinct_count(arr, subarray_window_size):
         current_subarray_distinct_count -= 1
         current_subarray_elem_count[arr[index - subarray_window_size]] -= 1
 
+        if current_subarray_elem_count[arr[index - subarray_window_size]] == 1:
+            current_subarray_distinct_count += 1
+
         if current_subarray_elem_count.get(arr[index]):
             current_subarray_elem_count[arr[index]] += 1
         else:
@@ -36,9 +39,10 @@ def get_every_subarray_distinct_count(arr, subarray_window_size):
 # driver code
 def run():
     window_size = 4
+    arr = [1, 2, 1, 3, 4, 2, 3]
     print(f'Distinct elements count in each sub-array if size-{window_size}, is: ')
-    for dist_count in get_every_subarray_distinct_count():
-        print(dist_count)
+    for dist_count in get_every_subarray_distinct_count(arr, window_size):
+        print('\n', dist_count)
 
 
 if __name__ =='__main__':
