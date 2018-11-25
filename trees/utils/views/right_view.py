@@ -9,13 +9,13 @@ from trees.tree import LinkedBinaryTree, BinaryTree
 
 
 # Standard Solution
-# def right_view(tree: LinkedBinaryTree):
+# def top_view(tree: LinkedBinaryTree):
 #     if tree.is_empty():
 #         raise ValueError('Tree is Empty')
 #
 #     ###############
 #     # 1st Approach: BFS
-#     def _left_view(node: BinaryTree.BinaryTreeNode, traversal_level):
+#     def _right_view_bfs(node: BinaryTree.BinaryTreeNode, traversal_level):
 #         bfs_queue = deque()
 #         bfs_queue.append((node, 0))
 #         yield node
@@ -39,7 +39,7 @@ from trees.tree import LinkedBinaryTree, BinaryTree
 #                 bfs_queue.append((child, node_level + 1))
 #             ###############
 #
-#     for node in _left_view(tree.root(), 0):
+#     for node in _right_view(tree.root(), 0):
 #         yield node
 #
 
