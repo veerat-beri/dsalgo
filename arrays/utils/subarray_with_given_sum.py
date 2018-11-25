@@ -31,6 +31,7 @@
 ############################################################
 
 # Sliding window approach
+# Seems to be O(n2) approach, but is O(n) approach.
 def get_sub_array_with_given_sum(arr, given_sum):
     if not len(arr):
         return False
@@ -57,7 +58,12 @@ def get_sub_array_with_given_sum(arr, given_sum):
 def run():
     arr = [1, 4, 20, 3, 10, 5, ]
     given_sum = 33
-    get_sub_array_with_given_sum(arr, given_sum)
+    print('Given Array: ', arr)
+
+    arr_exists = get_sub_array_with_given_sum(arr, given_sum)
+    if arr_exists:
+        start_pos, end_pos = arr_exists[1][0], arr_exists[1][1]
+        print(f'Sub array with sum({given_sum}) is: ', arr[start_pos: end_pos])
 
 
 if __name__ == '__main__':

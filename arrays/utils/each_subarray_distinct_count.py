@@ -46,7 +46,7 @@ def run():
     arr = [1, 2, 1, 1, 4, 2, 3]
     # arr = [1, 2, 1, 3, 4, 2, 3]
 
-    print('Given Array: ', arr, sep='')
+    print('Given Array: ', arr)
     print(f'Distinct elements count in each sub-array of size-{window_size}, is: ')
 
     for dist_count in get_eAch_subarray_distinct_count(arr, window_size):
