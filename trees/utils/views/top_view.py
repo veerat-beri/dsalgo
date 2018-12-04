@@ -4,46 +4,11 @@
 from collections import deque, namedtuple
 from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 
-# Standard Solution
-# def top_view(tree: LinkedBinaryTree):
-#     if tree.is_empty():
-#         raise ValueError('Tree is Empty')
-#
-#     ###############
-#     # 1st Approach: BFS
-#     def _left_view(node: BinaryTree.BinaryTreeNode, traversal_level):
-#         bfs_queue = deque()
-#         bfs_queue.append((node, 0))
-#         yield node
-#
-#         while bfs_queue:
-#             node, node_level = bfs_queue.popleft()
-#             if node_level > traversal_level:
-#                 traversal_level = node_level
-#                 yield node
-#             ###############
-#             # 1st Approach
-#             # left_child = self.left(node)
-#             # right_child = self.right(node)
-#             # if right_child is not None:
-#             #     bfs_queue.append((right_child, node_level + 1))
-#             # if left_child is not None:
-#             #     bfs_queue.append((left_child, node_level + 1))
-#             ###############
-#             # 2nd Approach
-#             for child in tree.children(node):
-#                 bfs_queue.append((child, node_level + 1))
-#             ###############
-#
-#     for node in _left_view(tree.root(), 0):
-#         yield node
-#
 
-
-# Full-proof Solution
 def top_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
     if tree.is_empty():
         raise ValueError('Tree is Empty')
+
     horizontal_distance_first_node = dict()
     Node = namedtuple('Node', ['node', 'level'])
 
@@ -58,6 +23,7 @@ def top_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
         horizontal_distance_first_node[horizontal_distance] = make_node_named_tuple(node)
         while bfs_queue:
             node, node_level, node_hd = bfs_queue.popleft()
+
             # save first node of each HD
             if not horizontal_distance_first_node.get(node_hd, None):
                 horizontal_distance_first_node[node_hd] = make_node_named_tuple(node)
