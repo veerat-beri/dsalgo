@@ -218,30 +218,30 @@ class LinkedBinaryTree(BinaryTree):
         return self._add_right(parent_node, new_node_data)
 
 
-class LinkedBinaryTreeWithParent(LinkedBinaryTree):
-
-    class BinaryTreeNode(LinkedBinaryTree.BinaryTreeNode):
-        def __init__(self, data, left=None, right=None, parent=None, **kwargs):
-            super().__init__(data, left, right)
-            __slots__ = '_parent'
-            self._parent = parent
-
-    def _add_left(self, node: BinaryTreeNode, new_node_data):
-        raise NotImplementedError('Has to be Implemented by this class')
-
-    def _add_right(self, node: BinaryTreeNode, new_node_data):
-        raise NotImplementedError('Has to be Implemented by this class')
-
-    def _delete(self, node: BinaryTreeNode):
-        raise NotImplementedError('Has to be Implemented by this class')
-
-    def parent(self, node: BinaryTreeNode):
-        return node._parent
-
-    def sibling(self, node):
-        parent_node = self.parent(node)
-        if not parent_node:
-            return None
-        if node == self.left(parent_node):
-            return self.right(parent_node)
-        return self.left(parent_node)
+# class LinkedBinaryTreeWithParent(LinkedBinaryTree):
+#
+#     class BinaryTreeNode(LinkedBinaryTree.BinaryTreeNode):
+#         def __init__(self, data, left=None, right=None, parent=None, **kwargs):
+#             super().__init__(data, left, right)
+#             __slots__ = '_parent'
+#             self._parent = parent
+#
+#     def _add_left(self, node: BinaryTreeNode, new_node_data):
+#         raise NotImplementedError('Has to be Implemented by this class')
+#
+#     def _add_right(self, node: BinaryTreeNode, new_node_data):
+#         raise NotImplementedError('Has to be Implemented by this class')
+#
+#     def _delete(self, node: BinaryTreeNode):
+#         raise NotImplementedError('Has to be Implemented by this class')
+#
+#     def parent(self, node: BinaryTreeNode):
+#         return node._parent
+#
+#     def sibling(self, node):
+#         parent_node = self.parent(node)
+#         if not parent_node:
+#             return None
+#         if node == self.left(parent_node):
+#             return self.right(parent_node)
+#         return self.left(parent_node)

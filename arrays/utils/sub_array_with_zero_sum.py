@@ -19,7 +19,7 @@ def check_zero_sum_subarray_exists(arr):
 
 # Problem Statement
 # https://www.geeksforgeeks.org/find-the-largest-subarray-with-0-sum/
-def find_zero_sum_subarray(arr):
+def get_zero_sum_subarray(arr):
     indexed_prefix_sum = {}
     arr_sum_till_point = 0
     max_length_zero_sum_subarray = ()
@@ -50,7 +50,7 @@ def run():
     # print(message)
     ###############
 
-    subarray_indexes = find_zero_sum_subarray(arr)
+    subarray_indexes = get_zero_sum_subarray(arr)
     if subarray_indexes:
         print(f'Max Length({subarray_indexes[1] - subarray_indexes[0]}) Sub-array with zero sum: ', arr[subarray_indexes[0] + 1: subarray_indexes[1] + 1], sep='\n')
     else:

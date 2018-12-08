@@ -5,4 +5,4 @@ __all__ = [
 ]
 
 from .linked_list import SinglyLinkedList, SinglyLinkedListNode, DoublyLinkedListNode, DoublyLinkedList
-from linkedlists.build_linked_list import BuildSinglyLinkedList, BuildDoublyLinkedList, BuildSinglyLinkedListWithLoop
+from .build_linked_list import BuildSinglyLinkedList, BuildDoublyLinkedList, BuildSinglyLinkedListWithLoop
