@@ -11,7 +11,7 @@ from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 #
 #     ###############
 #     # 1st Approach: BFS
-#     def _right_view_bfs(node: LinkedBinaryTree.BinaryTreeNode, traversal_level):
+#     def _right_view(node: LinkedBinaryTree.BinaryTreeNode, traversal_level):
 #         bfs_queue = deque()
 #         bfs_queue.append((node, 0))
 #         yield node
@@ -28,9 +28,10 @@ from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 #             # if left_child is not None:
 #             #     bfs_queue.append((left_child, node_level + 1))
 #
-#     for node in _right_view(tree._root(), 0):
+#     for node in _right_view(tree.root(), 0):
 #         yield node
 #
+
 
 # Full-proof Solution
 def right_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
@@ -94,7 +95,6 @@ def right_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
 # driver code
 def run():
     # tree = BuildLinkedBinaryTree(auto_populate=True).build()
-    # tree = BuildLinkedBinaryTree(_root=_root).build()
     tree = BuildLinkedBinaryTree().get_diamond_tree()
 
     print('Right-view: ')

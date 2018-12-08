@@ -36,7 +36,7 @@ from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 #                 bfs_queue.append((child, node_level + 1))
 #             ###############
 #
-#     for node in _left_view(tree._root(), 0):
+#     for node in _left_view(tree.root(), 0):
 #         yield node
 #
 
@@ -102,7 +102,6 @@ def left_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
 # driver code
 def run():
     # tree = BuildLinkedBinaryTree(auto_populate=True).build()
-    # tree = BuildLinkedBinaryTree(_root=_root).build()
     tree = BuildLinkedBinaryTree().get_diamond_tree()
 
     print('Left-view: ')
