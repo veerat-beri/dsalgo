@@ -95,7 +95,7 @@ class LinkedBinaryTree(BinaryTree):
             self._right = right
 
     def __init__(self, *args, **kwargs):
-        self._root = kwargs.get('root', None)
+        self._root = kwargs.get('_root', None)
         self._size = (kwargs.get('size', 0) or self._get_tree_size(self._root)) if self._root else 0
 
     def __len__(self):

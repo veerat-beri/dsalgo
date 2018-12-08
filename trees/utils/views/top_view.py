@@ -64,7 +64,7 @@ def top_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
 # driver code
 def run():
     # tree = BuildLinkedBinaryTree(auto_populate=True).build()
-    # tree = BuildLinkedBinaryTree(root=root).build()
+    # tree = BuildLinkedBinaryTree(_root=_root).build()
     tree = BuildLinkedBinaryTree().get_diamond_tree()
 
     print('Top-view: ')

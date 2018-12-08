@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/count-distinct-elements-in-every-window-of-size-k/
 
 
-def get_eAch_subarray_distinct_count(arr, subarray_window_size):
+def get_each_subarray_distinct_count(arr, subarray_window_size):
     current_subarray_elem_count = {}
     arr_len = len(arr)
     current_subarray_distinct_count = 0
@@ -49,7 +49,7 @@ def run():
     print('Given Array: ', arr)
     print(f'Distinct elements count in each sub-array of size-{window_size}, is: ')
 
-    for dist_count in get_eAch_subarray_distinct_count(arr, window_size):
+    for dist_count in get_each_subarray_distinct_count(arr, window_size):
         print(dist_count)
 
 
