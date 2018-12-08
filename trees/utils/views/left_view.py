@@ -2,12 +2,11 @@
 # https://www.geeksforgeeks.org/print-left-view-binary-tree/
 
 from collections import deque, OrderedDict
-
 from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 
 
 # Standard Solution
-# def top_view(tree: LinkedBinaryTree):
+# def left_view(tree: LinkedBinaryTree):
 #     if tree.is_empty():
 #         raise ValueError('Tree is Empty')
 #
