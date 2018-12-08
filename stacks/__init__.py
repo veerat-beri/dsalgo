@@ -3,6 +3,6 @@ __all__ = [
 ]
 
 from .build_stack import BuildLinkedStack
-from stacks.stack import LinkedStack
+from .stack import LinkedStack
 
 
