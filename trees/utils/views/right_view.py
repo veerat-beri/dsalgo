@@ -94,7 +94,7 @@ def right_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
 
 # driver code
 def run():
-    # tree = BuildLinkedBinaryTree(auto_populate=True).build()
+    # tree = BuildLinkedBinaryTree(auto_populate=True).get_tree()
     tree = BuildLinkedBinaryTree().get_diamond_tree()
 
     print('Right-view: ')

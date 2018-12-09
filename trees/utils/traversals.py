@@ -6,7 +6,7 @@ from trees.build_tree import BuildLinkedBinaryTree
 
 # driver code
 def run():
-    binary_tree = BuildLinkedBinaryTree(auto_populate=True).build()
+    binary_tree = BuildLinkedBinaryTree(auto_populate=True).get_tree()
 
     # Pre-order Traversal
     print('\nPre order Traversal: ')

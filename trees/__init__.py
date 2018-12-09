@@ -1,7 +1,7 @@
 __all__ = [
-    'BuildLinkedBinaryTree', 'LinkedBinaryTree',
+    'BuildLinkedBinaryTree', 'LinkedBinaryTree', 'BinaryTree',
 ]
 
-from .tree import LinkedBinaryTree
+from .tree import LinkedBinaryTree, BinaryTree
 from .build_tree import BuildLinkedBinaryTree
 
