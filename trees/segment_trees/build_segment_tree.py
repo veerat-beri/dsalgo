@@ -25,17 +25,20 @@ class BuildArraySegmentTree(_BuildSegmentTree):
             arr = []
         return ([1, 2, 3, 4, 5, ] if auto_populate else []) + arr
 
-    def __constuct_tree(self, low, high, tree_arr_index):
-        tree = self._tree
-        tree.list_of_nodes[tree_arr_index] = tree.create_node(low, high, sum(self.input_arr))
+    def _build_tree(self, low, high, tree_arr_index):
+        if low >= high:
+            self._tree.list_of_nodes[tree_arr_index] = self._tree.create_node(low, low, self.input_arr[low])
+            return self.input_arr[low]
 
 
-    def _build_tree(self):
-        self.__constuct_tree()
-
+        lower_half_range_arr_sum = self._build_tree(low, mid, self._tree.get_left_node_index(tree_arr_index))
+        upper_half_range_arr_sum = self._build_tree(mid, high, self._tree.get_right_node_index(tree_arr_index))
+        self._tree.list_of_nodes[tree_arr_index] = lower_half_range_arr_sum + upper_half_range_arr_sum
+        return self._tree.list_of_nodes[tree_arr_index]
 
     def get_tree(self):
-        self._build_tree()
+        self._build_tree(0, len(self.input_arr) - 1, 0)
         return self._tree
+
 
 
