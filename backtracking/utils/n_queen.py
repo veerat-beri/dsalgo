@@ -41,7 +41,7 @@ def driver():
     if solExist:
         printSolution(board_status)
     else:
-        print("Solution doesn't exist")
+        print("Solution doesn'no_of_test_cases exist")
 
 board_size = int(input("enter value of N, for N-Queen prob. = "))
 driver()
