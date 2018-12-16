@@ -30,7 +30,7 @@
 # Sample Output:
 # 2
 # Explanation:
-# If we change the "a" character to "b" and "b" character to "a", then total cost involved is 2 which is the
+# If we change the 6th character to "b" and 7th character to "a", then total cost involved is 2 which is the
 # minimum cost to convert the string in the input.
 
 #############################################################################################################
