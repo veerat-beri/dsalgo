@@ -119,8 +119,5 @@ def get_min_operations(arr, k):
 
 
 arr_size, k = list(map(int, input().strip().split()))
-arr = list(map(int, input().strip().split()))
+arr = list(map(int, input().strip().split()))  # 1 4 10 8 15
 print(get_min_operations(arr, k))
-
-
-# 1 4 10 8 15
