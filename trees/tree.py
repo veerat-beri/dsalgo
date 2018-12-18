@@ -110,6 +110,9 @@ class LinkedBinaryTree(BinaryTree):
 
     def _add_left(self, node: BinaryTreeNode, new_node_data):
         if node._left is not None:
+
+
+            print(node._left._data, new_node_data)
             raise ValueError('Left child exists')
         node._left = self._make_node(new_node_data)
         self._size += 1
