@@ -33,6 +33,16 @@ def run():
     binary_tree = BuildLinkedBinaryTree(list_of_nodes=[60, 70, 80, 90, 100, ], auto_populate=True).get_tree()
     searched_node = 100
     print(f'Path to node ({searched_node}): ')
+
+
+    print('tree is: ')
+    current_node_level = 0
+    for (node, node_level) in binary_tree.bfs():
+        if node_level > current_node_level:
+            print('=============')
+            current_node_level = node_level
+        print(binary_tree.element(node))
+
     for node in get_path(binary_tree, searched_node):
         print(binary_tree.element(node), end=' ')
 

@@ -86,12 +86,15 @@ class BinaryTreeTraversalMixin:
 
     @set_default_node
     def bfs(self, node):
+        if node is None:
+            raise Exception('Tree is empty!')
+
         bfs_queue = deque()
-        bfs_queue.append(node)
+        bfs_queue.append((node, 0))
 
         while bfs_queue:
-            node = bfs_queue.popleft()
-            yield node
+            node, node_level = bfs_queue.popleft()
+            yield node, node_level
             ###############
             # 1st Approach
             # left_child = self.left(node)
@@ -103,5 +106,5 @@ class BinaryTreeTraversalMixin:
             ###############
             # 2nd Approach
             for child in self.children(node):
-                bfs_queue.append(child)
+                bfs_queue.append((child, node_level + 1))
             ###############

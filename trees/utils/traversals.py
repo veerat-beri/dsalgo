@@ -25,7 +25,7 @@ def run():
 
     # Post-order Traversal
     print('\nBreadth First Traversal: ')
-    for node in binary_tree.bfs():
+    for (node, node_level) in binary_tree.bfs():
         print(binary_tree.element(node), end=' ')
 
 

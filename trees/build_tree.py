@@ -21,23 +21,33 @@ class BuildLinkedBinaryTree:
         if self.list_of_nodes:
 
 
-            print(self.list_of_nodes)
+            # print(self.list_of_nodes)
             if self._tree.is_empty():
                 root_node = self._tree.add_root(self.list_of_nodes[0])
                 index = 1
                 bfs_queue = deque()
                 bfs_queue.append(root_node)
                 while index <= len(self.list_of_nodes) - 1:
+
+
+                    # print(bfs_queue, end='=====\n')
                     root_node = bfs_queue.popleft()
 
 
-                    print(bfs_queue, end='=====\n')
+
                     self._tree.add_left_child(root_node, self.list_of_nodes[index])
                     index += 1
                     bfs_queue.append(self._tree.left(root_node))
+
+                    if index == len(self.list_of_nodes):
+                        break
+
                     self._tree.add_right_child(root_node, self.list_of_nodes[index])
                     index += 1
-                    bfs_queue.append(self._tree.left(root_node))
+                    bfs_queue.append(self._tree.right(root_node))
+
+
+                    # print(self._tree.element(root_node), end='++++++++++++\n\n')
 
     def get_tree(self):
         ###############
