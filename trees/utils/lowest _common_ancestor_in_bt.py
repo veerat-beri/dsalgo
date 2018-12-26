@@ -5,5 +5,9 @@
 from trees.tree import BinaryTree
 
 
-def get_LCA_in_BT(tree: BinaryTree, searched_node_data):
-    pass
+def get_LCA_in_BT(tree: BinaryTree, node_1_data, node_2_data):
+    ###############
+    # 1st Approach
+    def _get_LCA_in_BT():
+        pass
+    
