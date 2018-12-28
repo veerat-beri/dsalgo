@@ -3,7 +3,7 @@ from collections import deque
 from trees.decorators import set_default_node
 
 
-class BinaryTreeTraversalMixin:
+class LinkedBinaryTreeTraversalMixin:
     BFS = 'BFS'
     DFS = 'DFS'
 

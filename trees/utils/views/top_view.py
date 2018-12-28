@@ -12,7 +12,7 @@ def top_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
     horizontal_distance_first_node = dict()
     Node = namedtuple('Node', ['node', 'level'])
 
-    def make_node_named_tuple(node, node_level=None):
+    def get_named_node_tuple(node, node_level=None):
         return Node(node, node_level)
 
     ##############
@@ -20,13 +20,13 @@ def top_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
     def _top_view_bfs(node: LinkedBinaryTree.BinaryTreeNode, traversal_level, horizontal_distance):
         bfs_queue = deque()
         bfs_queue.append((node, traversal_level, horizontal_distance))
-        horizontal_distance_first_node[horizontal_distance] = make_node_named_tuple(node)
+        horizontal_distance_first_node[horizontal_distance] = get_named_node_tuple(node)
         while bfs_queue:
             node, node_level, node_hd = bfs_queue.popleft()
 
             # save first node of each HD
             if not horizontal_distance_first_node.get(node_hd, None):
-                horizontal_distance_first_node[node_hd] = make_node_named_tuple(node)
+                horizontal_distance_first_node[node_hd] = get_named_node_tuple(node)
 
             ###############
             # Queue Append Logic
@@ -47,9 +47,9 @@ def top_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
         first_node_in_hd = horizontal_distance_first_node.get(node_hd)
         if first_node_in_hd:
             if first_node_in_hd.level > node_level:
-                horizontal_distance_first_node[node_hd] = make_node_named_tuple(node, node_level)
+                horizontal_distance_first_node[node_hd] = get_named_node_tuple(node, node_level)
         else:
-            horizontal_distance_first_node[node_hd] = make_node_named_tuple(node, node_level)
+            horizontal_distance_first_node[node_hd] = get_named_node_tuple(node, node_level)
 
         _top_view_dfs(tree.right(node), node_level + 1, node_hd + 1)
         _top_view_dfs(tree.left(node), node_level + 1, node_hd - 1)

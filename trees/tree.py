@@ -1,5 +1,5 @@
 from trees.decorators import set_default_node
-from trees.mixins import BinaryTreeTraversalMixin
+from trees.mixins import LinkedBinaryTreeTraversalMixin
 
 
 class Tree:
@@ -57,10 +57,15 @@ class Tree:
         raise NotImplementedError('Has to be Implemented by sub class')
 
 
-class BinaryTree(BinaryTreeTraversalMixin, Tree):
+class BinaryTree(Tree):
     class BinaryTreeNode:
         def __init__(self):
             raise NotImplementedError('Has to be Implemented by sub class')
+
+    def __iter__(self):
+        # making default iteration of tree in in-order
+        for node in self.in_order():
+            yield node
 
     def _get_tree_size(self, root_node):
         count = 0
@@ -74,18 +79,11 @@ class BinaryTree(BinaryTreeTraversalMixin, Tree):
     def right(self, node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def sibling(self, node):
+    def get_sibling(self, node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def children(self, node):
-        """Generates an iteration of Children of node"""
-        if node._left is not None:
-            yield self.left(node)
-        if node._right is not None:
-            yield self.right(node)
 
-
-class LinkedBinaryTree(BinaryTree):
+class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
 
     class BinaryTreeNode:
         def __init__(self, data, left=None, right=None, **kwargs):
@@ -110,9 +108,6 @@ class LinkedBinaryTree(BinaryTree):
 
     def _add_left(self, node: BinaryTreeNode, new_node_data):
         if node._left is not None:
-
-
-            print(node._left._data, new_node_data)
             raise ValueError('Left child exists')
         node._left = self._make_node(new_node_data)
         self._size += 1
@@ -131,9 +126,6 @@ class LinkedBinaryTree(BinaryTree):
         node._data = new_data
         return old_data
 
-    # def _delete(self, node: BinaryTreeNode):
-    #     if self.is_leaf(node)
-
     def _make_node(self, node_data):
         return self.BinaryTreeNode(node_data)
 
@@ -146,14 +138,14 @@ class LinkedBinaryTree(BinaryTree):
 
         return 1 + left_subtree_nodes + right_subtree_nodes
 
-    def _sibling(self, root: BinaryTreeNode, sibling_node_data):
+    def _get_sibling(self, root: BinaryTreeNode, sibling_node_data):
         if root is None:
             return
         if self.element(self.left(root)) == sibling_node_data:
             return self.right(root)
         if self.element(self.right(root)) == sibling_node_data:
             return self.left(root)
-        return self._sibling(self.left(root), sibling_node_data) or self._sibling(self.right(root), sibling_node_data)
+        return self._get_sibling(self.left(root), sibling_node_data) or self._get_sibling(self.right(root), sibling_node_data)
 
     def _is_sibling(self, root: BinaryTreeNode, node_1_data, node_2_data) -> bool:
         """Return True if node_1 is sibling of node_2"""
@@ -205,11 +197,11 @@ class LinkedBinaryTree(BinaryTree):
                 return False
         return self._is_sibling(self.root(), node_1_data, node_2_data)
 
-    def sibling(self, sibling_node_data):
+    def get_sibling(self, node_data):
         if self.root():
-            if self.element(self.root()) == sibling_node_data:
+            if self.element(self.root()) == node_data:
                 return
-        return self._sibling(self.root(), sibling_node_data)
+        return self._get_sibling(self.root(), node_data)
 
     def add_root(self, node_data):
         return self._add_root(node_data)
@@ -220,6 +212,18 @@ class LinkedBinaryTree(BinaryTree):
     def add_right_child(self, parent_node: BinaryTreeNode, new_node_data):
         return self._add_right(parent_node, new_node_data)
 
+    def children(self, node):
+        """Generates an iteration of Children of node"""
+        if node._left is not None:
+            yield self.left(node)
+        if node._right is not None:
+            yield self.right(node)
+
+    def do_node_exists_in_tree(self, node_data) -> bool:
+        for node in self:
+            if self.element(node) == node_data:
+                return True
+        return False
 
 # class LinkedBinaryTreeWithParent(LinkedBinaryTree):
 #

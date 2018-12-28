@@ -1,4 +1,4 @@
-from trees import BinaryTree
+from trees.tree import BinaryTree
 
 
 class ArraySegmentTree(BinaryTree):
@@ -20,6 +20,10 @@ class ArraySegmentTree(BinaryTree):
         @property
         def high(self):
             return self._high
+
+    @property
+    def root(self):
+        return self.list_of_nodes[0]
 
     def __len__(self):
         return self._size
@@ -48,4 +52,4 @@ class ArraySegmentTree(BinaryTree):
         return right_node_index
 
     def get_mid(self, low, high):
-        return (low + high) // 2
+        return (high - low) // 2 + low
