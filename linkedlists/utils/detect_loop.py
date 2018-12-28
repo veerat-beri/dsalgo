@@ -6,7 +6,7 @@ from linkedlists import SinglyLinkedList
 from linkedlists.build_linked_list import BuildSinglyLinkedListWithLoop
 
 
-# Using Floyd’input_str Cycle-Finding Algorithm
+# Using Floyd’s Cycle-Finding Algorithm
 def check_loop_exists(singly_linked_list: SinglyLinkedList):
     slow_ptr = singly_linked_list.head
     fast_ptr = singly_linked_list.head
