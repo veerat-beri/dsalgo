@@ -48,24 +48,22 @@ def left_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
 
     ##############
     # 1st Approach: BFS
-    def _left_view_bfs(node: LinkedBinaryTree.BinaryTreeNode, traversal_level, horizontal_distance):
+    def _left_view_bfs(node: LinkedBinaryTree.BinaryTreeNode, node_level, horizontal_distance):
         bfs_queue = deque()
-        bfs_queue.append((node, traversal_level, horizontal_distance))
-        level_first_node[traversal_level] = node, horizontal_distance
+        bfs_queue.append((node, node_level, horizontal_distance))
+        level_first_node[node_level] = node, horizontal_distance
         while bfs_queue:
             node, node_level, node_hd = bfs_queue.popleft()
 
             ###############
             # First Node selection Logic
-            if node_level > traversal_level:
-                traversal_level = node_level
-                level_first_node[traversal_level] = node, node_hd
-
             first_node_in_level = level_first_node.get(node_level)
 
             if first_node_in_level:
                 if first_node_in_level[1] > node_hd:
-                    level_first_node[traversal_level] = node, node_hd
+                    level_first_node[node_level] = node, node_hd
+            else:
+                level_first_node[node_level] = node, node_hd
 
             ###############
             # Queue Append Logic
