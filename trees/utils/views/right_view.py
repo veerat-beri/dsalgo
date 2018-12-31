@@ -37,29 +37,26 @@ from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 def right_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
     if tree.is_empty():
         raise ValueError('Tree is Empty')
-    level_first_node = OrderedDict()
+    level_last_node = OrderedDict()
 
     ##############
     # 1st Approach: BFS
-    def _right_view_bfs(node: LinkedBinaryTree.BinaryTreeNode, traversal_level, horizontal_distance):
+    def _right_view_bfs(node: LinkedBinaryTree.BinaryTreeNode, node_level, horizontal_distance):
         bfs_queue = deque()
-        bfs_queue.append((node, traversal_level, horizontal_distance))
-        level_first_node[traversal_level] = node, horizontal_distance
+        bfs_queue.append((node, node_level, horizontal_distance))
+        level_last_node[node_level] = node, horizontal_distance
         while bfs_queue:
             node, node_level, node_hd = bfs_queue.popleft()
 
             ###############
-            # First Node selection Logic
-            if node_level > traversal_level:
-                traversal_level = node_level
-                level_first_node[traversal_level] = node, node_hd
-
-            last_node_in_level = level_first_node.get(node_level)
+            # Last Node selection Logic
+            last_node_in_level = level_last_node.get(node_level)
 
             if last_node_in_level:
                 if last_node_in_level[1] < node_hd:
-                    level_first_node[traversal_level] = node, node_hd
-
+                    level_last_node[node_level] = node, node_hd
+            else:
+                level_last_node[node_level] = node, node_hd
             ###############
             # Queue Append Logic
             left_child = tree.left(node)
@@ -76,19 +73,19 @@ def right_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
         if node is None:
             return
 
-        last_node_in_level = level_first_node.get(node_level)
+        last_node_in_level = level_last_node.get(node_level)
         if last_node_in_level:
             if last_node_in_level[1] < node_hd:
-                level_first_node[node_level] = node, node_hd
+                level_last_node[node_level] = node, node_hd
         else:
-            level_first_node[node_level] = node, node_hd
+            level_last_node[node_level] = node, node_hd
         _right_view_dfs(tree.right(node), node_level + 1, node_hd + 1)
         _right_view_dfs(tree.left(node), node_level + 1, node_hd - 1)
 
     #############
     implementation_func = _right_view_bfs if traversal_choice == LinkedBinaryTree.BFS else _right_view_dfs
     implementation_func(tree.root(), 0, 0)
-    for node, node_hd in level_first_node.values():
+    for node, node_hd in level_last_node.values():
         yield node
 
 
