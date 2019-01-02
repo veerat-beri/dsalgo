@@ -1,6 +1,6 @@
-# from linkedlists import BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlists import BuildDoublyLinkedList, DoublyLinkedList
 #
-# MAX_LINKED_LIST_SIZE = 4
+MAX_LINKED_LIST_SIZE = 4  # cache size
 #
 #
 # class LRUCache:

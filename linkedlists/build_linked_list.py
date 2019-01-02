@@ -27,7 +27,7 @@ class _BuildLinkedList:
 
 
 class BuildSinglyLinkedList(_BuildLinkedList):
-    def __init__(self, singly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
+    def __init__(self, singly_linked_list=None, list_of_nodes: [SinglyLinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
         super(BuildSinglyLinkedList, self).__init__(singly_linked_list, list_of_nodes, insert_at_end, auto_populate, **kwargs)
 
     def _create_list_of_nodes(self):
