@@ -7,11 +7,12 @@ import heapq
 
 def get_sorted_arr_from_k_sorted(arr: list, k):
     """
-    Python Generator, which returns elements in completely sorted array.
-    :param arr:
-    :param k:
-    :return:
+    Generator, which returns elements in completely sorted array.
+    :param arr: input partially sorted array
+    :param k: max displacement of elements from their target sorted position
+    :return: elements in completely sorted array.
     """
+
     # List of first k+1 items
     heap = arr[:k + 1]
 
