@@ -36,5 +36,50 @@ def get_sum_of_digits(num: int):
         sum = sum + rem
     return sum
 
-def is_sum_of_digits_pallindrome(num: int):
+
+def get_reverse_of_num(num: int):
+    # dup_num = num
+    # sum = 0
+    # while dup_num:
+    #     rem = dup_num % 10
+    #     dup_num = dup_num // 10
+    #     sum = sum + rem
+    # return sum
     pass
+
+
+def is_num_pallindrome(num: int):
+    # Method 1
+    str_repr_of_num = str(num)
+    len_str_repr_of_num = len(str_repr_of_num)
+    index = 0
+    while index < len_str_repr_of_num:
+        if str_repr_of_num[index] == str_repr_of_num[len_str_repr_of_num - index - 1]:
+            index += 1
+            continue
+        break
+    if index == len_str_repr_of_num:
+        return True
+    return False
+    ###############
+    # Method 2
+
+    ###############
+
+
+def is_sum_of_digits_pallindrome(num: int):
+    digits_sum = get_sum_of_digits(num)
+    return is_num_pallindrome(digits_sum)
+
+
+# driver code
+def run():
+    t = int(input())
+    for _ in range(t):
+        num = int(input())
+        print('Yes' if is_sum_of_digits_pallindrome(num) else 'No')
+
+
+if __name__ == '__main__':
+    run()
+    
