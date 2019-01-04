@@ -29,42 +29,44 @@
 
 def get_sum_of_digits(num: int):
     dup_num = num
-    sum = 0
+    digits_sum = 0
     while dup_num:
         rem = dup_num % 10
         dup_num = dup_num // 10
-        sum = sum + rem
-    return sum
+        digits_sum = digits_sum + rem
+    return digits_sum
 
 
 def get_reverse_of_num(num: int):
-    # dup_num = num
-    # sum = 0
-    # while dup_num:
-    #     rem = dup_num % 10
-    #     dup_num = dup_num // 10
-    #     sum = sum + rem
-    # return sum
-    pass
+    ###############
+    # Method 1
+    # str_repr_of_num = str(num)
+    # len_str_repr_of_num = len(str_repr_of_num)
+    # index = 0
+    # while index < len_str_repr_of_num:
+    #     if str_repr_of_num[index] == str_repr_of_num[len_str_repr_of_num - index - 1]:
+    #         index += 1
+    #         continue
+    #     break
+    # if index == len_str_repr_of_num:
+    #     return True
+    # return False
+    ###############
+    # Method 2
+    ###############
+    dup_num = num
+    reverse_num = 0
+    while dup_num:
+        rem = dup_num % 10
+        dup_num = dup_num // 10
+        reverse_num = 10 * reverse_num + rem
+    return reverse_num
 
 
 def is_num_pallindrome(num: int):
-    # Method 1
-    str_repr_of_num = str(num)
-    len_str_repr_of_num = len(str_repr_of_num)
-    index = 0
-    while index < len_str_repr_of_num:
-        if str_repr_of_num[index] == str_repr_of_num[len_str_repr_of_num - index - 1]:
-            index += 1
-            continue
-        break
-    if index == len_str_repr_of_num:
+    if get_reverse_of_num(num) == num:
         return True
     return False
-    ###############
-    # Method 2
-
-    ###############
 
 
 def is_sum_of_digits_pallindrome(num: int):
@@ -74,12 +76,11 @@ def is_sum_of_digits_pallindrome(num: int):
 
 # driver code
 def run():
-    t = int(input())
-    for _ in range(t):
+    total_test_cases = int(input())
+    for _ in range(total_test_cases):
         num = int(input())
-        print('Yes' if is_sum_of_digits_pallindrome(num) else 'No')
+        print('YES' if is_sum_of_digits_pallindrome(num) else 'NO')
 
 
 if __name__ == '__main__':
     run()
-    
