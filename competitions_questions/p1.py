@@ -34,6 +34,8 @@ def get_ceil_of_arr(a, low, high, x):
 
 bits_count_sum_list = []
 st = 1
+
+
 def u_a(ix):
     global st
     s = bits_count_sum_list[st]
