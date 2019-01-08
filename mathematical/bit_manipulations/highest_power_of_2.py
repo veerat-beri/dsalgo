@@ -17,9 +17,6 @@ def get_max_power_of_2(num: int):
     ###############
     pass
 
-def get_max_power_of_2(num: int):
-    pass
-
 
 # driver code
 def run():
