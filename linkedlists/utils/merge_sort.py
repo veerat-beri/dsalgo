@@ -2,11 +2,7 @@
 # https://www.geeksforgeeks.org/merge-sort-for-linked-list/
 
 
-from linkedlists import SinglyLinkedListNode, BuildSinglyLinkedList, SinglyLinkedList
-
-
-
-
+from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 
 def get_merge_sorted_ll(linked_list: SinglyLinkedList):
@@ -16,9 +12,8 @@ def get_merge_sorted_ll(linked_list: SinglyLinkedList):
 
 # driver code
 def run():
-    list_of_nodes = [SinglyLinkedListNode(12), SinglyLinkedListNode(11), SinglyLinkedListNode(13),
-                     SinglyLinkedListNode(5), SinglyLinkedListNode(6), SinglyLinkedListNode(7)]
-    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes).build()
+    list_of_nodes = [12, 11, 13, 5, 6, 7, ]
+    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes).get_ll()
     print('Linked List before sort: ')
     singly_linked_list.print_linked_list()
 
