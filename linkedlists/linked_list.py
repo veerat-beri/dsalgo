@@ -1,31 +1,20 @@
 from builtins import NotImplementedError
 
 
-class _LinkedListNode:
-    def __init__(self, data, **kwargs):
-        self.data = data
-
-
-class SinglyLinkedListNode(_LinkedListNode):
-    def __init__(self, data, **kwargs):
-        super(SinglyLinkedListNode, self).__init__(data, **kwargs)
-        self.next = None
-
-
-class DoublyLinkedListNode(SinglyLinkedListNode):
-    def __init__(self, data, **kwargs):
-        super(DoublyLinkedListNode, self).__init__(data, **kwargs)
-        self.previous = None
-
-
 class _LinkedList:
-    def __init__(self, head: _LinkedListNode=None, **kwargs):
-        self.head = head
+    class _LinkedListNode:
+        def __init__(self, data, **kwargs):
+            self.data = data
+
+    def __init__(self, **kwargs):
+        self.head = None
         self.tail = None
 
     def __len__(self):
         no_of_nodes_in_list = 0
         current_node = self.head
+
+        print(current_node)
         while current_node:
             no_of_nodes_in_list += 1
             current_node = current_node.next
@@ -36,14 +25,18 @@ class _LinkedList:
         if not self.tail or not self.head:
             self.tail = node
             self.head = node
-            return True
-        return False
+
+    def _get_new_node(self, node_data):
+        raise NotImplementedError('Has to be Implemented by sub class')
 
     def insert_at_begin(self, node: _LinkedListNode):
-        raise NotImplementedError('func insert_at_begin() must be implemented')
+        raise NotImplementedError('Has to be Implemented by sub class')
 
     def insert_at_end(self, node: _LinkedListNode):
-        raise NotImplementedError('func insert_at_end() must be implemented')
+        raise NotImplementedError('Has to be Implemented by sub class')
+
+    def is_empty(self):
+        return len(self) == 0
 
     def print_linked_list(self, with_address=False):
         current_node = self.head
@@ -53,43 +46,65 @@ class _LinkedList:
 
 
 class SinglyLinkedList(_LinkedList):
-    def __init__(self, head: SinglyLinkedListNode=None, **kwargs):
-        super(SinglyLinkedList, self).__init__(head, **kwargs)
+    class SinglyLinkedListNode(_LinkedList._LinkedListNode):
+        def __init__(self, data, **kwargs):
+            super().__init__(data, **kwargs)
+            self.next = None
 
-    def insert_at_begin(self, node: SinglyLinkedListNode):
-        if not self._set_head_tail(node):
-            node.next = self.head
-            self.head = node
+    def _get_new_node(self, node_data):
+        return self.SinglyLinkedListNode(node_data)
 
-    def insert_at_end(self, node: SinglyLinkedListNode):
-        if not self._set_head_tail(node):
-            self.tail.next = node
-            self.tail = node
+    def insert_at_begin(self, node_data):
+        new_node = self._get_new_node(node_data)
+        if self.is_empty():
+            self._set_head_tail(new_node)
+        else:
+            new_node.next = self.head
+            self.head = new_node
+
+    def insert_at_end(self, node_data):
+        new_node = self._get_new_node(node_data)
+        if self.is_empty():
+            self._set_head_tail(new_node)
+        else:
+            self.tail.next = node_data
+            self.tail = node_data
 
 
 class DoublyLinkedList(_LinkedList):
-    def __init__(self, head: DoublyLinkedListNode=None, **kwargs):
-        super(DoublyLinkedList, self).__init__(head, **kwargs)
+    class DoublyLinkedListNode(SinglyLinkedList.SinglyLinkedListNode):
+        def __init__(self, data, **kwargs):
+            super().__init__(data, **kwargs)
+            self.previous = None
 
-    def insert_at_begin(self, node: DoublyLinkedListNode):
-        if not self._set_head_tail(node):
-            node.next = self.head
-            self.head.previous = node
-            self.head = node
+    def _get_new_node(self, node_data):
+        return self.DoublyLinkedListNode(node_data)
 
-    def insert_at_end(self, node: DoublyLinkedListNode):
-        if not self._set_head_tail(node):
-            self.tail.next = node
-            node.previous = self.tail
-            self.tail = node
+    def insert_at_begin(self, node_data):
+        new_node = self._get_new_node(node_data)
+        if self.is_empty():
+            self._set_head_tail(new_node)
+        else:
+            new_node.next = self.head
+            self.head.previous = new_node
+            self.head = new_node
+
+    def insert_at_end(self, node_data):
+        new_node = self._get_new_node(node_data)
+        if self.is_empty():
+
+            print('is empty')
+            self._set_head_tail(new_node)
+        else:
+            self.tail.next = new_node
+            new_node.previous = self.tail
+            self.tail = new_node
 
 
 # driver code
 def run():
     from linkedlists.build_linked_list import BuildSinglyLinkedList
-
-    list_of_nodes = [SinglyLinkedListNode(1), SinglyLinkedListNode(2), SinglyLinkedListNode(3)]
-    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes, auto_populate=False).build()
+    singly_linked_list = BuildSinglyLinkedList(auto_populate=True).get_ll()
 
     singly_linked_list.print_linked_list()
 

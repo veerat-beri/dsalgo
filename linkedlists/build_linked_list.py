@@ -1,64 +1,51 @@
-from linkedlists import DoublyLinkedListNode, SinglyLinkedListNode, SinglyLinkedList, DoublyLinkedList
-from linkedlists.linked_list import _LinkedList, _LinkedListNode
+from linkedlists import SinglyLinkedList, DoublyLinkedList
 
 
 class _BuildLinkedList:
-    def __init__(self, linked_list: _LinkedList=None, list_of_nodes: [_LinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
-        self.auto_populate = auto_populate
-        self.list_of_nodes = list_of_nodes
+    def __init__(self, list_of_nodes: [int]=None, insert_at_end=True, auto_populate=False, **kwargs):
         self.insert_at_end = insert_at_end
-        self._linked_list = linked_list
+        self._linked_list = self._get_ll_instance()
 
-        self._create_linked_list()
-        self._create_list_of_nodes()
+        self.list_of_nodes = self._get_list_of_nodes(list_of_nodes, auto_populate)
 
-    def _create_linked_list(self):
-        raise NotImplementedError
+    def _get_list_of_nodes(self, list_of_nodes, auto_populate):
+        if list_of_nodes is None:
+            list_of_nodes = []
+        return ([10, 20, 30, 40, 50, ] if auto_populate else []) + list_of_nodes
 
-    def _create_list_of_nodes(self):
-        raise NotImplementedError
+    def _get_ll_instance(self):
+        raise NotImplementedError('Has to be Implemented by sub class')
 
-    def build(self):
+    def _build(self):
         insertion_scheme = 'insert_at_end' if self.insert_at_end else 'insert_at_begin'
         for node in self.list_of_nodes:
             getattr(self._linked_list, insertion_scheme)(node)
 
+    def get_ll(self):
+        self._build()
         return self._linked_list
 
 
 class BuildSinglyLinkedList(_BuildLinkedList):
-    def __init__(self, singly_linked_list=None, list_of_nodes: [SinglyLinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
-        super(BuildSinglyLinkedList, self).__init__(singly_linked_list, list_of_nodes, insert_at_end, auto_populate, **kwargs)
-
-    def _create_list_of_nodes(self):
-        self.list_of_nodes = ([
-            SinglyLinkedListNode(10), SinglyLinkedListNode(20), SinglyLinkedListNode(30),
-            SinglyLinkedListNode(40), SinglyLinkedListNode(50),
-        ] if self.auto_populate else []) + self.list_of_nodes
-
-    def _create_linked_list(self):
-        if not self._linked_list:
-            self._linked_list = SinglyLinkedList()
+    def _get_ll_instance(self):
+        return SinglyLinkedList()
 
 
 class BuildDoublyLinkedList(_BuildLinkedList):
-    def __init__(self, doubly_linked_list=None, list_of_nodes: [DoublyLinkedListNode]=[], insert_at_end=True, auto_populate=False, **kwargs):
-        super(BuildDoublyLinkedList, self).__init__(doubly_linked_list, list_of_nodes, insert_at_end, auto_populate, **kwargs)
-
-    def _create_list_of_nodes(self):
-        self.list_of_nodes = ([
-            DoublyLinkedListNode(10), DoublyLinkedListNode(20), DoublyLinkedListNode(30),
-            DoublyLinkedListNode(40), DoublyLinkedListNode(50),
-        ] if self.auto_populate else []) + self.list_of_nodes
-
-    def _create_linked_list(self):
-        if not self._linked_list:
-            self._linked_list = DoublyLinkedList()
+    def _get_ll_instance(self):
+        return DoublyLinkedList()
 
 
 class BuildSinglyLinkedListWithLoop(BuildSinglyLinkedList):
-    def build(self):
-        super(BuildSinglyLinkedListWithLoop, self).build()
+    def _build(self):
+        # For sample LL: 10-> 20-> 30-> 40-> 50
+        #
+        # Returns: 10-> 20-> 30-> 40-> 50->
+        #                    ^             |
+        #                    |             |
+        #                     <----<----<--
+        #
+        super(BuildSinglyLinkedListWithLoop, self)._build()
         if self._linked_list.head and self._linked_list.tail:
             loop_start_elem = self._linked_list.head
             if loop_start_elem.next:
@@ -67,4 +54,3 @@ class BuildSinglyLinkedListWithLoop(BuildSinglyLinkedList):
                     loop_start_elem = loop_start_elem.next
 
             self._linked_list.tail.next = loop_start_elem
-        return self._linked_list
