@@ -60,15 +60,24 @@ def point_of_intersection_of_two_lists(singly_linked_list_1: SinglyLinkedList, s
 
 # driver code
 def run():
-    list_nodes_of_list_1 = [60, 70, 80, 90, ]
-
     singly_linked_list1 = BuildSinglyLinkedList(auto_populate=True).get_ll()
     singly_linked_list2 = BuildSinglyLinkedList(list_of_nodes=[5, ]).get_ll()
 
-    current_node = singly_linked_list1.head
-    while current_node:
+    ###############
+    # Build intersecting Linked-list
+    common_node_1 = SinglyLinkedList.SinglyLinkedListNode(60)
+    common_node_1.next = SinglyLinkedList.SinglyLinkedListNode(70)
+    common_node_1.next.next = SinglyLinkedList.SinglyLinkedListNode(80)
+    new_common_tail = SinglyLinkedList.SinglyLinkedListNode(90)
+    common_node_1.next.next.next = new_common_tail
 
+    singly_linked_list1.tail.next = common_node_1
+    singly_linked_list1.tail = new_common_tail
 
+    singly_linked_list2.tail.next = common_node_1
+    singly_linked_list2.tail = new_common_tail
+
+    ###############
     intersection_node = point_of_intersection_of_two_lists(singly_linked_list1, singly_linked_list2)
 
     print('Given Linked List 1: ')
@@ -85,4 +94,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-

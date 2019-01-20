@@ -2,8 +2,7 @@
 # https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/
 
 
-from linkedlists import SinglyLinkedList
-from linkedlists.build_linked_list import BuildSinglyLinkedListWithLoop
+from linkedlists import SinglyLinkedList, BuildSinglyLinkedListWithLoop
 
 
 # Using Floyd’s Cycle-Finding Algorithm

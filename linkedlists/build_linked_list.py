@@ -1,4 +1,4 @@
-from linkedlists import SinglyLinkedList, DoublyLinkedList
+from linkedlists.linked_list import SinglyLinkedList, DoublyLinkedList
 
 
 class _BuildLinkedList:

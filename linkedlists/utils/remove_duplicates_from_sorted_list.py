@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/
 
 
-from linkedlists import SinglyLinkedListNode, SinglyLinkedList, BuildSinglyLinkedList
+from linkedlists import SinglyLinkedList, BuildSinglyLinkedList
 
 
 def remove_duplicates_from_sorted_list(sorted_linked_list: SinglyLinkedList):
@@ -18,11 +18,8 @@ def remove_duplicates_from_sorted_list(sorted_linked_list: SinglyLinkedList):
 
 # driver code
 def run():
-    list_of_nodes = [
-        SinglyLinkedListNode(10), SinglyLinkedListNode(10), SinglyLinkedListNode(20),
-        SinglyLinkedListNode(30), SinglyLinkedListNode(30), SinglyLinkedListNode(30)
-    ]
-    sorted_singly_singly_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes).build()
+    list_of_nodes = [10, 10, 20, 30, 30, 30, ]
+    sorted_singly_singly_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes).get_ll()
 
     print('Given Lined List: ')
     sorted_singly_singly_list.print_linked_list()
