@@ -6,15 +6,21 @@ class _LinkedList:
         def __init__(self, data, **kwargs):
             self.data = data
 
-    def __init__(self, **kwargs):
-        self.head = None
-        self.tail = None
+    def __init__(self, head: _LinkedListNode=None, **kwargs):
+        self.head = head
+
+        # set tail node
+        if self.head is not None:
+            current_node = self.head
+            while current_node:
+                self.tail = current_node
+                current_node = current_node.next
+        else:
+            self.tail = None
 
     def __len__(self):
         no_of_nodes_in_list = 0
         current_node = self.head
-
-        print(current_node)
         while current_node:
             no_of_nodes_in_list += 1
             current_node = current_node.next
@@ -36,7 +42,10 @@ class _LinkedList:
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def is_empty(self):
-        return len(self) == 0
+        # Method 1
+        # return len(self) == 0
+        # Method 2
+        return self.head is None
 
     def print_linked_list(self, with_address=False):
         current_node = self.head
@@ -67,8 +76,8 @@ class SinglyLinkedList(_LinkedList):
         if self.is_empty():
             self._set_head_tail(new_node)
         else:
-            self.tail.next = node_data
-            self.tail = node_data
+            self.tail.next = new_node
+            self.tail = new_node
 
 
 class DoublyLinkedList(_LinkedList):

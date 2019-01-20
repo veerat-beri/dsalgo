@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
 
 
-from linkedlists import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlists import SinglyLinkedList, BuildSinglyLinkedList
 
 
 # Based on Method 3 (Using difference of node counts)
@@ -60,13 +60,15 @@ def point_of_intersection_of_two_lists(singly_linked_list_1: SinglyLinkedList, s
 
 # driver code
 def run():
-    list_nodes_of_list_1 = [
-        SinglyLinkedListNode(60), SinglyLinkedListNode(70), SinglyLinkedListNode(80),
-        SinglyLinkedListNode(90),
-    ]
+    list_nodes_of_list_1 = [60, 70, 80, 90, ]
 
-    singly_linked_list1 = BuildSinglyLinkedList(list_of_nodes=list_nodes_of_list_1, auto_populate=True).build()
-    singly_linked_list2 = BuildSinglyLinkedList(list_of_nodes=[SinglyLinkedListNode(5)] + list_nodes_of_list_1).build()
+    singly_linked_list1 = BuildSinglyLinkedList(auto_populate=True).get_ll()
+    singly_linked_list2 = BuildSinglyLinkedList(list_of_nodes=[5, ]).get_ll()
+
+    current_node = singly_linked_list1.head
+    while current_node:
+
+
     intersection_node = point_of_intersection_of_two_lists(singly_linked_list1, singly_linked_list2)
 
     print('Given Linked List 1: ')

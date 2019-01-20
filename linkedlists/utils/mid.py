@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/write-a-c-function-to-print-the-middle-of-the-linked-list/
 
 
-from linkedlists import SinglyLinkedListNode, BuildSinglyLinkedList, SinglyLinkedList
+from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 
 def find_mid_of_linked_list(linked_list: SinglyLinkedList):
@@ -18,10 +18,8 @@ def find_mid_of_linked_list(linked_list: SinglyLinkedList):
 
 # driver code
 def run():
-    list_of_nodes = [SinglyLinkedListNode(1), SinglyLinkedListNode(10), SinglyLinkedListNode(20), SinglyLinkedListNode(40), SinglyLinkedListNode(50), SinglyLinkedListNode(60)]
-    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes).build()
+    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=[60, ], auto_populate=True).get_ll()
     mid_node = find_mid_of_linked_list(singly_linked_list)
-
     print('Linked List: ', end='')
     singly_linked_list.print_linked_list()
     print('\nMid is: ', end='')

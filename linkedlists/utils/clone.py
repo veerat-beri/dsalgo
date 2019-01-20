@@ -3,37 +3,29 @@
 
 
 from collections import OrderedDict
-from linkedlists import SinglyLinkedList, SinglyLinkedListNode
+from linkedlists import SinglyLinkedList
 from linkedlists.build_linked_list import _BuildLinkedList
 
 
 class BuildCustomLinkedList(_BuildLinkedList):
-    def __init__(self, **kwargs):
-        super(BuildCustomLinkedList, self).__init__(**kwargs)
-
-    def _create_linked_list(self):
-        if not self._linked_list:
-            self._linked_list = CustomLinkedList()
-
-    def _create_list_of_nodes(self):
-        pass
+    def _get_ll_instance(self):
+        return CustomLinkedList()
 
 
 class CustomLinkedList(SinglyLinkedList):
-    def __init__(self, head: 'CustomNode'=None, **kwargs):
-        super(CustomLinkedList, self).__init__(head, **kwargs)
+    class CustomNode(SinglyLinkedList.SinglyLinkedListNode):
+        def __init__(self, data, **kwargs):
+            super().__init__(data, **kwargs)
+            self.random = None
 
-    def print_linked_list(self):
+    def _get_new_node(self, node_data):
+        return self.CustomNode(node_data)
+
+    def print_linked_list(self, **kwargs):
         current_node = self.head
         while current_node:
             print(current_node.data, f'({id(current_node)})', f'({current_node.random.data})', sep='', end='  ')
             current_node = current_node.next
-
-
-class CustomNode(SinglyLinkedListNode):
-    def __init__(self, data, **kwargs):
-        super(CustomNode, self).__init__(data, **kwargs)
-        self.random = None
 
 
 class CloneLinkedList:
@@ -45,12 +37,12 @@ class CloneLinkedList:
         # Format => {'old_node': 'new_node'}
         self.old_node_new_node_map = OrderedDict()
 
-        self._linked_list = linked_list
+        self.linked_list = linked_list
 
     def __clone_data(self):
-        current_node = self._linked_list.head
+        current_node = self.linked_list.head
         while current_node:
-            new_node = CustomNode(current_node.data)
+            new_node = self.linked_list._get_new_node(current_node.data)
             self.old_node_new_node_map[current_node] = new_node
             current_node = current_node.next
 
@@ -67,14 +59,14 @@ class CloneLinkedList:
 
 # driver code
 def run():
-    n1 = CustomNode(1)
-    n2 = CustomNode(2)
-    n3 = CustomNode(3)
-    n4 = CustomNode(4)
-    n5 = CustomNode(5)
-
     print('Old Linked List: ')
-    custom_linked_list = BuildCustomLinkedList(list_of_nodes=[n1, n2, n3, n4, n5]).build()
+    custom_linked_list = BuildCustomLinkedList(list_of_nodes=[1, 2, 3, 4, 5]).get_ll()
+    n1 = custom_linked_list.head
+    n2 = n1.next
+    n3 = n2.next
+    n4 = n3.next
+    n5 = n4.next
+
     n1.random = n3
     n2.random = n1
     n3.random = n5
