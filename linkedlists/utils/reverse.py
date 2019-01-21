@@ -2,8 +2,7 @@
 # https://www.geeksforgeeks.org/reverse-a-linked-list/
 
 
-from linkedlists import BuildSinglyLinkedList
-from linkedlists.linked_list import SinglyLinkedList
+from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 
 ######################################
@@ -32,7 +31,7 @@ def reverse_linked_list(linked_list: SinglyLinkedList):
 
 # driver code
 def run():
-    singly_linked_list = BuildSinglyLinkedList(auto_populate=True).build()
+    singly_linked_list = BuildSinglyLinkedList(auto_populate=True).get_ll()
 
     print('Given Linked List: ')
     singly_linked_list.print_linked_list()

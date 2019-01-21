@@ -102,3 +102,6 @@ devops/create_services.retry
 keys/*
 !keys/.keep
 celerybeat-schedule.db
+
+competitions_questions/*
+!competitions_questions/.keep

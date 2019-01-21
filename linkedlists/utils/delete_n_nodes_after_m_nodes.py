@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/
 
 
-from linkedlists import SinglyLinkedList, BuildSinglyLinkedList, SinglyLinkedListNode
+from linkedlists import SinglyLinkedList, BuildSinglyLinkedList
 
 
 def delete_n_nodes_after_every_m_nodes(singly_linked_list: SinglyLinkedList, m, n):
@@ -30,13 +30,8 @@ def delete_n_nodes_after_every_m_nodes(singly_linked_list: SinglyLinkedList, m, 
 
 # driver code
 def run():
-    list_of_nodes = [
-        SinglyLinkedListNode(60), SinglyLinkedListNode(70), SinglyLinkedListNode(80),
-        SinglyLinkedListNode(90), SinglyLinkedListNode(100), SinglyLinkedListNode(110),
-        SinglyLinkedListNode(120), SinglyLinkedListNode(130),
-    ]
-
-    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes, auto_populate=True).build()
+    list_of_nodes = [60, 70, 80, 90, 100, 110, 120, 130, ]
+    singly_linked_list = BuildSinglyLinkedList(list_of_nodes=list_of_nodes, auto_populate=True).get_ll()
     m = 2
     n = 2
 
