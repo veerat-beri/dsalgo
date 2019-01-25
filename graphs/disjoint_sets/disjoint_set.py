@@ -21,7 +21,12 @@ class DisjointSet:
     # def getSets(self):
     #     return self.sets
     def do_union(self, elem1, elem2):
-        # path-compressed union
+        """
+        path-compressed union
+        :param elem1:
+        :param elem2:
+        :return:
+        """
 
         if self.sets.get(elem1, None) and not self.sets.get(elem2, None):
             elem1_root = self.sets[elem1]
@@ -32,7 +37,16 @@ class DisjointSet:
             self.sets[elem1] = elem2_root if elem2_root != -1 else elem2
 
         elif self.sets.get(elem1, None) and self.sets.get(elem2, None):
-            self.sets[self.sets[elem2]] = self.sets[elem1]
-            self.sets[elem2] = self.sets[elem1]
+            if self.sets[elem2] == -1 and self.sets[elem1] != -1:
+                self.sets[elem2] = self.sets[elem1]
+
+            elif self.sets[elem1] == -1 and self.sets[elem2] != -1:
+                self.sets[elem1] = self.sets[elem2]
+
+            else:
+                self.sets[elem2] = self.sets[elem1]
+            # self.sets[self.sets[elem2]] = self.sets[elem1]
+            # self.sets[elem2] = self.sets[elem1]
+
 
 
