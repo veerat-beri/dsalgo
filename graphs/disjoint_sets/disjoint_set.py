@@ -37,16 +37,15 @@ class DisjointSet:
             self.sets[elem1] = elem2_root if elem2_root != -1 else elem2
 
         elif self.sets.get(elem1, None) and self.sets.get(elem2, None):
-            if self.sets[elem2] == -1 and self.sets[elem1] != -1:
-                self.sets[elem2] = self.sets[elem1]
-
-            elif self.sets[elem1] == -1 and self.sets[elem2] != -1:
-                self.sets[elem1] = self.sets[elem2]
-
-            else:
-                self.sets[elem2] = self.sets[elem1]
-            # self.sets[self.sets[elem2]] = self.sets[elem1]
-            # self.sets[elem2] = self.sets[elem1]
+            # if self.sets[elem2] == -1 and self.sets[elem1] != -1:
+            #     self.sets[elem2] = self.sets[elem1]
+            #
+            # elif self.sets[elem1] == -1 and self.sets[elem2] != -1:
+            #     self.sets[elem1] = self.sets[elem2]
+            #
+            # else:
+            #     self.sets[elem2] = self.sets[elem1]
+            pass
 
 
 
