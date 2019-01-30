@@ -75,7 +75,7 @@ def run():
 
     custom_linked_list.print_linked_list()
     new_custom_linked_list = CloneLinkedList(custom_linked_list).clone()
-    print('\n\nNew Cloned Linked List: ')
+    print('\nNew Cloned Linked List: ')
     new_custom_linked_list.print_linked_list()
 
 

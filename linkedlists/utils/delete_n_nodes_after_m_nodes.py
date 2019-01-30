@@ -40,7 +40,7 @@ def run():
 
     delete_n_nodes_after_every_m_nodes(singly_linked_list, m, n)
 
-    print('\n\nLinked List after deletion: ')
+    print('\nLinked List after deletion: ')
     singly_linked_list.print_linked_list()
 
 

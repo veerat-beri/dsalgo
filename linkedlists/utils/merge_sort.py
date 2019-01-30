@@ -22,19 +22,13 @@ def find_mid_of_linked_list(head):
 def get_merge_sorted_ll(linked_list: SinglyLinkedList):
     def _get_merge_sorted_ll(head):
         if head.next is None:
-
-
-            print(head.data, '='*10)
             return head
 
-        mid_node = find_mid_of_linked_list(head=head, use_head=True)
+        mid_node = find_mid_of_linked_list(head=head)
         next_ll_head = mid_node.next
-
-
-        print(mid_node.data, '=' * 10)
         mid_node.next = None
 
-        return get_sorted_merged_ll(_get_merge_sorted_ll(head), _get_merge_sorted_ll(next_ll_head))
+        return get_sorted_merged_ll(head_1=_get_merge_sorted_ll(head), head_2=_get_merge_sorted_ll(next_ll_head), use_heads=True)
 
     if linked_list.head:
         return _get_merge_sorted_ll(linked_list.head)
@@ -49,7 +43,7 @@ def run():
 
     new_head = get_merge_sorted_ll(singly_linked_list)
     sorted_ll = SinglyLinkedList(head=new_head)
-    print('\nLinked List after sort: ')
+    print('Linked List after sort: ')
     sorted_ll.print_linked_list()
 
 

@@ -9,6 +9,8 @@ def find_mid_of_linked_list(linked_list: SinglyLinkedList=None, head=None, use_h
     slow_ptr = head if use_head else linked_list.head
     fast_ptr = head if use_head else linked_list.head
 
+    assert (head and use_head) or linked_list, 'Linked list or head is not provided'
+
     while fast_ptr and fast_ptr.next:
         slow_ptr = slow_ptr.next
         fast_ptr = fast_ptr.next.next
@@ -22,7 +24,7 @@ def run():
     mid_node = find_mid_of_linked_list(singly_linked_list)
     print('Linked List: ', end='')
     singly_linked_list.print_linked_list()
-    print('\nMid is: ', end='')
+    print('Mid is: ', end='')
     if mid_node:
         print(mid_node.data)
     else:

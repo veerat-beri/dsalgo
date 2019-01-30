@@ -5,9 +5,13 @@
 from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 
-def get_sorted_merged_ll(linked_list_1: SinglyLinkedList, linked_list_2: SinglyLinkedList):
-        current_node_of_ll_1 = linked_list_1.head
-        current_node_of_ll_2 = linked_list_2.head
+def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: SinglyLinkedList=None, head_1=None, head_2=None, use_heads=False):
+        current_node_of_ll_1 = head_1 if use_heads else linked_list_1.head
+        current_node_of_ll_2 = head_2 if use_heads else linked_list_2.head
+
+        assert (head_1 and use_heads) or linked_list_1, 'linked list-1 or head-1 is not provided.'
+        assert (head_2 and use_heads) or linked_list_2, 'linked list-2 or head-2 is not provided.'
+
         new_ll = SinglyLinkedList()
         new_ll.head = SinglyLinkedList.SinglyLinkedListNode(None)
         current_node_of_new_ll = new_ll.head
@@ -47,12 +51,12 @@ def run():
     print('Sorted Linked list-1: ')
     singly_ll_1.print_linked_list()
 
-    print('\nSorted Linked list-2: ')
+    print('Sorted Linked list-2: ')
     singly_ll_2.print_linked_list()
 
     new_sorted_mergd_ll = SinglyLinkedList(head=get_sorted_merged_ll(singly_ll_1, singly_ll_2))
 
-    print('\nNew sorted Linked list after merge: ')
+    print('New sorted Linked list after merge: ')
     new_sorted_mergd_ll.print_linked_list()
 
 
