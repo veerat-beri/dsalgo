@@ -5,9 +5,9 @@
 from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 
-def find_mid_of_linked_list(linked_list: SinglyLinkedList):
-    slow_ptr = linked_list.head
-    fast_ptr = linked_list.head
+def find_mid_of_linked_list(linked_list: SinglyLinkedList=None, head=None, use_head=False):
+    slow_ptr = head if use_head else linked_list.head
+    fast_ptr = head if use_head else linked_list.head
 
     while fast_ptr and fast_ptr.next:
         slow_ptr = slow_ptr.next
