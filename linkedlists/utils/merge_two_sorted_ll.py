@@ -12,7 +12,7 @@ def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: Si
     assert (head_1 and use_heads) or linked_list_1, 'linked list-1 or head-1 is not provided.'
     assert (head_2 and use_heads) or linked_list_2, 'linked list-2 or head-2 is not provided.'
 
-    use_recursive_appr = kwargs.get('use_recursive_appr') if kwargs.get('use_recursive_appr') in [True, False] else True
+    use_recursive_approach = kwargs.get('use_recursive_appr') if kwargs.get('use_recursive_appr') in [True, False] else True
 
     ##############################
     # Iterative solution
@@ -67,7 +67,8 @@ def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: Si
         return current_node_of_new_ll
 
     ##############################
-    return _get_sorted_merged_ll_recursive(current_node_of_ll_1, current_node_of_ll_2)
+    execution_func = _get_sorted_merged_ll_recursive if use_recursive_approach else _get_sorted_merged_ll_iterative
+    return execution_func(current_node_of_ll_1, current_node_of_ll_2)
 
 
 # driver code

@@ -6,20 +6,19 @@ from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 from linkedlists.utils import get_sorted_merged_ll
 
 
-def find_mid_of_linked_list(head):
-    slow_ptr = head
-    fast_ptr = None
-    if slow_ptr:
-        fast_ptr = slow_ptr.next.next
-
-    while fast_ptr and fast_ptr.next:
-        slow_ptr = slow_ptr.next
-        fast_ptr = fast_ptr.next.next
-
-    return slow_ptr
-
-
 def get_merge_sorted_ll(linked_list: SinglyLinkedList):
+    def find_mid_of_linked_list(head):
+        slow_ptr = head
+        fast_ptr = None
+        if slow_ptr:
+            fast_ptr = slow_ptr.next.next
+
+        while fast_ptr and fast_ptr.next:
+            slow_ptr = slow_ptr.next
+            fast_ptr = fast_ptr.next.next
+
+        return slow_ptr
+
     def _get_merge_sorted_ll(head):
         if head.next is None:
             return head
