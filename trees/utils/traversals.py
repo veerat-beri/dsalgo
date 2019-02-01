@@ -19,7 +19,7 @@ def print_bfs(binary_tree):
 # Problem Statement
 # https://www.geeksforgeeks.org/diagonal-traversal-of-binary-tree/
 
-def diagonal_traversal(binary_tree: BinaryTree):
+def diagonal_traversal(binary_tree: BinaryTree) -> list:
     diagonal_nodes = {}
     diagonal_level = 0
 
@@ -27,15 +27,15 @@ def diagonal_traversal(binary_tree: BinaryTree):
         if node is None:
             return None
 
-        new_diagonal_nodes_list = diagonal_nodes.get(diagonal_level, []).append(node)
-        diagonal_nodes[diagonal_level] = new_diagonal_nodes_list
-        _diagonal_traversal(binary_tree.right(node), diagonal_level)
+        diagonal_nodes_list = diagonal_nodes.get(diagonal_level, [])
+        diagonal_nodes_list.append(node)
+        diagonal_nodes[diagonal_level] = diagonal_nodes_list
+
         _diagonal_traversal(binary_tree.left(node), diagonal_level + 1)
+        _diagonal_traversal(binary_tree.right(node), diagonal_level)
 
     _diagonal_traversal(binary_tree.root(), diagonal_level)
 
-
-    print(diagonal_nodes)
     for diagonal_level, level_nodes_list in diagonal_nodes.items():
         yield level_nodes_list
 
@@ -86,7 +86,7 @@ def run():
     # Diagonal Traversal
     print('Diagonal Traversal: ')
     for diagonal_nodes_list in diagonal_traversal(binary_tree):
-        print(node.data for node in diagonal_nodes_list)
+        print([node.data for node in diagonal_nodes_list])
 
 
 if __name__ == '__main__':

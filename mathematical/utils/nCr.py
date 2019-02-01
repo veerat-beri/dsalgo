@@ -40,7 +40,6 @@ def _get_ncr(n, r, p=10**9 + 7, use_p=True):
     # Calculate value of Binomial Coefficient in bottom up manner
     _calc_ncr_with_p() if use_p else _calc_ncr()
     return ncr[n][r]
-################################################################################################
 
 
 # Space Optimized version using 1-D array
@@ -80,7 +79,7 @@ def get_ncr(n, r, p=10**9 + 7, use_p=True):
 
 ################################################################################################
 # Problem Statement
-#
+# 
 
 
 # driver code
