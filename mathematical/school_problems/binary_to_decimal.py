@@ -27,7 +27,7 @@
 
 
 def get_decimal_from_binary(num: int):
-    # Method 1 (for )
+    # Method 1
     dup_num = num
     digit_index = 0
     decimal_num = 0
