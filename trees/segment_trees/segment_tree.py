@@ -13,6 +13,10 @@ class ArraySegmentTree(BinaryTree):
         def data(self):
             return self._data
 
+        @data.setter
+        def data(self, new_data):
+            self._data = new_data
+
         @property
         def low(self):
             return self._low
@@ -20,6 +24,10 @@ class ArraySegmentTree(BinaryTree):
         @property
         def high(self):
             return self._high
+
+        @property
+        def range_mid(self):
+            return (self.high - self.low) // 2 + self.low
 
     @property
     def root(self):
@@ -55,7 +63,8 @@ class ArraySegmentTree(BinaryTree):
             raise IndexError('Left of node do not exists!')
         return right_node_index
 
-    def get_mid(self, low, high):
+    @staticmethod
+    def get_range_mid(low, high):
         return (high - low) // 2 + low
 
     def add_node(self, tree_arr_index: int, low, high, node_data):
