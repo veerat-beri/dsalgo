@@ -62,10 +62,10 @@ def run():
     print(f'Sum of {arr} in range({range_start}, {range_end}) is: ')
     print(segment_tree_operation.get_given_range_sum(range_start, range_end))
 
-    print(f'Updating given arr, with value for index "{range_start}"= 10')
+    print(f'\nUpdating given arr, with value for index "{range_start}"= 10')
     segment_tree_operation.update_given_index_value(1, 10)
 
-    print(f'New Sum of given-array in range({range_start}, {range_end}), after updation is: ')
+    print(f'\nNew Sum of given-array in range({range_start}, {range_end}), after updation is: ')
     print(segment_tree_operation.get_given_range_sum(range_start, range_end))
 
 
