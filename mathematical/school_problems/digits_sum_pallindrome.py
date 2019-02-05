@@ -26,6 +26,8 @@
 # SOLUTION
 #############################################################################################################
 
+from mathematical.school_problems.reverse_num import get_reverse_of_num
+
 
 def get_sum_of_digits(num: int):
     dup_num = num
@@ -37,7 +39,13 @@ def get_sum_of_digits(num: int):
     return digits_sum
 
 
-def get_reverse_of_num(num: int):
+def is_num_pallindrome(num: int):
+    if get_reverse_of_num(num) == num:
+        return True
+    return False
+
+
+def is_sum_of_digits_pallindrome(num: int):
     ###############
     # Method 1
     # str_repr_of_num = str(num)
@@ -53,25 +61,14 @@ def get_reverse_of_num(num: int):
     # return False
     ###############
     # Method 2
+    # str_repr_of_num = str(num)
+    # return str_repr_of_num == str_repr_of_num[::-1]
     ###############
-    dup_num = num
-    reverse_num = 0
-    while dup_num:
-        rem = dup_num % 10
-        dup_num = dup_num // 10
-        reverse_num = 10 * reverse_num + rem
-    return reverse_num
-
-
-def is_num_pallindrome(num: int):
-    if get_reverse_of_num(num) == num:
-        return True
-    return False
-
-
-def is_sum_of_digits_pallindrome(num: int):
+    # Method 3
+    ###############
     digits_sum = get_sum_of_digits(num)
     return is_num_pallindrome(digits_sum)
+    ###############
 
 
 # driver code

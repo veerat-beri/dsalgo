@@ -83,13 +83,13 @@ def run():
     print('Given Linked List 1: ')
     singly_linked_list1.print_linked_list(with_address=True)
 
-    print('\n\nGiven Linked List 2: ')
+    print('\nGiven Linked List 2: ')
     singly_linked_list2.print_linked_list(with_address=True)
 
     if intersection_node:
-        print('\n\nIntersection Node: ', intersection_node.data, f'({id(intersection_node)})', sep='')
+        print('\nIntersection Node: ', intersection_node.data, f'({id(intersection_node)})', sep='')
     else:
-        print('\n\nNo Intersection Node exists')
+        print('\nNo Intersection Node exists')
 
 
 if __name__ == '__main__':

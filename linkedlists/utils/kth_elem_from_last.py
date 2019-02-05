@@ -31,7 +31,7 @@ def run():
     singly_linked_list.print_linked_list()
 
     required_node = find_kth_node_from_end(singly_linked_list, k)
-    print(f'\n\n{k}th node from end: ', required_node.data)
+    print(f'\n{k}th node from end: ', required_node.data)
 
 
 if __name__ == '__main__':

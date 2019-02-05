@@ -36,7 +36,7 @@ def run():
     print('Given Linked List: ')
     singly_linked_list.print_linked_list()
 
-    print('\n\nLinked List after reversal: ')
+    print('\nLinked List after reversal: ')
     new_head = reverse_linked_list(singly_linked_list)
     singly_linked_list.head = new_head
     singly_linked_list.print_linked_list()

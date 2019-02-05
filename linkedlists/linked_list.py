@@ -52,6 +52,7 @@ class _LinkedList:
         while current_node:
             print(current_node.data, f'({id(current_node)})' if with_address else '', end='  ', sep='')
             current_node = current_node.next
+        print('\n')
 
 
 class SinglyLinkedList(_LinkedList):

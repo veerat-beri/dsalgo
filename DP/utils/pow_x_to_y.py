@@ -2,6 +2,7 @@
 # https://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/
 
 
+# Recursive Approach
 def power(x, y):
     if y == 0:
         return 1
@@ -9,6 +10,7 @@ def power(x, y):
     if y % 2 == 0:
         return power(x, y // 2) * power(x, y // 2)
     return x * power(x, y // 2) * power(x, y // 2)
+##########################################################################################
 
 
 # driver code

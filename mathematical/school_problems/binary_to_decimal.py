@@ -27,7 +27,6 @@
 
 
 def get_decimal_from_binary(num: int):
-    # Method 1 (for )
     dup_num = num
     digit_index = 0
     decimal_num = 0
@@ -43,7 +42,14 @@ def get_decimal_from_binary(num: int):
 def run():
     total_test_cases = int(input())
     for _ in range(total_test_cases):
+        # Method 1
+        ###############
         print(get_decimal_from_binary(int(input())))
+        ###############
+        # Method 2
+        ###############
+        # print(int('{:b}'.format(int(input()))))
+        ###############
 
 
 if __name__ == '__main__':

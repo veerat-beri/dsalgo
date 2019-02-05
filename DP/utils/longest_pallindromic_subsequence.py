@@ -2,6 +2,7 @@
 # https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/
 
 
+# Recursive Approach
 def get_longest_palindromic_subsequence(input_str: str):
     def _get_longest_palindromic_subsequence(start_index: int, end_index: int):
         if start_index == end_index:
@@ -15,6 +16,7 @@ def get_longest_palindromic_subsequence(input_str: str):
                    _get_longest_palindromic_subsequence(start_index, end_index - 1))
 
     return _get_longest_palindromic_subsequence(0, len(input_str) - 1)
+##########################################################################################
 
 
 # driver code

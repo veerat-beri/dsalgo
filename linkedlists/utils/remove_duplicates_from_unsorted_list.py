@@ -36,7 +36,7 @@ def run():
     print('Given Lined List: ')
     unsorted_singly_singly_list.print_linked_list()
 
-    print('\n\nLinked List after duplicate removal: ')
+    print('\nLinked List after duplicate removal: ')
     remove_duplicates_from_unsorted_list(unsorted_singly_singly_list)
     unsorted_singly_singly_list.print_linked_list()
 

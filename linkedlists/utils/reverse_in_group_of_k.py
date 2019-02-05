@@ -32,7 +32,7 @@ def run():
     print('Given Linked List: ')
     singly_linked_list.print_linked_list()
 
-    print('\n\nLinked List after reverse action: ')
+    print('\nLinked List after reverse action: ')
     new_head = reverse_in_group_of_k(singly_linked_list, k)
     singly_linked_list.head = new_head
     singly_linked_list.print_linked_list()
