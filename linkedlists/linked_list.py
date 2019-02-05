@@ -102,8 +102,6 @@ class DoublyLinkedList(_LinkedList):
     def insert_at_end(self, node_data):
         new_node = self._get_new_node(node_data)
         if self.is_empty():
-
-            print('is empty')
             self._set_head_tail(new_node)
         else:
             self.tail.next = new_node
