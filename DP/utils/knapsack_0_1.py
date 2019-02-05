@@ -2,6 +2,7 @@
 # https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
 
 
+# Recursive Approach
 def get_max_total_value(bag_weight_capacity: int, weight_list: [], values_list: []):
     if len(weight_list) != len(values_list):
         raise Exception('weight-list and value-list are not of same length!')
@@ -18,6 +19,7 @@ def get_max_total_value(bag_weight_capacity: int, weight_list: [], values_list: 
         return _get_max_total_value(list_untraversed_len - 1, bag_weight_capacity_left),
 
     return _get_max_total_value(len(values_list), bag_weight_capacity)
+##########################################################################################
 
 
 # driver code

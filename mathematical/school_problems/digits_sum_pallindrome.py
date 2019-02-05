@@ -61,9 +61,14 @@ def is_sum_of_digits_pallindrome(num: int):
     # return False
     ###############
     # Method 2
+    # str_repr_of_num = str(num)
+    # return str_repr_of_num == str_repr_of_num[::-1]
+    ###############
+    # Method 3
     ###############
     digits_sum = get_sum_of_digits(num)
     return is_num_pallindrome(digits_sum)
+    ###############
 
 
 # driver code
