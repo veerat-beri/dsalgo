@@ -6,34 +6,56 @@ from linkedlists import BuildDoublyLinkedList, DoublyLinkedList
 
 MAX_CACHE_SIZE = 4
 
-
 class LRUCache:
     def __init__(self, list_of_nodes: []=None):
-        self.doubly_ended_queue = self.get_ll_instance(list_of_nodes)
+        self.deque = self.get_deque_instance()
         self.key_node_map = {}
 
     def get_attr(self, key):
         return self.key_node_map
 
     def get_new_node(self, node_data):
-        return
+        return self.deque._get_new_node(node_data)
+
+    def _remove_deque_node(self, node):
+        if node == self.deque.head:
+            self.deque.head = node.next
+            node.next.previous = None
+        else:
+            node.previous.next = node.next
+            node.next.previous = node.previous
+
+        node.next = None
+
+    def remove(self, attr_key=None):
+        deque_node = self.key_node_map[attr_key or self.deque.tail.data]
+        del deque_node
+        self._remove_deque_node(deque_node)
+
+    def append_left(self, new_deque_node):
+        new_deque_node.next = self.deque.head
+        self.deque.head.previous = new_deque_node
+        self.deque.head = new_deque_node
 
     def set_attr(self, attr_key, attr_value):
         ll_node = self.key_node_map.get(attr_key, None)
         if ll_node:
-            self.remove(ll_node)
+            self.remove(attr_key)
             self.append_left(ll_node)
         else:
-            if len(self.key_node_map) >= MAX_CACHE_SIZE:
+            if self.is_deque_full:
                 self.remove()
                 self.append_left(self.get_new_node(attr_value))
+            else:
+                pass
 
-    def get_ll_instance(self, list_of_nodes):
-        return BuildDoublyLinkedList(list_of_nodes=list_of_nodes, insert_at_end=False).get_ll()
+    def get_deque_instance(self):
+        return BuildDoublyLinkedList().get_ll()
 
     @property
-    def is_linked_list_full(self):
-        return self.len_of_linked_list == MAX_LINKED_LIST_SIZE
+    def is_deque_full(self):
+        # return self.len_of_linked_list == MAX_CACHE_SIZE
+        return len(self.key_node_map) >= MAX_CACHE_SIZE
 
 
 # driver code
