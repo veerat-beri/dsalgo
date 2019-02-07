@@ -7,25 +7,26 @@ from linkedlists import BuildDoublyLinkedList, DoublyLinkedList
 MAX_CACHE_SIZE = 4
 
 class LRUCache:
-    def __init__(self, list_of_nodes: []=None):
+    def __init__(self):
         self.deque = self.get_deque_instance()
         self.key_node_map = {}
 
     def get_attr(self, key):
-        return self.key_node_map
+        return self.key_node_map[key]
 
     def get_new_node(self, node_data):
         return self.deque._get_new_node(node_data)
 
     def _remove_deque_node(self, node):
-        if node == self.deque.head:
+        if node.previous is None:  # node is head node
             self.deque.head = node.next
-            node.next.previous = None
         else:
             node.previous.next = node.next
-            node.next.previous = node.previous
 
-        node.next = None
+        if node.next is None:  # node is tail node
+            self.deque.tail = node.previous
+        else:
+            node.next.previous = node.previous
 
     def remove(self, attr_key=None):
         deque_node = self.key_node_map[attr_key or self.deque.tail.data]
@@ -47,7 +48,7 @@ class LRUCache:
                 self.remove()
                 self.append_left(self.get_new_node(attr_value))
             else:
-                pass
+
 
     def get_deque_instance(self):
         return BuildDoublyLinkedList().get_ll()
