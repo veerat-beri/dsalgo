@@ -28,26 +28,28 @@ class LRUCache:
         else:
             node.next.previous = node.previous
 
-    def remove(self, attr_key=None):
-        deque_node = self.key_node_map[attr_key or self.deque.tail.data]
-        del deque_node
-        self._remove_deque_node(deque_node)
+    def remove(self, attr_key=None, node=None):
+        del self.key_node_map[attr_key or self.deque.tail.data]
+        node or self.deque.tail
+        self._remove_deque_node(node or self.deque.tail)
 
     def append_left(self, new_deque_node):
         new_deque_node.next = self.deque.head
         self.deque.head.previous = new_deque_node
         self.deque.head = new_deque_node
+        new_deque_node.previous = None
 
     def set_attr(self, attr_key, attr_value):
         ll_node = self.key_node_map.get(attr_key, None)
         if ll_node:
-            self.remove(attr_key)
+            self.remove(attr_key, ll_node)
             self.append_left(ll_node)
         else:
             if self.is_deque_full:
                 self.remove()
                 self.append_left(self.get_new_node(attr_value))
             else:
+                self.append_left()
 
 
     def get_deque_instance(self):
