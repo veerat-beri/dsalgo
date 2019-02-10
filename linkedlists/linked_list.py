@@ -41,6 +41,9 @@ class _LinkedList:
     def insert_at_end(self, node: _LinkedListNode):
         raise NotImplementedError('Has to be Implemented by sub class')
 
+    def remove(self, node: _LinkedListNode):
+        raise NotImplementedError('Has to be Implemented by sub class')
+
     def is_empty(self):
         # Method 1
         # return len(self) == 0
@@ -80,6 +83,9 @@ class SinglyLinkedList(_LinkedList):
             self.tail.next = new_node
             self.tail = new_node
 
+    def remove(self, node: SinglyLinkedListNode):
+        pass
+
 
 class DoublyLinkedList(_LinkedList):
     class DoublyLinkedListNode(SinglyLinkedList.SinglyLinkedListNode):
@@ -90,8 +96,10 @@ class DoublyLinkedList(_LinkedList):
     def _get_new_node(self, node_data):
         return self.DoublyLinkedListNode(node_data)
 
-    def insert_at_begin(self, node_data):
-        new_node = self._get_new_node(node_data)
+    def insert_at_begin(self, node_data=None, node: DoublyLinkedListNode = None):
+        assert node or node_data, 'Data or node not provided to be inserted'
+
+        new_node = node or self._get_new_node(node_data)
         if self.is_empty():
             self._set_head_tail(new_node)
         else:
@@ -107,6 +115,17 @@ class DoublyLinkedList(_LinkedList):
             self.tail.next = new_node
             new_node.previous = self.tail
             self.tail = new_node
+
+    def remove(self, node: DoublyLinkedListNode):
+        if node.previous is None:  # node is head node
+            self.head = node.next
+        else:
+            node.previous.next = node.next
+
+        if node.next is None:  # node is tail node
+            self.tail = node.previous
+        else:
+            node.next.previous = node.previous
 
 
 # driver code
