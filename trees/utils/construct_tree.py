@@ -7,19 +7,20 @@ from trees.utils import print_bfs
 
 
 def get_tree_from_inorder_and_preorder(inorder_path: [], preorder_path: [])-> LinkedBinaryTree:
-    def _get_tree_from_inorder_and_preorder(inorder_path, preorder_path):
-        if preorder_path:
-            for node_data in preorder_path:
-                inorder_path_index = inorder_path.index(node_data)
-                node = LinkedBinaryTree.get_new_node(node_data)
-                break
+    preorder_traversal_index = 0
 
+    def _get_tree_from_inorder_and_preorder(inorder_path, preorder_path):
+        global preorder_traversal_index
+        if inorder_path:
+            inorder_path_index = inorder_path.index(preorder_path[preorder_traversal_index])
+            preorder_traversal_index += 1
+
+            node = LinkedBinaryTree.get_new_node(inorder_path[inorder_path_index])
             node._left = _get_tree_from_inorder_and_preorder(inorder_path[:inorder_path_index], preorder_path)
             node._right = get_tree_from_inorder_and_preorder(inorder_path[inorder_path_index + 1:], preorder_path)
             return node
 
-
-    root_node = _get_tree_from_inorder_and_preorder()
+    root_node = _get_tree_from_inorder_and_preorder(inorder_path, preorder_path)
     return LinkedBinaryTree(root=root_node)
 
 
