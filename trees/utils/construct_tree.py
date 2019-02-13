@@ -35,7 +35,8 @@ def run():
     for node in binary_tree.pre_order():
         print(binary_tree.element(node), end=' ')
 
-    print(f'\nLevel order traversal of new tree is: {print_bfs(binary_tree)}')
+    print('\n\nLevel order traversal of new tree is: ')
+    print_bfs(binary_tree)
 
 
 if __name__ == '__main__':
