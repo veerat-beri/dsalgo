@@ -28,14 +28,14 @@ def get_tree_from_inorder_and_preorder(inorder_path: [], preorder_path: [])-> Li
 def run():
     inorder_path = ['D', 'B', 'E', 'A', 'F', 'C', ]
     preorder_path = ['A', 'B', 'D', 'E', 'C', 'F', ]
-    binary_tree = get_tree_from_inorder_and_preorder(inorder_path, preorder_path)
-    # sample_bt = BuildLinkedBinaryTree(list_of_nodes=['a', 'b', 'c', 'd', 'e', 'f']).get_tree()
 
-    for node in binary_tree.in_order():
+    binary_tree = get_tree_from_inorder_and_preorder(inorder_path, preorder_path)
+
+    print('Preorder of new Tree constructed is:')
+    for node in binary_tree.pre_order():
         print(binary_tree.element(node), end=' ')
 
-    print('\n')
-    print_bfs(binary_tree)
+    print(f'\nLevel order traversal of new tree is: {print_bfs(binary_tree)}')
 
 
 if __name__ == '__main__':
