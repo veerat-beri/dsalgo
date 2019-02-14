@@ -36,9 +36,20 @@ def get_full_bt_from_preorder_and_postorder(preorder_path: [], postorder_path: [
     def _get_bt_root_from_preorder_and_postorder(postorder_path):
         nonlocal preorder_traversal_index
         if postorder_path:
-            postorder_path_index = postorder_path.index(preorder_path[preorder_traversal_index + 1])
+            node = LinkedBinaryTree.get_new_node(preorder_path[preorder_traversal_index])
 
-    root_node = _get_bt_root_from_preorder_and_postorder()
+            breakpoint()
+            preorder_traversal_index += 1
+            if len(postorder_path) > 1:
+                postorder_path_index = postorder_path.index(preorder_path[preorder_traversal_index + 1])
+                node._left = _get_bt_root_from_preorder_and_postorder(postorder_path[:postorder_path_index + 1])
+
+                # breakpoint()
+                node._right = _get_bt_root_from_preorder_and_postorder(postorder_path[postorder_path_index + 1: postorder_path.index(preorder_path[preorder_traversal_index])])
+
+            return node
+
+    root_node = _get_bt_root_from_preorder_and_postorder(postorder_path)
     return LinkedBinaryTree(root=root_node)
 
 ###########################################################################
@@ -50,6 +61,20 @@ def run():
     preorder_path = ['A', 'B', 'D', 'E', 'C', 'F', ]
 
     binary_tree = get_bt_from_inorder_and_preorder(inorder_path, preorder_path)
+
+    print('Constructing new tree from preorder and inorder....')
+    print('Preorder of new Tree constructed is:')
+    for node in binary_tree.pre_order():
+        print(binary_tree.element(node), end=' ')
+
+    print('\n\nLevel order traversal of new tree is: ')
+    print_bfs(binary_tree)
+
+    ###########################################################################
+    preorder_path = [1, 2, 4, 8, 9, 5, 3, 6, 7]
+    postorder_path = [8, 9, 4, 5, 2, 6, 7, 3, 1]
+    print('###########################################################################\nConstructing new full tree from preorder and postorder....')
+    binary_tree = get_full_bt_from_preorder_and_postorder(preorder_path, postorder_path)
 
     print('Preorder of new Tree constructed is:')
     for node in binary_tree.pre_order():
