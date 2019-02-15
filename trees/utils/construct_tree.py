@@ -37,16 +37,11 @@ def get_full_bt_from_preorder_and_postorder(preorder_path: [], postorder_path: [
         nonlocal preorder_traversal_index
         if postorder_path:
             node = LinkedBinaryTree.get_new_node(preorder_path[preorder_traversal_index])
-
             preorder_traversal_index += 1
             if len(postorder_path) > 1:
                 postorder_path_index = postorder_path.index(preorder_path[preorder_traversal_index])
-
-                breakpoint()
                 node._left = _get_bt_root_from_preorder_and_postorder(postorder_path[:postorder_path_index + 1])
-
-                # breakpoint()
-                node._right = _get_bt_root_from_preorder_and_postorder(postorder_path[postorder_path_index: postorder_path.index(preorder_path[preorder_traversal_index])])
+                node._right = _get_bt_root_from_preorder_and_postorder(postorder_path[postorder_path_index + 1: -1])
 
             return node
 
@@ -54,7 +49,20 @@ def get_full_bt_from_preorder_and_postorder(preorder_path: [], postorder_path: [
     return LinkedBinaryTree(root=root_node)
 
 ###########################################################################
+# Problem Statement
+# https://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/
 
+
+def get_bt_from_inorder_and_levelorder(inorder_path: [], level_order_path: [])-> LinkedBinaryTree:
+
+    def _get_bt_from_inorder_and_levelorder(inorder_path):
+        pass
+
+    root_node = _get_bt_from_inorder_and_levelorder(inorder_path)
+    return LinkedBinaryTree(root=root_node)
+
+
+###########################################################################
 
 # driver code
 def run():
