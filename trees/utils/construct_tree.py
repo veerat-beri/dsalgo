@@ -38,6 +38,7 @@ def get_full_bt_from_preorder_and_postorder(preorder_path: [], postorder_path: [
         if postorder_path:
             node = LinkedBinaryTree.get_new_node(preorder_path[preorder_traversal_index])
             preorder_traversal_index += 1
+
             if len(postorder_path) > 1:
                 postorder_path_index = postorder_path.index(preorder_path[preorder_traversal_index])
                 node._left = _get_bt_root_from_preorder_and_postorder(postorder_path[:postorder_path_index + 1])
@@ -54,7 +55,6 @@ def get_full_bt_from_preorder_and_postorder(preorder_path: [], postorder_path: [
 
 
 def get_bt_from_inorder_and_levelorder(inorder_path: [], level_order_path: [])-> LinkedBinaryTree:
-
     def _get_bt_from_inorder_and_levelorder(inorder_path):
         pass
 
