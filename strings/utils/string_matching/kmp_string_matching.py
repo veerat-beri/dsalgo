@@ -6,7 +6,6 @@ def get_lps_arr(pattern_string: str):
     lps = [0]*len(pattern_string)
     local_max_prefix_len = 0
     str_index = 1
-    # for str_index in range(1, len(pattern_string)):
     while str_index < len(pattern_string):
         if pattern_string[str_index] == pattern_string[local_max_prefix_len]:
             local_max_prefix_len += 1
@@ -24,6 +23,14 @@ def get_lps_arr(pattern_string: str):
 
 def get_all_pattern_occurrences(pattern_str: str, search_str: str):
     lps_arr = get_lps_arr(pattern_str)
+    search_index = pattern_index = 0
+    while search_index < len(search_str):
+        if search_str[search_index] == pattern_str[pattern_index]:
+            pattern_index += 1
+            search_index += 1
+        else:
+            if pattern_index > 0:
+                pattern_index = lps_arr[pattern_index - 1]
 
 
     print(lps_arr)
