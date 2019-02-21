@@ -21,9 +21,11 @@ def get_lps_arr(pattern_string: str):
     return lps
 
 
-def get_all_pattern_occurrences(pattern_str: str, search_str: str):
+def get_all_pattern_occurrences(pattern_str: str, search_str: str, pattern_len: int):
     lps_arr = get_lps_arr(pattern_str)
     search_index = pattern_index = 0
+    pattern_found_indexes = []
+
     while search_index < len(search_str):
         if search_str[search_index] == pattern_str[pattern_index]:
             pattern_index += 1
@@ -31,16 +33,30 @@ def get_all_pattern_occurrences(pattern_str: str, search_str: str):
         else:
             if pattern_index > 0:
                 pattern_index = lps_arr[pattern_index - 1]
+            elif pattern_index <= 0:
+                search_index += 1
+                pattern_index = 0
 
+        if pattern_index == pattern_len:
+            pattern_found_indexes.append(search_index)
+            pattern_index = lps_arr[pattern_index - 1]
 
-    print(lps_arr)
+    return pattern_found_indexes
 
 
 # driver code
 def run():
-    pattern_str = 'AAACAAAA'
-    search_str = ''
-    get_all_pattern_occurrences(pattern_str, search_str)
+    pattern_str = 'ABABCABAB'
+    search_str = 'ABABDABACDABABCABABABABCABAB'
+    pattern_len = len(pattern_str)
+    pattern_found_indexes = get_all_pattern_occurrences(pattern_str, search_str, pattern_len)
+
+    if pattern_found_indexes:
+        print('Pattern Found at: ')
+        for index in pattern_found_indexes:
+            print(index - pattern_len, end=' ')
+    else:
+        print('Pattern not found')
 
 
 if __name__ == '__main__':
