@@ -5,7 +5,7 @@ from trees.tree import BinaryTree
 
 
 class Trie(BinaryTree):
-    # for only small english chars
+    # either small or large Alphabet set
     DEFAULT_TRIE_NODE_CHILDREN_COUNT = 26
 
     class TrieNode(BinaryTree.BinaryTreeNode):
@@ -21,7 +21,8 @@ class Trie(BinaryTree):
     def _get_new_node(self, node_data):
         return self.TrieNode(node_data)
 
-    def root(self):
-
-    def insert_node(self, node_data, parent_node):
-        self._get_new_node()
+    # def root(self):
+    #     return self._root
+    #
+    # def insert_node(self, node_data, parent_node):
+    #     self._get_new_node(node_data)

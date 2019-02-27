@@ -62,7 +62,7 @@ def run():
     binary_tree.add_left_child(root_left, 1)
 
     ###############
-    # binary_tree = BuildLinkedBinaryTree(auto_populate=True).get_tree()
+    # binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
 
     # Pre-order Traversal
     print('\n\nPre order Traversal: ')
