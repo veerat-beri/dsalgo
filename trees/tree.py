@@ -104,8 +104,8 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
         return self._size
 
     @classmethod
-    def get_new_node(self, node_data):
-        return self.BinaryTreeNode(node_data)
+    def get_new_node(cls, node_data):
+        return cls.BinaryTreeNode(node_data)
 
     def _add_root(self, node_data):
         if self._root is not None:
