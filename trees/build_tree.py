@@ -3,7 +3,7 @@ from collections import deque
 
 
 class BuildLinkedBinaryTree:
-    def __init__(self, root: BinaryTree.BinaryTreeNode=None, list_of_nodes: [int]=None, auto_populate=False, **kwargs):
+    def __init__(self, root: BinaryTree.BinaryTreeNode = None, list_of_nodes: [int] = None, auto_populate=False, **kwargs):
         self.list_of_nodes = self._get_list_of_nodes(list_of_nodes, auto_populate)
         self._tree = self._get_tree_instance(root)
 

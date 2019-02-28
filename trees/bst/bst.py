@@ -5,19 +5,32 @@
 from trees import LinkedBinaryTree
 
 
-class BinarySearchTree(LinkedBinaryTree):
+class LinkedBinarySearchTree(LinkedBinaryTree):
     def insert_node(self, node_data):
-        def _insert_node(node_data):
-
-                current_node = self.root()
-                next_node = None
-                while next_node:
-                    current_node = next_node
-                    if node_data > current_node.data:
-                        next_node = self.right(current_node)
+        def _insert_node(current_node):
+            if node_data > current_node.data:
+                if self.right(current_node) is None:
+                    self.add_right_child(current_node, self.get_new_node(node_data))
+                    return
+                _insert_node(self.right(current_node))
+            else:
+                if self.left(current_node) is None:
+                    self.add_left_child(current_node, self.get_new_node(node_data))
+                    return
+                _insert_node(self.left(current_node))
 
         if self.is_empty():
-            inserted_node = self.add_root(node_data)
+            self.add_root(node_data)
+            return
 
-        return inserted_node
+        _insert_node(self.root())
 
+
+# driver code
+def run():
+    LinkedBinarySearchTree()
+
+
+
+if __name__ == '__main__':
+    run()
