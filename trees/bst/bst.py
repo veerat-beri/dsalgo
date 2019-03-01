@@ -3,6 +3,7 @@
 
 
 from trees import LinkedBinaryTree
+from trees.utils import print_bfs
 
 
 class LinkedBinarySearchTree(LinkedBinaryTree):
@@ -10,12 +11,12 @@ class LinkedBinarySearchTree(LinkedBinaryTree):
         def _insert_node(current_node):
             if node_data > current_node.data:
                 if self.right(current_node) is None:
-                    self.add_right_child(current_node, self.get_new_node(node_data))
+                    self.add_right_child(current_node, node_data)
                     return
                 _insert_node(self.right(current_node))
             else:
                 if self.left(current_node) is None:
-                    self.add_left_child(current_node, self.get_new_node(node_data))
+                    self.add_left_child(current_node, node_data)
                     return
                 _insert_node(self.left(current_node))
 
@@ -28,8 +29,11 @@ class LinkedBinarySearchTree(LinkedBinaryTree):
 
 # driver code
 def run():
-    LinkedBinarySearchTree()
+    from trees.bst.build_bst import BuildLinkedBinarySearchTree
+    bst = BuildLinkedBinarySearchTree(auto_populate=True).get_tree()
 
+    print('Level Order traversal: ')
+    print_bfs(bst)
 
 
 if __name__ == '__main__':
