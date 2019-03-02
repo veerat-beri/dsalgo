@@ -230,6 +230,11 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
                 return True
         return False
 
+    def get_node(self, node_data):
+        for node in self:
+            if node._data == node_data:
+                return node
+
 # class LinkedBinaryTreeWithParent(LinkedBinaryTree):
 #
 #     class BinaryTreeNode(LinkedBinaryTree.BinaryTreeNode):

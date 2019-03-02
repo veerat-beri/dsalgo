@@ -3,7 +3,7 @@
 
 
 from trees import LinkedBinaryTree
-from trees.utils import print_bfs
+from trees.utils.traversals import Traversal
 
 
 class LinkedBinarySearchTree(LinkedBinaryTree):
@@ -32,8 +32,8 @@ def run():
     from trees.bst.build_bst import BuildLinkedBinarySearchTree
     bst = BuildLinkedBinarySearchTree(auto_populate=True).get_tree()
 
-    print('Level Order traversal: ')
-    print_bfs(bst)
+    Traversal(bst).print_level_order_traversal()
+    Traversal(bst).print_inorder_traversal()
 
 
 if __name__ == '__main__':

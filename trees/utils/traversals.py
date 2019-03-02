@@ -49,32 +49,37 @@ class Traversal:
 
     def print_inorder_traversal(self):
         # In-order Traversal
-        print('\n\nIn order Traversal: ')
+        print('\nIn order Traversal: ')
         for node in self.binary_tree.in_order():
             print(self.binary_tree.element(node), end=' ')
+        print('\n')
 
     def print_preorder_traversal(self):
         # Pre-order Traversal
-        print('\n\nPre order Traversal: ')
+        print('\nPre order Traversal: ')
         for node in self.binary_tree.pre_order():
             print(self.binary_tree.element(node), end=' ')
+        print('\n')
 
     def print_postorder_traversal(self):
         # Post-order Traversal
-        print('\n\nPost order Traversal: ')
+        print('\nPost order Traversal: ')
         for node in self.binary_tree.post_order():
             print(self.binary_tree.element(node), end=' ')
+        print('\n')
 
     def print_level_order_traversal(self):
         # Level-order Traversal
-        print('\n\nBreadth First Traversal: ')
+        print('\nBreadth First Traversal: ')
         print_bfs(self.binary_tree)
+        print('\n')
 
     def print_diagonal_traversal(self):
         # Diagonal Traversal (top-left to lower right diagonal)
-        print('Diagonal Traversal: ')
+        print('\nDiagonal Traversal: ')
         for diagonal_nodes_list in diagonal_traversal(self.binary_tree):
             print([node.data for node in diagonal_nodes_list])
+        print('\n')
 
 
 # driver code
@@ -99,30 +104,6 @@ def run():
     ###############
     # binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
 
-    # # Pre-order Traversal
-    # print('\n\nPre order Traversal: ')
-    # for node in binary_tree.pre_order():
-    #     print(binary_tree.element(node), end=' ')
-    #
-    # # In-order Traversal
-    # print('\n\nIn order Traversal: ')
-    # for node in binary_tree.in_order():
-    #     print(binary_tree.element(node), end=' ')
-    #
-    # # Post-order Traversal
-    # print('\n\nPost order Traversal: ')
-    # for node in binary_tree.post_order():
-    #     print(binary_tree.element(node), end=' ')
-    #
-    # # Level-order Traversal
-    # print('\n\nBreadth First Traversal: ')
-    # print_bfs(binary_tree)
-    #
-    # # Diagonal Traversal
-    # print('Diagonal Traversal: ')
-    # for diagonal_nodes_list in diagonal_traversal(binary_tree):
-    #     print([node.data for node in diagonal_nodes_list])
-
     bt_traversal = Traversal(binary_tree)
     bt_traversal.print_preorder_traversal()
     bt_traversal.print_inorder_traversal()
@@ -133,5 +114,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
-
