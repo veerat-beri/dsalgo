@@ -4,6 +4,7 @@
 
 from trees.bst.bst import LinkedBinarySearchTree
 from trees.bst.build_bst import BuildLinkedBinarySearchTree
+from trees.utils import Traversal
 
 
 def get_bst_inorder_successor(bst: LinkedBinarySearchTree, node: LinkedBinarySearchTree.BinaryTreeNode = None, node_data=None):
@@ -19,11 +20,11 @@ def get_bst_inorder_successor(bst: LinkedBinarySearchTree, node: LinkedBinarySea
 
         while current_node:
             if given_node_data > current_node.data:
-                current_node = bst.left(current_node)
+                current_node = bst.right(current_node)
 
             elif given_node_data < current_node.data:
-                given_node_left_parent = current_node.left
-                current_node = current_node.left
+                given_node_left_parent = current_node
+                current_node = bst.left(current_node)
 
             else:
                 break
@@ -46,9 +47,11 @@ def get_bst_inorder_successor(bst: LinkedBinarySearchTree, node: LinkedBinarySea
 # driver code
 def run():
     bst = BuildLinkedBinarySearchTree(auto_populate=True).get_tree()
-    node_data = 14
+    node_data = 4
+    # node_data = 7
     inorder_successor_node = get_bst_inorder_successor(bst, node_data=node_data)
 
+    Traversal(bst).print_inorder_traversal()
     if inorder_successor_node:
         print(f'In-order successor of the node({node_data}): ', inorder_successor_node.data)
     else:

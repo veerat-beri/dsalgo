@@ -42,7 +42,7 @@ class BuildLinkedBinaryTree:
         # Make a simple test-tree
         #                                      10
         #                                     /  \
-        #                                    20   30
+        #                                    20  30
         #                                   /  \
         #                                  40  50
         self._build_tree()

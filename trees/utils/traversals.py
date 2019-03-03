@@ -4,6 +4,7 @@
 
 from trees import LinkedBinaryTree
 from trees.build_tree import BuildLinkedBinaryTree
+from trees.decorators import set_default_node
 
 
 def print_bfs(binary_tree):
@@ -81,6 +82,90 @@ class Traversal:
             print([node.data for node in diagonal_nodes_list])
         print('\n')
 
+    # def print_pictorial_repr(self):
+    #     from collections import deque
+    #
+    #     left_child = 'l'
+    #     right_child = 'r'
+    #     root = 'b'
+    #
+    #     node_type_mapping = {
+    #         'left_child': left_child,
+    #         'right_child': right_child,
+    #         'root': root
+    #     }
+    #
+    #     def extreme_left_nodes_count(bst, node):
+    #         extreme_nodes_count = 0
+    #         while bst.left(node):
+    #             extreme_nodes_count += 1
+    #             node = bst.left(node)
+    #         return extreme_nodes_count
+    #
+    #     def extreme_right_nodes_count(bst, node):
+    #         extreme_nodes_count = 0
+    #         while bst.right(node):
+    #             extreme_nodes_count += 1
+    #             node = bst.right(node)
+    #         return extreme_nodes_count
+    #
+    #     @set_default_node
+    #     def bfs(bst, node):
+    #         nonlocal node_type_mapping
+    #
+    #         if node is None:
+    #             raise Exception('Tree is empty!')
+    #
+    #         bfs_queue = deque()
+    #         bfs_queue.append((node, 0, node_type_mapping['root'], None))
+    #
+    #         while bfs_queue:
+    #             node, node_level, node_type, parent_node = bfs_queue.popleft()
+    #             yield node, node_level, node_type, parent_node
+    #
+    #             left_child = bst.left(node)
+    #             right_child = bst.right(node)
+    #
+    #             if left_child is not None:
+    #                 bfs_queue.append((left_child, node_level + 1, node_type_mapping['left_child'], node))
+    #             if right_child is not None:
+    #                 bfs_queue.append((right_child, node_level + 1, node_type_mapping['right_child'], node))
+    #
+    #     current_node_level = 0
+    #     # left_padding = 9
+    #     node_space_value_mapping = {}
+    #     node_spaces_in_level_so_far = {}
+    #
+    #     for (node, node_level, node_type, parent_node) in bfs(self.binary_tree):
+    #         if node_level > current_node_level:
+    #             print('\n')
+    #             # left_padding -= 3 + 1
+    #             current_node_level = node_level
+    #         # print(self.binary_tree.element(node), end=' ')
+    #
+    #         if node_type == root:
+    #             # left_padding += 2
+    #             node_space_value = extreme_right_nodes_count(self.binary_tree, self.binary_tree.left(node)) + extreme_left_nodes_count(self.binary_tree, self.binary_tree.left(node)) + 1
+    #             node_space_value = 20
+    #             print(' ' * node_space_value, self.binary_tree.element(node), end='', sep='')
+    #
+    #         elif node_type == left_child:
+    #
+    #
+    #
+    #             # print(extreme_right_nodes_count(self.binary_tree, node))
+    #             node_space_value = node_space_value_mapping[parent_node] - 2*extreme_right_nodes_count(self.binary_tree, node)
+    #             print(' ' * (node_space_value - node_spaces_in_level_so_far.get(node_level, 0)), self.binary_tree.element(node), end='', sep='')
+    #             node_spaces_in_level_so_far[node_level] = node_spaces_in_level_so_far.get(node_level, 0) + node_space_value
+    #         else:
+    #             node_space_value = node_space_value_mapping[parent_node] + extreme_left_nodes_count(self.binary_tree, node) + 1
+    #             print(' ' * (node_space_value - node_spaces_in_level_so_far.get(node_level, 0)), self.binary_tree.element(node), end='', sep='')
+    #             node_spaces_in_level_so_far[node_level] = node_spaces_in_level_so_far.get(node_level, 0) + extreme_left_nodes_count(self.binary_tree, node)
+    #
+    #         node_space_value_mapping[node] = node_space_value
+    #
+    #     print('\n')
+
 
 # driver code
 def run():
@@ -103,6 +188,7 @@ def run():
 
     ###############
     # binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
+    binary_tree = BuildLinkedBinaryTree(list_of_nodes=[10, 20, 30, 40, 50, 60, 70], auto_populate=True).get_tree()
 
     bt_traversal = Traversal(binary_tree)
     bt_traversal.print_preorder_traversal()
@@ -110,6 +196,7 @@ def run():
     bt_traversal.print_postorder_traversal()
     bt_traversal.print_level_order_traversal()
     bt_traversal.print_diagonal_traversal()
+    # bt_traversal.print_pictorial_repr()
 
 
 if __name__ == '__main__':
