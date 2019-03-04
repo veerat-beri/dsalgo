@@ -37,7 +37,7 @@ def get_bst_inorder_predecessor(bst: LinkedBinarySearchTree, node: LinkedBinaryS
         given_node = bst.get_node(node_data)
         assert given_node, 'Node with given data is not found'
 
-    if bst.right(given_node):
+    if bst.left(given_node):
         return get_max_right_subtree_node(bst.left(given_node))
 
     return _get_bst_inorder_predecessor(given_node)
