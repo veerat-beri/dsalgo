@@ -14,6 +14,16 @@ class BuildLinkedBinarySearchTree(BuildLinkedBinaryTree):
         return ([8, 3, 10, 1, 6, 14, 4, 7, 13, ] if auto_populate else []) + list_of_nodes
 
     def _build_tree(self):
+        ###############
+        # Make a simple test-tree
+        #                                        8
+        #                                     /     \
+        #                                    3      10
+        #                                   / \       \
+        #                                  1   6      14
+        #                                     / \     /
+        #                                    4   7   13
+        ###############
         if self.list_of_nodes:
             for node_data in self.list_of_nodes:
                 self._tree.insert_node(node_data)

@@ -188,7 +188,7 @@ def run():
 
     ###############
     # binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
-    binary_tree = BuildLinkedBinaryTree(list_of_nodes=[10, 20, 30, 40, 50, 60, 70], auto_populate=True).get_tree()
+    # binary_tree = BuildLinkedBinaryTree(list_of_nodes=[10, 20, 30, 40, 50, 60, 70], auto_populate=True).get_tree()
 
     bt_traversal = Traversal(binary_tree)
     bt_traversal.print_preorder_traversal()
