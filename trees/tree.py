@@ -96,6 +96,10 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
         def data(self):
             return self._data
 
+        @data.setter
+        def data(self, value):
+            self._data = value
+
     def __init__(self, *args, **kwargs):
         self._root = kwargs.get('root', None)
         self._size = (kwargs.get('size', 0) or self._get_tree_size(self._root)) if self._root else 0
