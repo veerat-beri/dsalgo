@@ -1,5 +1,5 @@
 # Problem Statement
-# https://www.geeksforgeeks.org/inorder-succesor-node-binary-tree/
+#
 
 
 from trees import LinkedBinaryTree, BuildLinkedBinaryTree

@@ -30,12 +30,34 @@ def get_bst_inorder_predecessor(bst: LinkedBinarySearchTree, node: LinkedBinaryS
 
         return given_node_left_ancestor
 
+    def get_bst_inorder_predecessor_from_key():
+        possible_inorder_predecessor = None
+
+        def _get_bst_inorder_predecessor_from_key(current_node):
+            nonlocal possible_inorder_predecessor
+            if current_node is None:
+                return
+
+            if current_node.data == node_data:
+                if bst.left(current_node):
+                    return get_max_right_subtree_node(bst.left(current_node))
+                return possible_inorder_predecessor
+
+            if node_data > current_node.data:
+                possible_inorder_predecessor = current_node
+                return _get_bst_inorder_predecessor_from_key(bst.right(current_node))
+
+            return _get_bst_inorder_predecessor_from_key(bst.left(current_node))
+
+        return _get_bst_inorder_predecessor_from_key(bst.root())
+
     given_node = node
     assert given_node or node_data, 'Either of Node or Node-data must be provided'
 
     if not given_node:
-        given_node = bst.get_node(node_data)
-        assert given_node, 'Node with given data is not found'
+        # given_node = bst.get_node(node_data)
+        # assert given_node, 'Node with given data is not found'
+        return get_bst_inorder_predecessor_from_key()
 
     if bst.left(given_node):
         return get_max_right_subtree_node(bst.left(given_node))
