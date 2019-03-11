@@ -18,9 +18,6 @@ def get_bt_inorder_predecessor(binary_tree: LinkedBinaryTree, node: LinkedBinary
         def _get_bt_inorder_predecessor_from_key(current_node):
             nonlocal given_node_right_ancestor
 
-            if current_node is None:
-                return
-
             if node_data == current_node.data:
                 if binary_tree.left(current_node):
                     return get_max_left_subtree_node(current_node)
