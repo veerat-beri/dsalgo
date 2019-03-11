@@ -7,7 +7,7 @@ from trees.utils import Traversal
 
 
 def get_bst_inorder_predecessor(bst: LinkedBinarySearchTree, node: LinkedBinarySearchTree.BinaryTreeNode = None, node_data=None):
-    def get_max_right_subtree_node(current_node):
+    def get_max_left_subtree_node(current_node):
         while bst.right(current_node):
             current_node = bst.right(current_node)
         return current_node
@@ -40,7 +40,7 @@ def get_bst_inorder_predecessor(bst: LinkedBinarySearchTree, node: LinkedBinaryS
 
             if current_node.data == node_data:
                 if bst.left(current_node):
-                    return get_max_right_subtree_node(bst.left(current_node))
+                    return get_max_left_subtree_node(bst.left(current_node))
                 return possible_inorder_predecessor
 
             if node_data > current_node.data:
@@ -60,7 +60,7 @@ def get_bst_inorder_predecessor(bst: LinkedBinarySearchTree, node: LinkedBinaryS
         return get_bst_inorder_predecessor_from_key()
 
     if bst.left(given_node):
-        return get_max_right_subtree_node(bst.left(given_node))
+        return get_max_left_subtree_node(bst.left(given_node))
 
     return _get_bst_inorder_predecessor(given_node)
 

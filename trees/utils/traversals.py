@@ -73,7 +73,6 @@ class Traversal:
         # Level-order Traversal
         print('\nBreadth First Traversal: ')
         print_bfs(self.binary_tree)
-        print('\n')
 
     def print_diagonal_traversal(self):
         # Diagonal Traversal (top-left to lower right diagonal)
