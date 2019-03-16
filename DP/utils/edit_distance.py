@@ -6,11 +6,11 @@
 def get_min_edits_count(str1, str2):
     def _get_min_edits_count(str1_untraversed_len, str2_untraversed_len):
         if str1_untraversed_len == 0:
-            # delete str2 if str1 is empty
+            # insert  extra str2 chars in str1 when str1 is traversed fully
             return str2_untraversed_len
 
         if str2_untraversed_len == 0:
-            # delete str1 if str2 is empty
+            # delete extra str1 chars when str2 is traversed fully
             return str1_untraversed_len
 
         if str1[str1_untraversed_len - 1] == str2[str2_untraversed_len - 1]:
@@ -28,8 +28,8 @@ def get_min_edits_count(str1, str2):
 
 # driver code
 def run():
-    str1 = "saturday"
-    str2 = "sunday"
+    str1 = 'saturday'
+    str2 = 'sunday'
     # str1 = "cat"
     # str2 = "cut"
     print('Minimum number of edits (operations) required to convert ‘str1’ into ‘str2’: ', get_min_edits_count(str1, str2))

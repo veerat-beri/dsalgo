@@ -5,7 +5,7 @@ from trees.tree import BinaryTree
 from trees.utils import print_bfs
 
 
-def get_path(tree: BinaryTree, searched_node_data):
+def get_bt_path_to_node(tree: BinaryTree, searched_node_data):
     ###############
     # 1st Approach
     nodes_in_path = []
@@ -37,7 +37,7 @@ def run():
     print_bfs(binary_tree)
     print(f'Path to node ({searched_node}): ')
 
-    for node in get_path(binary_tree, searched_node):
+    for node in get_bt_path_to_node(binary_tree, searched_node):
         print(binary_tree.element(node), end=' ')
 
 
