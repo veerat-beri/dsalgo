@@ -79,11 +79,6 @@ dump.rdb
 # python-dotenv
 .env
 
-# Feeds Mvp
-_docs_html/
-media/
-provisioner/site.retry
-
 # Virtualenv
 venv/
 
