@@ -3,6 +3,10 @@
 
 
 def check_pair_exists(arr, sum_of_pair):
+    # Hash based Approach
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+
     hash_set = set()
     for index in range(len(arr)):
         elem = arr[index]

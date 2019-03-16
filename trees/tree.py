@@ -53,7 +53,7 @@ class Tree:
             node = self.root()
         return self._height(node)
 
-    def _make_node(self, node_data):
+    def get_new_node(self, node_data):
         raise NotImplementedError('Has to be Implemented by sub class')
 
 
@@ -96,6 +96,10 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
         def data(self):
             return self._data
 
+        @data.setter
+        def data(self, value):
+            self._data = value
+
     def __init__(self, *args, **kwargs):
         self._root = kwargs.get('root', None)
         self._size = (kwargs.get('size', 0) or self._get_tree_size(self._root)) if self._root else 0
@@ -103,24 +107,28 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
     def __len__(self):
         return self._size
 
+    @classmethod
+    def get_new_node(cls, node_data):
+        return cls.BinaryTreeNode(node_data)
+
     def _add_root(self, node_data):
         if self._root is not None:
             raise ValueError('Root Exists')
         self._size += 1
-        self._root = self._make_node(node_data)
+        self._root = self.get_new_node(node_data)
         return self._root
 
     def _add_left(self, node: BinaryTreeNode, new_node_data):
         if node._left is not None:
             raise ValueError('Left child exists')
-        node._left = self._make_node(new_node_data)
+        node._left = self.get_new_node(new_node_data)
         self._size += 1
         return node._left
 
     def _add_right(self, node: BinaryTreeNode, new_node_data):
         if node._right is not None:
             raise ValueError('Right child exists')
-        node._right = self._make_node(new_node_data)
+        node._right = self.get_new_node(new_node_data)
         self._size += 1
         return node._right
 
@@ -129,9 +137,6 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
         old_data = node._data
         node._data = new_data
         return old_data
-
-    def _make_node(self, node_data):
-        return self.BinaryTreeNode(node_data)
 
     def _num_descendants(self, node: BinaryTreeNode):
         if node is None:
@@ -228,6 +233,11 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
             if self.element(node) == node_data:
                 return True
         return False
+
+    def get_node(self, node_data):
+        for node in self:
+            if node._data == node_data:
+                return node
 
 # class LinkedBinaryTreeWithParent(LinkedBinaryTree):
 #

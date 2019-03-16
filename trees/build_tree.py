@@ -3,7 +3,7 @@ from collections import deque
 
 
 class BuildLinkedBinaryTree:
-    def __init__(self, root: BinaryTree.BinaryTreeNode=None, list_of_nodes: [int]=None, auto_populate=False, **kwargs):
+    def __init__(self, root: BinaryTree.BinaryTreeNode = None, list_of_nodes: [int] = None, auto_populate=False, **kwargs):
         self.list_of_nodes = self._get_list_of_nodes(list_of_nodes, auto_populate)
         self._tree = self._get_tree_instance(root)
 
@@ -18,6 +18,14 @@ class BuildLinkedBinaryTree:
         return LinkedBinaryTree(root=root_node)
 
     def _build_tree(self):
+        ###############
+        # Make a simple test-tree
+        #                                      10
+        #                                     /  \
+        #                                    20  30
+        #                                   /  \
+        #                                  40  50
+        ###############
         if self.list_of_nodes:
             if self._tree.is_empty():
                 root_node = self._tree.add_root(self.list_of_nodes[0])
@@ -38,13 +46,6 @@ class BuildLinkedBinaryTree:
                     bfs_queue.append(self._tree.right(root_node))
 
     def get_tree(self):
-        ###############
-        # Make a simple test-tree
-        #                                      10
-        #                                     /  \
-        #                                    20   30
-        #                                   /  \
-        #                                  40  50
         self._build_tree()
         return self._tree
 
