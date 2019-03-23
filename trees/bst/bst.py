@@ -3,7 +3,7 @@
 
 
 from trees import LinkedBinaryTree
-from trees.utils.traversals import Traversal
+from trees.utils.traversals.traversals import Traversal
 
 
 class LinkedBinarySearchTree(LinkedBinaryTree):

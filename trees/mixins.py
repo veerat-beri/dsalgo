@@ -89,7 +89,7 @@ class LinkedBinaryTreeTraversalMixin:
         if node is None:
             raise Exception('Tree is empty!')
 
-        bfs_queue = deque()
+        bfs_queue = deque()  # Used as Queue
         bfs_queue.append((node, 0))
 
         while bfs_queue:
