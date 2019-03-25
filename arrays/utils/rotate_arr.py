@@ -7,6 +7,7 @@ def get_rotated_arr(arr: [], total_rotations: int):
     pass
 
 
+
 # driver code
 def run():
     arr = []
