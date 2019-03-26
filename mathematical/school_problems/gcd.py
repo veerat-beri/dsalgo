@@ -3,12 +3,17 @@
 
 
 def get_gcd(num1, num2):
-    # Method 1
-    while num2:
-        num1, num2 = num2 % num1, num1
-    return num1
+    # Method 1 (Iterative)
+    # while num1:
+    #     num1, num2 = num2 % num1, num1
+    # return num2
     #############################################
-    # Method 2
+    # Method 2 (Recursive)
+    def _get_gcd(num1, num2):
+        if num1 == 0:
+            return num2
+        return _get_gcd(num2 % num1, num1)
+    return _get_gcd(num1, num2)
     #############################################
 
 
