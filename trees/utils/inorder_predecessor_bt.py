@@ -20,27 +20,28 @@ def get_bt_inorder_predecessor(binary_tree: LinkedBinaryTree, node: LinkedBinary
 
             if node_data == current_node.data:
                 if binary_tree.left(current_node):
-                    return get_max_left_subtree_node(current_node)
-                return given_node_right_ancestor
+                    given_node_right_ancestor = get_max_left_subtree_node(binary_tree.left(current_node))
+                return True
 
             if binary_tree.right(current_node):
-                given_node_right_ancestor = current_node
-                possible_predecessor_node = _get_bt_inorder_predecessor_from_key(binary_tree.right(current_node))
-                if possible_predecessor_node:
-                    return possible_predecessor_node
+                if _get_bt_inorder_predecessor_from_key(binary_tree.right(current_node)):
+                    if not given_node_right_ancestor:
+                        given_node_right_ancestor = current_node
+                    return True
 
             if binary_tree.left(current_node):
-                possible_predecessor_node = _get_bt_inorder_predecessor_from_key(binary_tree.left(current_node))
-                if possible_predecessor_node:
-                    return possible_predecessor_node
+                if _get_bt_inorder_predecessor_from_key(binary_tree.left(current_node)):
+                    return True
 
-        return _get_bt_inorder_predecessor_from_key(binary_tree.root())
+            return False
+        _get_bt_inorder_predecessor_from_key(binary_tree.root())
+        return given_node_right_ancestor
 
     given_node = node
     assert given_node or node_data, 'Either of Node or Node-data must be provided'
 
-    if given_node and binary_tree.right(given_node):
-        return get_max_left_subtree_node(binary_tree.right(given_node))
+    if given_node and binary_tree.left(given_node):
+        return get_max_left_subtree_node(binary_tree.left(given_node))
 
     return get_bt_inorder_predecessor_from_key()
 
@@ -52,7 +53,7 @@ def run():
     inorder_predecessor_node = get_bt_inorder_predecessor(binary_tree, node_data=node_data)
 
     Traversal(binary_tree).print_inorder_traversal()
-    Traversal(binary_tree).print_level_order_traversal()
+    # Traversal(binary_tree).print_level_order_traversal()
     if inorder_predecessor_node:
         print(f'In-order predecessor of the node({node_data}): ', inorder_predecessor_node.data)
     else:

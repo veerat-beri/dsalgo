@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/diagonal-traversal-of-binary-tree/
 
 
-from trees import LinkedBinaryTree
+from trees import LinkedBinaryTree, BuildLinkedBinaryTree
 
 
 def diagonal_traversal(binary_tree: LinkedBinaryTree = None, bt_node: LinkedBinaryTree.BinaryTreeNode = None) -> list:
@@ -26,3 +26,22 @@ def diagonal_traversal(binary_tree: LinkedBinaryTree = None, bt_node: LinkedBina
 
     for diagonal_level, level_nodes_list in diagonal_nodes.items():
         yield level_nodes_list
+
+
+# driver code
+def run():
+    binary_tree = BuildLinkedBinaryTree(list_of_nodes=[8, 3, 10, ]).get_tree()
+    root = binary_tree.root()
+    root._left._left = LinkedBinaryTree.get_new_node(1)
+    root._right._right = LinkedBinaryTree.get_new_node(14)
+    root._right._right._left = LinkedBinaryTree.get_new_node(13)
+    root._right._left = LinkedBinaryTree.get_new_node(6)
+    root._right._left._left = LinkedBinaryTree.get_new_node(4)
+    root._right._left._right = LinkedBinaryTree.get_new_node(7)
+
+    for diagonal_nodes_list in diagonal_traversal(binary_tree):
+        print([node.data for node in diagonal_nodes_list])
+
+
+if __name__ == '__main__':
+    run()

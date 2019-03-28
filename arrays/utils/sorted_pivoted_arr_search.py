@@ -1,5 +1,5 @@
 # Problem Statement
-# https://www.geeksforgeeks.org/find-element-given-index-number-rotations/
+# https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/
 
 from arrays import binary_search
 
@@ -20,7 +20,7 @@ def get_arr_elem(arr: [], key: int):
         if mid < high and arr[mid] > arr[mid + 1]:  # mid < high is required to avoid error, if low=high=len(arr) - 1
             return mid
 
-        if arr[mid] < arr[low]:
+        if arr[mid] <= arr[low]:
             return find_pivot(low, mid - 1)
 
         return find_pivot(mid + 1, high)
@@ -57,7 +57,7 @@ def get_arr_elem_optimised(arr: [], key: int):
 
         # arr[mid + 1:] is sorted
         else:
-            if arr[mid + 1] <= key:
+            if arr[mid + 1] <= key and arr[high] >= key:
                 return binary_search(arr, mid + 1, high, key)
             return _get_arr_elem(low, mid - 1)
 
