@@ -1,5 +1,8 @@
-def get_pivot_index(arr, lower_index, higher_index, partitioning_elem: int = None):
+def get_pivot_index(arr, lower_index, higher_index, partitioning_elem: int = None, use_randomise=True):
     pivot_index = 0
+
+    assert not (use_randomise and partitioning_elem), 'can not perform random partition on provided element'
+
     if partitioning_elem:
         try:
             partitioning_elem_index = arr.index(partitioning_elem)
@@ -20,7 +23,7 @@ def get_pivot_index(arr, lower_index, higher_index, partitioning_elem: int = Non
 
 # driver code
 def run():
-    arr = [12, 3, 5, 7, 11, ]
+    arr = [12, 3, 5, 7, 11, 2, ]
     print(f'Partition index in given array is: {get_pivot_index(arr, 0, len(arr) - 1)}')
     print(f'Array after partitioning: {arr}')
 

@@ -8,10 +8,10 @@ class _Heap:
         def __init__(self, data, left=None, right=None, **kwargs):
             super().__init__(data, left, right, **kwargs)
 
-    def __init__(self, arr: []):
+    def __init__(self, arr: [] = None):
+        arr = arr if arr else []
         self._size = len(arr)
-        self._arr = arr or []
-        self.heap = self._arr
+        self.heap = arr[:]
         self.heapify()
 
     def __len__(self):
