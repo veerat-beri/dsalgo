@@ -3,9 +3,10 @@
 
 
 from heaps.heap import MaxHeap, MinHeap
+from sorting.quick_sort import get_pivot_index
 
 
-def get_kth_smallest_num(arr: [], k, use_min_heap=False):
+def get_kth_smallest_num(arr: [], k, execution_method = 1):
     # Using Min Heap
     # Time-complexity: O(N + k*log k)
     arr_len = len(arr)
@@ -36,10 +37,32 @@ def get_kth_smallest_num(arr: [], k, use_min_heap=False):
         return heap.pop()
 
     # Using Quick Sort
-    def _use_quick_sort():
-        pass
+    def _use_quick_search():
+        print('Using Quick Search..')
 
-    executing_func = _use_min_heap if use_min_heap is True else _use_max_heap
+        def _get_pivot_index(low, high):
+            if low > high:
+                return
+
+            if k <= high and k >= low:
+                pivot_index = get_pivot_index(arr, low, high)
+                if pivot_index == k:
+                    return arr[k]
+
+                elif pivot_index < k:
+                    return _get_pivot_index(pivot_index + 1, high)
+
+                return _get_pivot_index(low, pivot_index - 1)
+
+        return _get_pivot_index(0, arr_len - 1)
+
+    method_to_use = {
+        1: _use_min_heap,
+        2: _use_max_heap,
+        3: _use_quick_search,
+    }
+
+    executing_func = method_to_use[execution_method]
     return executing_func()
 
 
@@ -47,8 +70,8 @@ def get_kth_smallest_num(arr: [], k, use_min_heap=False):
 def run():
     arr = [12, 3, 5, 7, 19, ]
     k = 2
-    print(f'Given array: {arr} ')
-    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, use_min_heap=False)}')
+    print(f'Given array: {arr} \n')
+    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 3)}')
 
 
 if __name__ == '__main__':
