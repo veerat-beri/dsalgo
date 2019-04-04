@@ -38,7 +38,10 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
         return heap.pop()
 
     # Using Quick Sort partition method
-    # Time-complexity: [O(N * log N), O(N^2)]
+    # Time-complexity:
+    # - O(N^2) Worst case
+    # - O(N) Avg. case
+
     def _use_quick_search():
         print('Using Quick Search..')
 
