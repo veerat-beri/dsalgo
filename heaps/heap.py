@@ -12,6 +12,7 @@ class _Heap:
         arr = arr if arr else []
         self._size = len(arr)
         self.heap = arr[:]
+        self._arr = arr[:]
         self.heapify()
 
     def __len__(self):
@@ -35,6 +36,10 @@ class _Heap:
     def pop(self):
         self._size -= 1
         return heapq.heappop(self.heap)
+
+    def push(self, elem):
+        self._size += 1
+        return heapq.heappush(self.heap, elem)
 
     def get_parent(self, child_index):
         parent_index = (child_index - 1) // 2
@@ -76,6 +81,3 @@ class MaxHeap(_Heap):
 
     def replace_root(self, elem: int):
         heapq._heapreplace_max(self.heap, elem)
-
-    # def heappop(self):
-    #     return heapq
