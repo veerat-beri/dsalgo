@@ -50,8 +50,8 @@ class CloneLinkedList:
 
     def __clone_ptrs(self):
         for (old_node, new_node) in self.old_node_new_node_map.items():
-            new_node.next = self.old_node_new_node_map[old_node.next] if old_node.next else None
-            new_node.random = self.old_node_new_node_map[old_node.random] if old_node.random else None
+            new_node.next = self.old_node_new_node_map.get(old_node.next)
+            new_node.random = self.old_node_new_node_map.get(old_node.random)
 
     def clone(self):
         self.__clone_data()
