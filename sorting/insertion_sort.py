@@ -1,7 +1,5 @@
 # Problem Statement
-#
-
-from arrays.services import swap_arr_elem
+# https://www.geeksforgeeks.org/insertion-sort/
 
 
 def get_sorted_arr(arr: []):
@@ -27,6 +25,7 @@ def get_sorted_arr(arr: []):
 # driver code
 def run():
     arr = [64, 25, 12, 22, 11, ]
+    # arr = [12, 11, 13, 5, 6, ]
     print(f'Array before sort: {arr}')
     get_sorted_arr(arr)
     print(f'Array after sort: {arr}')

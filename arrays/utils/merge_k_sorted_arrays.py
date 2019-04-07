@@ -1,5 +1,5 @@
 # Problem Statement
-# https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
+# https://www.geeksforgeeks.org/merge-k-sorted-arrays/
 
 
 # driver code

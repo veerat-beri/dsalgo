@@ -1,3 +1,10 @@
+# Problem Statement
+# https://www.geeksforgeeks.org/quick-sort/
+
+
+from arrays.services import swap_arr_elem
+
+
 def get_pivot_index(arr, lower_index, higher_index, partitioning_elem: int = None, use_randomise=True):
     pivot_index = 0
 
@@ -6,15 +13,15 @@ def get_pivot_index(arr, lower_index, higher_index, partitioning_elem: int = Non
     if partitioning_elem:
         try:
             partitioning_elem_index = arr.index(partitioning_elem)
-            arr[higher_index], arr[partitioning_elem_index] = arr[partitioning_elem_index], arr[higher_index]
-        except:
+            swap_arr_elem(higher_index, partitioning_elem_index, arr)
+        except ValueError:
             print('Given Partition element is not in array')
 
     partitioning_elem = arr[higher_index]
 
     for index in range(lower_index, higher_index):
         if arr[index] < partitioning_elem:
-            arr[index], arr[pivot_index] = arr[pivot_index], arr[index]
+            swap_arr_elem(index, pivot_index, arr)
             pivot_index += 1
 
     arr[higher_index], arr[pivot_index] = arr[pivot_index], arr[higher_index]

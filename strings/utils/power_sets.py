@@ -1,5 +1,5 @@
 # Problem Statement
-#
+# https://www.geeksforgeeks.org/power-set/
 
 
 # driver code
