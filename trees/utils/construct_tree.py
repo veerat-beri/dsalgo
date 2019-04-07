@@ -55,8 +55,22 @@ def get_full_bt_from_preorder_and_postorder(preorder_path: [], postorder_path: [
 
 
 def get_bt_from_inorder_and_levelorder(inorder_path: [], level_order_path: [])-> LinkedBinaryTree:
+    # TODO: correct this logic
+    level_order_traversal_index = 0
+
     def _get_bt_from_inorder_and_levelorder(inorder_path):
-        pass
+        nonlocal level_order_traversal_index
+
+        print(level_order_traversal_index, inorder_path)
+        if inorder_path:
+            node = LinkedBinaryTree.get_new_node(level_order_path[level_order_traversal_index])
+            inorder_path_index = inorder_path.index(level_order_path[level_order_traversal_index])
+            level_order_traversal_index += 1
+
+            node._left = _get_bt_from_inorder_and_levelorder(inorder_path[:inorder_path_index])
+            node._right = _get_bt_from_inorder_and_levelorder(inorder_path[inorder_path_index + 1:])
+
+            return node
 
     root_node = _get_bt_from_inorder_and_levelorder(inorder_path)
     return LinkedBinaryTree(root=root_node)
@@ -84,6 +98,20 @@ def run():
     postorder_path = [8, 9, 4, 5, 2, 6, 7, 3, 1]
     print('###########################################################################\nConstructing new full tree from preorder and postorder....')
     binary_tree = get_full_bt_from_preorder_and_postorder(preorder_path, postorder_path)
+
+    print('Preorder of new Tree constructed is:')
+    for node in binary_tree.pre_order():
+        print(binary_tree.element(node), end=' ')
+
+    print('\n\nLevel order traversal of new tree is: ')
+    print_bfs(binary_tree)
+
+    ###########################################################################
+    inorder_path = [4, 8, 10, 12, 14, 20, 22]
+    level_order_path = [20, 8, 22, 4, 12, 10, 14]
+    print(
+        '###########################################################################\nConstructing new full tree from inorder and level-order....')
+    binary_tree = get_bt_from_inorder_and_levelorder(inorder_path, level_order_path)
 
     print('Preorder of new Tree constructed is:')
     for node in binary_tree.pre_order():

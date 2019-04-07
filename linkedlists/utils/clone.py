@@ -29,6 +29,8 @@ class CustomLinkedList(SinglyLinkedList):
 
 
 class CloneLinkedList:
+    ############################################################
+    # Space Complexity: O(N)
     def __init__(self, linked_list: CustomLinkedList):
         # https://mail.python.org/pipermail/python-dev/2017-December/151283.html
         # From python 3.7 onwards default dict is OrderedDict(),
@@ -48,13 +50,20 @@ class CloneLinkedList:
 
     def __clone_ptrs(self):
         for (old_node, new_node) in self.old_node_new_node_map.items():
-            new_node.next = self.old_node_new_node_map.get(old_node.next)
-            new_node.random = self.old_node_new_node_map.get(old_node.random)
+            new_node.next = self.old_node_new_node_map[old_node.next] if old_node.next else None
+            new_node.random = self.old_node_new_node_map[old_node.random] if old_node.random else None
 
     def clone(self):
         self.__clone_data()
         self.__clone_ptrs()
         return CustomLinkedList(head=self.old_node_new_node_map[next(iter(self.old_node_new_node_map))])
+    ############################################################
+    # Space Complexity: O(1)
+    # https://www.geeksforgeeks.org/clone-linked-list-next-random-pointer-o1-space/
+
+    # def clone(self):
+    #     pass
+    ############################################################
 
 
 # driver code

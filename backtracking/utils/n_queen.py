@@ -5,8 +5,8 @@
 def print_board(board, board_size):
     for i in range(board_size):
         for j in range(board_size):
-            print(board[i][j], end=" ")
-        print(end="\n")
+            print(board[i][j], end=' ')
+        print(end='\n')
 
 
 def is_pos_feasible(row, col, board, board_size):
@@ -43,14 +43,14 @@ def backtrack(board_size):
 
 
 def run():
-    board_size = int(input("enter value of N, for N-Queen prob: "))
+    board_size = int(input('enter value of N, for N-Queen prob: '))
 
     are_queens_set, board = backtrack(board_size)
     if are_queens_set:
         print('Board status after setting N queens is: ')
         print_board(board, board_size)
     else:
-        print("Solution doe not exists!")
+        print('Solution doe not exists!')
 
 
 if __name__ == '__main__':

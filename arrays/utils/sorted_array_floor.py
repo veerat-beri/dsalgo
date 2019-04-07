@@ -17,11 +17,15 @@ def get_floor_index_in_sorted_array(arr: [], searched_num):
         if arr[mid] == searched_num:
             return mid
 
+        ##############################
+        # These two conditions are not just code-optimizing conditions, rather,
+        # any one of them is necessary for correct output
         if searched_num < arr[mid] and mid > 0 and searched_num >= arr[mid - 1]:
             return mid - 1
 
         if searched_num > arr[mid] and mid < arr_len and searched_num <= arr[mid + 1]:
             return mid
+        ##############################
 
         if arr[mid] < searched_num:
             return _get_floor_index_in_sorted_array(mid + 1, high)

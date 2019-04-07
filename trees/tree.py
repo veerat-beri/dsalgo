@@ -221,12 +221,18 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
     def add_right_child(self, parent_node: BinaryTreeNode, new_node_data):
         return self._add_right(parent_node, new_node_data)
 
-    def children(self, node):
+    def children(self, node, reverse_iter=False):
         """Generates an iteration of Children of node"""
-        if node._left is not None:
-            yield self.left(node)
-        if node._right is not None:
-            yield self.right(node)
+        if reverse_iter:
+            if node._right is not None:
+                yield self.right(node)
+            if node._left is not None:
+                yield self.left(node)
+        else:
+            if node._left is not None:
+                yield self.left(node)
+            if node._right is not None:
+                yield self.right(node)
 
     def do_node_exists_in_tree(self, node_data) -> bool:
         for node in self:
