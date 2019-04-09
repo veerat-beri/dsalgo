@@ -8,7 +8,7 @@ from sorting.quick_sort import get_pivot_index
 
 def get_kth_smallest_num(arr: [], k, execution_method = 1):
     # Using Min Heap
-    # Time-complexity: O(N + k*log k)
+    # Time-complexity: O(N + k*log2 k)
     arr_len = len(arr)
     assert k <= arr_len, 'k can not be greater than arr-len'
 
@@ -24,7 +24,7 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
         return heap.pop()
 
     # Using Max Heap (OPTIMISED)
-    # Time-complexity: O(k + (N-k) * log k)
+    # Time-complexity: O(k + (N-k) * log2 k)
     def _use_max_heap():
         print('Using MAX-Heap..')
 
