@@ -3,7 +3,10 @@
 
 
 def get_name_from_num(num: int):
+    # MAX_NAME_STR_CHAR = 50
+    # name_string = ['\0'] * MAX_NAME_STR_CHAR
     name_string = []
+    # str_index = 0
 
     def _get_char(num: int):
         return chr(ord('A') + num - 1)
@@ -11,11 +14,15 @@ def get_name_from_num(num: int):
     while num:
         rem = num % 26
         if not rem:
+            # name_string[str_index] = 'Z'
             name_string.append('Z')
             num = num // 26 - 1
         else:
+            # name_string[str_index] = _get_char(rem)
             name_string.append(_get_char(rem))
             num = num // 26
+
+        # str_index += 1
 
     return ''.join(name_string[::-1])
 
