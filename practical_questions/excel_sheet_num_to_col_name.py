@@ -2,14 +2,14 @@
 # https://www.geeksforgeeks.org/find-excel-column-name-given-number/
 
 
+from strings.service import get_relative_char
+
+
 def get_name_from_num(num: int):
     # MAX_NAME_STR_CHAR = 50
     # name_string = ['\0'] * MAX_NAME_STR_CHAR
     name_string = []
     # str_index = 0
-
-    def _get_char(num: int):
-        return chr(ord('A') + num - 1)
 
     while num:
         rem = num % 26
@@ -19,7 +19,7 @@ def get_name_from_num(num: int):
             num = num // 26 - 1
         else:
             # name_string[str_index] = _get_char(rem)
-            name_string.append(_get_char(rem))
+            name_string.append(get_relative_char(rem, use_upper_case=True))
             num = num // 26
 
         # str_index += 1
