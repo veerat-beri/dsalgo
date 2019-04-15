@@ -2,26 +2,7 @@
 # https://www.geeksforgeeks.org/kth-smallest-element-in-a-row-wise-and-column-wise-sorted-2d-array-set-1/
 
 
-from heaps.heap import MinHeap
-
-
-class CustomMinHeap(MinHeap):
-    # def __init__(self, arr: []):
-    #     self._size = len(arr)
-    #     # self.heap = arr[:]
-    #     parent_node = MinHeap.get_parent(len(arr) - 1)
-    #     for _ in range(parent_node, -1, -1):
-    #         self.heapify()
-
-    def percolate_up(self, elem_index):
-        if elem_index:
-            parent_index = self.get_parent(elem_index)
-            if self._arr[parent_index] < self._arr[elem_index]:
-                self._arr[parent_index], self._arr[elem_index] = self._arr[elem_index], self._arr[parent_index]
-                self.percolate_up(parent_index)
-
-    def heapify(self):
-        pass
+from heaps.build_heap import CustomMinHeap
 
 
 def get_kth_smallest_in_sorted_2d_arr(arr: [], k):

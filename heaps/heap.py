@@ -3,7 +3,7 @@ import heapq
 from trees import LinkedBinaryTree
 
 
-class _Heap:
+class _BinaryHeap:
     class HeapNode(LinkedBinaryTree.BinaryTreeNode):
         def __init__(self, data, left=None, right=None, **kwargs):
             super().__init__(data, left, right, **kwargs)
@@ -15,11 +15,12 @@ class _Heap:
         self._arr = arr[:]
         self.heapify()
 
+    @@property
+    def parent(self):
+        return
+
     def __len__(self):
         return self._size
-
-    def __str__(self):
-        return self.heap
 
     def __repr__(self):
         return str(self.heap)
@@ -41,25 +42,33 @@ class _Heap:
         self._size += 1
         return heapq.heappush(self.heap, elem)
 
-    def get_parent(self, child_index):
+    def get_parent_index(self, child_index):
         parent_index = (child_index - 1) // 2
         assert parent_index >= 0, 'No parent exists'
         return parent_index
 
-    def get_left_child_index(self, parent_index):
+    @staticmethod
+    def get_left_child_index(parent_index):
+        return parent_index * 2 + 1
+
+    @staticmethod
+    def get_right_child_index(parent_index):
+        return parent_index * 2 + 2
+
+    def get_left_child(self, parent_index):
         try:
-            return self.heap[parent_index*2 + 1]
+            return self.heap[self.get_left_child_index(parent_index)]
         except IndexError:
             print('Left Child don\'t exists')
 
-    def get_right_child_index(self, parent_index):
+    def get_right_child(self, parent_index):
         try:
-            return self.heap[parent_index*2 + 2]
+            return self.heap[self.get_right_child_index(parent_index)]
         except IndexError:
             print('Right Child don\'t exists')
 
 
-class MinHeap(_Heap):
+class MinBinaryHeap(_BinaryHeap):
     def get_min(self):
         assert self.heap, 'Heap cannot be empty'
         return self.heap[0]
@@ -71,7 +80,7 @@ class MinHeap(_Heap):
         heapq.heapreplace(self.heap, elem)
 
 
-class MaxHeap(_Heap):
+class MaxBinaryHeap(_BinaryHeap):
     def get_max(self):
         assert self.heap, 'Heap cannot be empty'
         return self.heap[0]
