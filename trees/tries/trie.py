@@ -31,7 +31,9 @@ class Trie:
                 trie_node.child_nodes[get_relative_ascii(word[word_index])] = self.get_new_node()
 
             if word_index + 1 == word_len:
-                trie_node.is_end_node = True
+                node = trie_node.child_nodes[get_relative_ascii(word[word_index])]
+                node.is_end_node = True
+                # trie_node.is_end_node = True
                 return
 
             return _insert(trie_node.child_nodes[get_relative_ascii(word[word_index])], word_index + 1)
@@ -45,9 +47,10 @@ class Trie:
     def print_trie(self):
         def _print_trie(trie_node: Trie.TrieNode, word_so_far):
             for node_index in range(self.DEFAULT_TRIE_NODE_CHILDREN_COUNT):
+                if trie_node.is_end_node:
+                    print(word_so_far + get_relative_char(node_index) + ', ')
+
                 if trie_node.child_nodes[node_index]:
-                    if trie_node.is_end_node:
-                        print(word_so_far + get_relative_char(node_index) + ', ')
                     _print_trie(trie_node.child_nodes[node_index], word_so_far + get_relative_char(node_index))
 
         _print_trie(self.root(), '')
