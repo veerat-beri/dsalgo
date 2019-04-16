@@ -42,10 +42,9 @@ class _BinaryHeap:
         self._size += 1
         return heapq.heappush(self.heap, elem)
 
-    def get_parent_index(self, child_index):
-        parent_index = (child_index - 1) // 2
-        assert parent_index >= 0, 'No parent exists'
-        return parent_index
+    @staticmethod
+    def get_parent_index(child_index):
+        return (child_index - 1) // 2
 
     @staticmethod
     def get_left_child_index(parent_index):
@@ -59,13 +58,19 @@ class _BinaryHeap:
         try:
             return self.heap[self.get_left_child_index(parent_index)]
         except IndexError:
-            print('Left Child don\'t exists')
+            print('Left Child doesn\'t exists')
 
     def get_right_child(self, parent_index):
         try:
             return self.heap[self.get_right_child_index(parent_index)]
         except IndexError:
-            print('Right Child don\'t exists')
+            print('Right Child doesn\'t exists')
+
+    def get_parent(self, child_index):
+        try:
+            return self.heap[self.get_parent(child_index)]
+        except IndexError:
+            print('Parent doesn\'t exists')
 
 
 class MinBinaryHeap(_BinaryHeap):

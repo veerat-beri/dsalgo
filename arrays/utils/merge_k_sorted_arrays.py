@@ -1,7 +1,8 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/merge-k-sorted-arrays/
 
-def get_merged_array(sorted_arrays: [[]], k: int, use_min_heap=True) -> []
+
+def get_merged_array(sorted_arrays: [[]], k: int, use_min_heap=True):
     # Using MinBinaryHeap
 
     def _get_merged_arr_using_heap():

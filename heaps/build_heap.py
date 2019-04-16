@@ -1,3 +1,4 @@
+from arrays.services import swap_arr_elem
 from heaps.heap import MinBinaryHeap
 
 
@@ -8,8 +9,9 @@ class CustomMinHeap(MinBinaryHeap):
         self.heap = [0]
         # self.heapify()
 
-    # def heapify(self):
-    #     pass
+    def _insert(self):
+        self._size += 1
+        self.percolate_up(self._size)
 
     # def replace_root(self, elem: int):
     #     pass
@@ -25,9 +27,8 @@ class CustomMinHeap(MinBinaryHeap):
     #     self._size += 1
     #     return heapq.heappush(self.heap, elem)
 
-    def get_parent_index(self, child_index):
-        # parent_index = child_index // 2
-        # assert parent_index >= 0, 'No parent exists'
+    @staticmethod
+    def get_parent_index(child_index):
         return child_index // 2
 
     @staticmethod
@@ -39,10 +40,23 @@ class CustomMinHeap(MinBinaryHeap):
         return parent_index * 2 + 1
 
     def percolate_up(self, elem_index):
-        while self.get_parent_index(elem_index):
-            if self._arr[parent_index] < self._arr[elem_index]:
-                self._arr[parent_index], self._arr[elem_index] = self._arr[elem_index], self._arr[parent_index]
-                self.percolate_up(parent_index)
+        parent_index = self.get_parent_index(elem_index)
+
+        while parent_index:
+            if self.heap[parent_index] < self.heap[elem_index]:
+                swap_arr_elem(parent_index, elem_index, self.heap)
+            parent_index = self.get_parent_index(parent_index)
+
+    def get_min_child(self, parent_index):
+        # Assuming parent has atleast one child
+        pass
+
+    def percolate_down(self, elem_index):
+        pass
+
+    def insert(self, elem: int):
+        self.heap.append(elem)
+        self._insert()
 
     def heapify(self):
         pass
