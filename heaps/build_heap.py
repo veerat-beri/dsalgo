@@ -41,22 +41,36 @@ class CustomMinHeap(MinBinaryHeap):
 
     def percolate_up(self, elem_index):
         parent_index = self.get_parent_index(elem_index)
-
         while parent_index:
             if self.heap[parent_index] < self.heap[elem_index]:
                 swap_arr_elem(parent_index, elem_index, self.heap)
             parent_index = self.get_parent_index(parent_index)
 
-    def get_min_child(self, parent_index):
-        # Assuming parent has atleast one child
-        pass
+    def get_min_child_index(self, parent_index):
+        # Assuming parent has at least left-child
+        left_child = self.get_left_child_index(parent_index)
+        try:
+            right_child = self.get_right_child(parent_index)
+            return self.get_left_child_index(parent_index) if left_child < right_child else self.get_right_child_index(parent_index)
+        except IndexError:
+            return self.get_left_child_index(parent_index)
 
     def percolate_down(self, elem_index):
-        pass
+        while self.get_left_child_index(elem_index):
+            min_child_index = self.get_min_child_index(elem_index)
+            if self.heap[elem_index] < self.heap[min_child_index]:
+                swap_arr_elem(elem_index, min_child_index, self.heap)
+            elem_index = min_child_index
 
     def insert(self, elem: int):
         self.heap.append(elem)
         self._insert()
+
+    def delete_min(self):
+        self.heap[0] = self.heap[-1]
+        self.heap
+        t = list()
+        t.
 
     def heapify(self):
         pass

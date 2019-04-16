@@ -15,7 +15,7 @@ class _BinaryHeap:
         self._arr = arr[:]
         self.heapify()
 
-    @@property
+    @property
     def parent(self):
         return
 
