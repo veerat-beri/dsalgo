@@ -1,19 +1,14 @@
 import heapq
 
-from trees import LinkedBinaryTree
-
 
 class _BinaryHeap:
-    class HeapNode(LinkedBinaryTree.BinaryTreeNode):
-        def __init__(self, data, left=None, right=None, **kwargs):
-            super().__init__(data, left, right, **kwargs)
+    # class HeapNode(LinkedBinaryTree.BinaryTreeNode):
+    #     def __init__(self, data, left=None, right=None, **kwargs):
+    #         super().__init__(data, left, right, **kwargs)
 
     def __init__(self, arr: [] = None):
-        arr = arr if arr else []
+        arr = arr[:] if arr else []
         self._size = len(arr)
-        self.heap = arr[:]
-        self._arr = arr[:]
-        self.heapify()
 
     @property
     def parent(self):
@@ -59,21 +54,43 @@ class _BinaryHeap:
             return self.heap[self.get_left_child_index(parent_index)]
         except IndexError:
             print('Left Child doesn\'t exists')
+            raise
 
     def get_right_child(self, parent_index):
         try:
             return self.heap[self.get_right_child_index(parent_index)]
         except IndexError:
             print('Right Child doesn\'t exists')
+            raise
 
     def get_parent(self, child_index):
         try:
             return self.heap[self.get_parent(child_index)]
         except IndexError:
             print('Parent doesn\'t exists')
+            raise
+
+    @staticmethod
+    def get_root_index():
+        return 1
+
+    @property
+    def root(self):
+        try:
+            return self.heap[self.get_root_index()]
+        except IndexError:
+            print('Heap is Empty')
+            raise
 
 
 class MinBinaryHeap(_BinaryHeap):
+    def __init__(self, arr: [] = None):
+        super(MinBinaryHeap, self).__init__(arr)
+        self._size = len(arr)
+        self.heap = arr[:]
+        self._arr = arr[:]
+        self.heapify()
+
     def get_min(self):
         assert self.heap, 'Heap cannot be empty'
         return self.heap[0]
