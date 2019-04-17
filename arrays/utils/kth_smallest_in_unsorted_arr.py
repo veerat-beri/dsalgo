@@ -1,7 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/
-
-
+from heaps.build_heap import ManualMinHeap
 from heaps.heap import MaxBinaryHeap, MinBinaryHeap
 from sorting.quick_sort import get_pivot_index
 
@@ -15,10 +14,14 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
     def _use_min_heap():
         print('Using MIN-Heap..')
 
-        heap = MinBinaryHeap(arr)
-        MinBinaryHeap()
+        # heap = MinBinaryHeap(arr)
+        heap = ManualMinHeap(arr)
+        heap.heapify()
 
         for _ in range(k - 1):
+
+
+            print(heap)
             heap.pop()
 
         return heap.pop()
@@ -78,8 +81,8 @@ def run():
     arr = [12, 3, 5, 7, 19, ]
     k = 2
     print(f'Given array: {arr} \n')
-    # print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 1)}')
-    # print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 2)}')
+    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 1)}')
+    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 2)}')
     print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 3)}')
 
 

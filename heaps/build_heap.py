@@ -2,29 +2,17 @@ from arrays.services import swap_arr_elem
 from heaps.heap import MinBinaryHeap
 
 
-class CustomMinHeap(MinBinaryHeap):
+class ManualMinHeap(MinBinaryHeap):
     def __init__(self, arr: [] = None):
-        arr = arr[:] if arr else []
         self._size = len(arr)
-        self.heap = [0] + arr
+        self.heap = [0] + (arr or [])
 
-    def _insert(self):
+    def _push(self):
         self._size += 1
         self._percolate_up(self._size)
 
     # def replace_root(self, elem: int):
     #     pass
-
-    def is_empty(self):
-        return bool(self._size)
-
-    # def pop(self):
-    #     self._size -= 1
-    #     return heapq.heappop(self.heap)
-
-    # def push(self, elem):
-    #     self._size += 1
-    #     return heapq.heappush(self.heap, elem)
 
     @staticmethod
     def get_parent_index(child_index: int):
@@ -41,7 +29,7 @@ class CustomMinHeap(MinBinaryHeap):
     def _percolate_up(self, elem_index: int):
         parent_index = self.get_parent_index(elem_index)
         while parent_index:
-            if self.heap[parent_index] < self.heap[elem_index]:
+            if self.heap[parent_index] > self.heap[elem_index]:
                 swap_arr_elem(parent_index, elem_index, self.heap)
             parent_index = self.get_parent_index(parent_index)
 
@@ -57,13 +45,13 @@ class CustomMinHeap(MinBinaryHeap):
     def _percolate_down(self, elem_index: int):
         while self.get_left_child_index(elem_index) <= len(self):
             min_child_index = self._get_min_child_index(elem_index)
-            if self.heap[elem_index] < self.heap[min_child_index]:
+            if self.heap[elem_index] > self.heap[min_child_index]:
                 swap_arr_elem(elem_index, min_child_index, self.heap)
             elem_index = min_child_index
 
-    def insert(self, elem: int):
+    def push(self, elem: int):
         self.heap.append(elem)
-        self._insert()
+        self._push()
 
     def _pop(self):
         self.heap[0] = self.heap[-1]

@@ -7,8 +7,8 @@ class _BinaryHeap:
     #         super().__init__(data, left, right, **kwargs)
 
     def __init__(self, arr: [] = None):
-        arr = arr[:] if arr else []
         self._size = len(arr)
+        self.heap = arr[:]
 
     @property
     def parent(self):
@@ -27,7 +27,7 @@ class _BinaryHeap:
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def is_empty(self):
-        return bool(self._size)
+        return not self._size
 
     def pop(self):
         self._size -= 1
@@ -86,13 +86,10 @@ class _BinaryHeap:
 class MinBinaryHeap(_BinaryHeap):
     def __init__(self, arr: [] = None):
         super(MinBinaryHeap, self).__init__(arr)
-        self._size = len(arr)
-        self.heap = arr[:]
-        self._arr = arr[:]
         self.heapify()
 
     def get_min(self):
-        assert self.heap, 'Heap cannot be empty'
+        assert len(self), 'Heap cannot be empty'
         return self.heap[0]
 
     def heapify(self):
