@@ -2,26 +2,36 @@
 # https://www.geeksforgeeks.org/kth-smallest-element-in-a-row-wise-and-column-wise-sorted-2d-array-set-1/
 
 
-from heaps.build_heap import CustomMinHeap
+from collections import namedtuple
+
+from heaps.heap import ManualMinHeap, CustomNodeMinHeap
 
 
-def get_kth_smallest_in_sorted_2d_arr(arr: [], k):
+def get_kth_smallest_in_sorted_2d_arr(arr: [], k: int, total_rows: int, total_cols: int):
     assert arr, 'Array can not be empty'
+    assert k <= total_cols * total_rows, 'K should be in range of total array elements'
+
+    heap_node = namedtuple('heap_node', ['data', 'arr_row', 'arr_col'])
+
+    def _get_new_node(data: int, arr_row: int, arr_col: int):
+        return heap_node(data, arr_row, arr_col)
 
     def _get_processed_row():
-        heap_arr = [(arr[0][col_index], 0, col_index) for col_index in range(len(arr[0]))]
+        heap_arr = [_get_new_node(arr[0][col_index], 0, col_index) for col_index in range(len(arr[0]))]
         return heap_arr
 
-    heap = CustomMinHeap(_get_processed_row())
-    kth_smallest_node = None
-    for _ in range(k):
-        kth_smallest_node = heap.pop()
+    heap = CustomNodeMinHeap(_get_processed_row())
+
+    for _ in range(k - 1):
+        smallest_node = heap.pop()
         try:
-            heap.push(arr[kth_smallest_node[1]][kth_smallest_node[2]])
+            pushing_elem_row = smallest_node.arr_row + 1
+            pushing_elem_col = smallest_node.arr_col
+            heap.push(_get_new_node(arr[pushing_elem_row][pushing_elem_col], pushing_elem_row, pushing_elem_col))
         except IndexError:
             continue
 
-    return kth_smallest_node
+    return heap.pop().data
 
 
 # driver code
