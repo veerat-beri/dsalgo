@@ -17,7 +17,6 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
 
         # heap = MinBinaryHeap(arr)
         heap = ManualMinHeap(arr)
-        heap.heapify()
 
         for _ in range(k - 1):
             heap.pop()
@@ -76,7 +75,7 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
 
 # driver code
 def run():
-    arr = [12, 3, 5, 7, 19, ]
+    arr = [12, 3, 21, 7, 19, ]
     k = 2
     print(f'Given array: {arr} \n')
     print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 1)}')
