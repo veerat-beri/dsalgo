@@ -22,17 +22,15 @@ def get_kth_smallest_in_sorted_2d_arr(arr: [], k: int, total_rows: int, total_co
 
     heap = CustomNodeMinHeap(_get_processed_row())
 
-    for _ in range(k - 1):
-        smallest_node = heap.pop()
-        try:
-            pushing_elem_row = smallest_node.arr_row + 1
-            pushing_elem_col = smallest_node.arr_col
-
-
-            print(smallest_node.data)
-            heap.push(_get_new_node(arr[pushing_elem_row][pushing_elem_col], pushing_elem_row, pushing_elem_col))
-        except IndexError:
-            continue
+    # for _ in range(k - 1):
+    #     smallest_node = heap.pop()
+    #     try:
+    #         pushing_elem_row = smallest_node.arr_row + 1
+    #         pushing_elem_col = smallest_node.arr_col
+    #         heap.push(_get_new_node(arr[pushing_elem_row][pushing_elem_col], pushing_elem_row, pushing_elem_col))
+    #         # print('after', heap)
+    #     except IndexError:
+    #         continue
 
     return heap.pop().data
 
@@ -45,7 +43,7 @@ def run():
         [24, 29, 37, 48, ],
         [32, 33, 39, 50, ],
     ]
-    k = 7
+    k = 3
     kth_smallest_node = get_kth_smallest_in_sorted_2d_arr(arr, k, 4, 4)
 
     if kth_smallest_node:
