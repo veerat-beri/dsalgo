@@ -27,6 +27,9 @@ def get_kth_smallest_in_sorted_2d_arr(arr: [], k: int, total_rows: int, total_co
         try:
             pushing_elem_row = smallest_node.arr_row + 1
             pushing_elem_col = smallest_node.arr_col
+
+
+            print(smallest_node.data)
             heap.push(_get_new_node(arr[pushing_elem_row][pushing_elem_col], pushing_elem_row, pushing_elem_col))
         except IndexError:
             continue
@@ -43,9 +46,10 @@ def run():
         [32, 33, 39, 50, ],
     ]
     k = 7
-    kth_smallest_node = get_kth_smallest_in_sorted_2d_arr(arr, k)
+    kth_smallest_node = get_kth_smallest_in_sorted_2d_arr(arr, k, 4, 4)
+
     if kth_smallest_node:
-        print(f'Kth({k}) smallest elem in given sorted 2D arr is: {kth_smallest_node[0]}')
+        print(f'Kth({k}) smallest elem in given sorted 2D arr is: {kth_smallest_node}')
     else:
         print('No Kth({k}) smallest elem exists')
 

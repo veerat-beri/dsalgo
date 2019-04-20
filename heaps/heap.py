@@ -186,8 +186,7 @@ class ManualMinHeap(MinBinaryHeap):
     def get_right_child_index(parent_index: int):
         return parent_index * 2 + 1
 
-    # def push(self, elem: int):
-    def push(self, elem):
+    def push(self, elem: int):
         self.heap.append(elem)
         self._push()
 
@@ -206,11 +205,3 @@ class ManualMinHeap(MinBinaryHeap):
 class ManualMaxHeap(ManualMinHeap):
     def _is_swap_needed(self, parent_index, child_index):
         return self.heap[parent_index] < self.heap[child_index]
-
-    def get_max(self):
-        assert len(self), 'Heap cannot be empty'
-        return self.heap[self.get_root_index()]
-
-
-class CustomNodeMinHeap(ManualMinHeap):
-    pass

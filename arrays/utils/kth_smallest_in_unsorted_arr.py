@@ -20,6 +20,7 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
 
         for _ in range(k - 1):
             heap.pop()
+            print(heap)
 
         return heap.pop()
 
@@ -44,6 +45,7 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
 
     def _use_quick_search():
         print('Using Quick Search..')
+
 
         k_index = k - 1
 
@@ -75,12 +77,13 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
 
 # driver code
 def run():
-    arr = [12, 3, 21, 7, 19, ]
+    # arr = [12, 3, 21, 7, 19, ]
+    arr = [12, 3, 5, 7, 19, ]
     k = 2
     print(f'Given array: {arr} \n')
     print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 1)}')
-    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 2)}')
-    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 3)}')
+    # print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 2)}')
+    # print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 3)}')
 
 
 if __name__ == '__main__':
