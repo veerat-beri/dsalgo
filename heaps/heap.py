@@ -140,11 +140,11 @@ class _ManualHeap(_BinaryHeap):
         self._percolate_down(self.get_root_index())
 
     def _percolate_up(self, elem_index: int):
-        parent_index = self.get_parent_index(elem_index)
-        while parent_index:
+        while self.get_parent_index(elem_index):
+            parent_index = self.get_parent_index(elem_index)
             if self._is_swap_needed(parent_index, elem_index):
                 swap_arr_elem(parent_index, elem_index, self.heap)
-            parent_index = self.get_parent_index(parent_index)
+            elem_index = parent_index
 
     def _is_swap_needed(self, parent_index, child_index):
         raise NotImplementedError('Has to be Implemented by sub class')
@@ -186,15 +186,17 @@ class ManualMinHeap(_ManualHeap):
     def _is_swap_needed(self, parent_index, child_index):
         return self.heap[parent_index] > self.heap[child_index]
 
+    def __get_min_child_index(self, parent_index: int):
+        left_child = self.get_left_child(parent_index)
+        right_child = self.get_right_child(parent_index)
+        return self.get_left_child_index(
+            parent_index) if left_child < right_child else self.get_right_child_index(parent_index)
+
     def _get_min_child_index(self, parent_index: int):
         # Assuming parent has at least left-child
-        left_child = self.get_left_child(parent_index)
-        try:
-            right_child = self.get_right_child(parent_index)
-            return self.get_left_child_index(parent_index) if left_child < right_child else self.get_right_child_index(
-                parent_index)
-        except IndexError:
-            return self.get_left_child_index(parent_index)
+        if self.get_right_child_index(parent_index) <= self._size:
+            return self.__get_min_child_index(parent_index)
+        return self.get_left_child_index(parent_index)
 
     def _percolate_down(self, elem_index: int):
         while self.get_left_child_index(elem_index) <= len(self):
@@ -212,22 +214,24 @@ class ManualMaxHeap(_ManualHeap):
     def _is_swap_needed(self, parent_index, child_index):
         return self.heap[parent_index] < self.heap[child_index]
 
+    def __get_max_child_index(self, parent_index: int):
+        left_child = self.get_left_child(parent_index)
+        right_child = self.get_right_child(parent_index)
+        return self.get_left_child_index(parent_index) if left_child > right_child else self.get_right_child_index(
+            parent_index)
+
     def _get_max_child_index(self, parent_index: int):
         # Assuming parent has at least left-child
-        left_child = self.get_left_child(parent_index)
-        try:
-            right_child = self.get_right_child(parent_index)
-            return self.get_left_child_index(parent_index) if left_child > right_child else self.get_right_child_index(
-                parent_index)
-        except IndexError:
-            return self.get_left_child_index(parent_index)
+        if self.get_right_child_index(parent_index) <= self._size:
+            return self.__get_max_child_index(parent_index)
+        return self.get_left_child_index(parent_index)
 
     def _percolate_down(self, elem_index: int):
         while self.get_left_child_index(elem_index) <= len(self):
-            min_child_index = self._get_max_child_index(elem_index)
-            if self._is_swap_needed(elem_index, min_child_index):
-                swap_arr_elem(elem_index, min_child_index, self.heap)
-            elem_index = min_child_index
+            max_child_index = self._get_max_child_index(elem_index)
+            if self._is_swap_needed(elem_index, max_child_index):
+                swap_arr_elem(elem_index, max_child_index, self.heap)
+            elem_index = max_child_index
 
     def get_max(self):
         assert len(self), 'Heap cannot be empty'
@@ -238,12 +242,8 @@ class CustomNodeMinHeap(ManualMinHeap):
     def _is_swap_needed(self, parent_index, child_index):
         return self.heap[parent_index].data > self.heap[child_index].data
 
-    def _get_min_child_index(self, parent_index: int):
-        # Assuming parent has at least left-child
+    def __get_min_child_index(self, parent_index: int):
         left_child = self.get_left_child(parent_index)
-        try:
-            right_child = self.get_right_child(parent_index)
-            return self.get_left_child_index(
-                parent_index) if left_child.data < right_child.data else self.get_right_child_index(parent_index)
-        except IndexError:
-            return self.get_left_child_index(parent_index)
+        right_child = self.get_right_child(parent_index)
+        return self.get_left_child_index(
+            parent_index) if left_child.data < right_child.data else self.get_right_child_index(parent_index)

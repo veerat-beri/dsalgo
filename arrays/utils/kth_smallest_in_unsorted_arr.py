@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/
 
 
-from heaps.heap import MaxBinaryHeap, ManualMinHeap
+from heaps.heap import ManualMinHeap, ManualMaxHeap
 from sorting.quick_sort import get_pivot_index
 
 
@@ -28,7 +28,8 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
     def _use_max_heap():
         print('Using MAX-Heap..')
 
-        heap = MaxBinaryHeap(arr[:k])
+        # heap = MaxBinaryHeap(arr[:k])
+        heap = ManualMaxHeap(arr[:k])
         for arr_index in range(k, arr_len):
             elem = arr[arr_index]
             if elem < heap.get_max():
