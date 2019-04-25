@@ -8,38 +8,38 @@ class MergeSort:
         self.input_arr = arr
 
     def _get_sorted_merged_arrays(self, low: int, mid: int, high: int):
-        arr1_index = low
-        arr2_index = mid + 1
+        left_array = self.input_arr[low: mid + 1]
+        right_arr = self.input_arr[mid + 1: high + 1]
+
+        arr1_index = 0
+        arr2_index = 0
         out_arr_index = low
 
-        # breakpoint()
-        while arr1_index <= mid and arr2_index <= high:
-            # if self.input_arr[arr1_index] < self.input_arr[arr2_index]:
-            if self.input_arr[arr1_index] > self.input_arr[arr2_index]:
-                swap_arr_elem(arr1_index, arr2_index, self.input_arr)
-                # self.input_arr[out_arr_index] = self.input_arr[arr1_index]
+        print('single iteraton', left_array, right_arr, low, mid, high)
+        while arr1_index <= mid - low and arr2_index <= high - mid - 1:
+
+
+            print(arr1_index, arr2_index)
+            if left_array[arr1_index] < right_arr[arr2_index]:
+                self.input_arr[out_arr_index] = left_array[arr1_index]
                 arr1_index += 1
-            # else:
-            #     swap_arr_elem(arr1_index, arr2_index, self.input_arr)
-            #     # self.input_arr[out_arr_index] = self.input_arr[arr2_index]
-            #     arr2_index += 1
+            else:
+                self.input_arr[out_arr_index] = right_arr[arr2_index]
+                arr2_index += 1
             out_arr_index += 1
 
-        # breakpoint()
-        # while arr1_index <= mid:
-        #     print('yes, in first')
-        #     self.input_arr[out_arr_index] = self.input_arr[arr1_index]
-        #     arr1_index += 1
-        #     out_arr_index += 1
-        #
-        # while arr2_index <= high:
-        #     print('yes in second')
-        #     self.input_arr[out_arr_index] = self.input_arr[arr2_index]
-        #     arr2_index += 1
-        #     out_arr_index += 1
+        while arr1_index <= mid - low:
+            self.input_arr[out_arr_index] = self.input_arr[arr1_index]
+            arr1_index += 1
+            out_arr_index += 1
+
+        while arr2_index <= high - mid - 1:
+            self.input_arr[out_arr_index] = self.input_arr[arr2_index]
+            arr2_index += 1
+            out_arr_index += 1
 
 
-        print(low, mid, high, self.input_arr)
+        # print(low, mid, high, self.input_arr)
         # breakpoint()
 
     def sort_arr(self, low, high):
