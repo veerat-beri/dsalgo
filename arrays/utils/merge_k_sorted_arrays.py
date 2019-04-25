@@ -40,7 +40,8 @@ class MergeKSortedArrays:
                 continue
 
     def get_merged_arr_using_sort(self):
-        for arr in range(ceil(self.k)):
+        # for arr in range(ceil(self.k)):
+        pass
 
     # Using MinBinaryHeap
     # def __get_merged_arr_using_heap(self):
