@@ -28,6 +28,8 @@ class MergeSort:
                 arr2_index += 1
             out_arr_index += 1
 
+        breakpoint()
+        print(out_arr_index)
         while arr1_index <= mid - low:
             self.input_arr[out_arr_index] = self.input_arr[arr1_index]
             arr1_index += 1
@@ -39,6 +41,7 @@ class MergeSort:
             out_arr_index += 1
 
 
+        print(self.input_arr)
         # print(low, mid, high, self.input_arr)
         # breakpoint()
 
