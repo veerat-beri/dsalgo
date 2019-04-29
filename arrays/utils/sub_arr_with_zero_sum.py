@@ -24,7 +24,7 @@ class ZeroSubArray:
     # https://www.geeksforgeeks.org/find-the-largest-subarray-with-0-sum/
     def _get_arr_elem(self, index):
         """
-        Overridable function, to modify arr-elem
+        Overridable function, to modify sorted_arrays-elem
         :param index:
         :return:
         """
@@ -53,12 +53,12 @@ class ZeroSubArray:
 
 # driver code
 def run():
-    # arr = [1, 1, 0, 0, ]
-    # arr = [4, -2, -1, -1, -1, 1]
+    # sorted_arrays = [1, 1, 0, 0, ]
+    # sorted_arrays = [4, -2, -1, -1, -1, 1]
     arr = [15, -2, 2, -1, 1, 10, -5, -3, -1, -1, 0, ]
-    # arr = [15, -2, 2, -1, 1, 20, 10, -5, -3, -1, -1, 0, ]
+    # sorted_arrays = [15, -2, 2, -1, 1, 20, 10, -5, -3, -1, -1, 0, ]
 
-    print(f'Given arr: {arr}')
+    print(f'Given sorted_arrays: {arr}')
     ###############
     # Check whether zero sum sub-array exists or not
     do_zero_sum_sub_arr_exists = ZeroSubArray(arr).check_zero_sum_sub_arr_exists()

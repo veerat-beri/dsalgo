@@ -10,12 +10,12 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
     # Using Min Heap
     # Time-complexity: O(N + k*log2 k)
     arr_len = len(arr)
-    assert k <= arr_len, 'k can not be greater than arr-len'
+    assert k <= arr_len, 'k can not be greater than sorted_arrays-len'
 
     def _use_min_heap():
         print('Using MIN-Heap..')
 
-        # heap = MinBinaryHeap(arr)
+        # heap = MinBinaryHeap(sorted_arrays)
         heap = ManualMinHeap(arr)
 
         for _ in range(k - 1):
@@ -28,7 +28,7 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
     def _use_max_heap():
         print('Using MAX-Heap..')
 
-        # heap = MaxBinaryHeap(arr[:k])
+        # heap = MaxBinaryHeap(sorted_arrays[:k])
         heap = ManualMaxHeap(arr[:k])
         for arr_index in range(k, arr_len):
             elem = arr[arr_index]
@@ -75,13 +75,13 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
 
 # driver code
 def run():
-    # arr = [12, 3, 21, 7, 19, ]
+    # sorted_arrays = [12, 3, 21, 7, 19, ]
     arr = [12, 3, 5, 7, 19, ]
     k = 2
     print(f'Given array: {arr} \n')
-    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 1)}')
-    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 2)}')
-    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 3)}')
+    print(f'Kth({k}) smallest num in given sorted_arrays is: {get_kth_smallest_num(arr, k, 1)}')
+    print(f'Kth({k}) smallest num in given sorted_arrays is: {get_kth_smallest_num(arr, k, 2)}')
+    print(f'Kth({k}) smallest num in given sorted_arrays is: {get_kth_smallest_num(arr, k, 3)}')
 
 
 if __name__ == '__main__':

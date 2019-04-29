@@ -26,7 +26,7 @@ def get_min_sub_array_sum(arr):
             min_sum_till_point = arr[index]
             start_index = index
 
-        # else add the value arr[index] to min_sum_till_point
+        # else add the value sorted_arrays[index] to min_sum_till_point
         else:
             min_sum_till_point += arr[index]
 
@@ -42,8 +42,8 @@ def get_min_sub_array_sum(arr):
 # Driver code
 def run():
     arr = [3, -4, 2, -3, -1, 7, -4, -3, -1, -5]
-    # arr = [2, 6, -5, 4, 1, 9]
-    # arr = [4, -1, -1, -1, -1, -1]
+    # sorted_arrays = [2, 6, -5, 4, 1, 9]
+    # sorted_arrays = [4, -1, -1, -1, -1, -1]
 
     start_index, end_index, min_sum = get_min_sub_array_sum(arr)
     print(f'Sub-array with minimum sum({min_sum}): \n{arr[start_index: end_index + 1]}')

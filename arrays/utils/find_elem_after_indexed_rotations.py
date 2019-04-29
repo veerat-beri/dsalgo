@@ -3,7 +3,7 @@
 
 
 def get_new_index_after_rotations(arr: [], rotations_arr: [], searched_index: int):
-    assert searched_index in range(len(arr)), 'searched_index in not in arr range'
+    assert searched_index in range(len(arr)), 'searched_index in not in sorted_arrays range'
 
     for rotation_arr_index in range(len(rotations_arr) - 1, -1, -1):
         rotated_lower_index = rotations_arr[rotation_arr_index][0]

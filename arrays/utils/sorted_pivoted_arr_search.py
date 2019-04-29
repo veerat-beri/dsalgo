@@ -17,7 +17,7 @@ def get_arr_elem(arr: [], key: int):
 
         if mid > low and arr[mid] < arr[mid - 1]:  # mid > low is required to avoid error, if low=high=0
             return mid - 1
-        if mid < high and arr[mid] > arr[mid + 1]:  # mid < high is required to avoid error, if low=high=len(arr) - 1
+        if mid < high and arr[mid] > arr[mid + 1]:  # mid < high is required to avoid error, if low=high=len(sorted_arrays) - 1
             return mid
 
         if arr[mid] <= arr[low]:
@@ -48,14 +48,14 @@ def get_arr_elem_optimised(arr: [], key: int):
         if arr[mid] == key:
             return mid
 
-        # if arr[low:mid + 1] is sorted
+        # if sorted_arrays[low:mid + 1] is sorted
         if arr[mid] >= arr[low]:
             if arr[mid] > key and arr[low] <= key:
                 return binary_search(arr, low, mid - 1, key)
 
             return _get_arr_elem(mid + 1, high)
 
-        # arr[mid + 1:] is sorted
+        # sorted_arrays[mid + 1:] is sorted
         else:
             if arr[mid + 1] <= key and arr[high] >= key:
                 return binary_search(arr, mid + 1, high, key)

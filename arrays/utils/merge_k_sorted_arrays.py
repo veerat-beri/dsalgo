@@ -5,11 +5,12 @@ from collections import namedtuple
 from math import ceil
 
 from heaps.heap import CustomNodeMinHeap
+from sorting.merge_sort import MergeSort
 
 
 class MergeKSortedArrays:
     def __init__(self, arr: [], k: int):
-        self.arr = arr
+        self.sorted_arrays = arr
         self.k = k
         self.heap_node = namedtuple('heap_node', ['data', 'arr_row', 'arr_col'])
 
@@ -20,13 +21,13 @@ class MergeKSortedArrays:
         return CustomNodeMinHeap(self._get_processed_row())
 
     def _get_processed_row(self):
-        heap_arr = [self._get_new_node(self.arr[row_index][0], row_index, 0) for row_index in range(self.k)]
+        heap_arr = [self._get_new_node(self.sorted_arrays[row_index][0], row_index, 0) for row_index in range(self.k)]
         return heap_arr
 
     def get_pushing_node(self, popped_node):
         pushing_elem_row = popped_node.arr_row
         pushing_elem_col = popped_node.arr_col + 1
-        return self._get_new_node(self.arr[pushing_elem_row][pushing_elem_col], pushing_elem_row, pushing_elem_col)
+        return self._get_new_node(self.sorted_arrays[pushing_elem_row][pushing_elem_col], pushing_elem_row, pushing_elem_col)
 
     def get_merged_arr_using_heap(self):
         heap = self.get_heap_inst()
@@ -40,8 +41,10 @@ class MergeKSortedArrays:
                 continue
 
     def get_merged_arr_using_sort(self):
-        # for arr in range(ceil(self.k)):
-        pass
+        # merged_sorted_arr = []
+        for arr_index in range(ceil(self.k/2)):
+            MergeSort.merge_sorted_arrays(self.sorted_arrays[arr_index], self.sorted_arrays[self.k - 1 - arr_index], 0, self.sorted_arrays[arr_index])
+        # return merged_sorted_arr
 
     # Using MinBinaryHeap
     # def __get_merged_arr_using_heap(self):
@@ -69,7 +72,8 @@ def run():
         [0, 9, 10, 11, ],
     ]
     print('Sorted Merged array is: ')
-    for arr_elem in MergeKSortedArrays(arr, 3).get_merged_array():
+    # for arr_elem in MergeKSortedArrays(arr, 3).get_merged_array():
+    for arr_elem in MergeKSortedArrays(arr, 3).get_merged_array(use_min_heap=False):
         print(arr_elem, end=' ')
 
 
