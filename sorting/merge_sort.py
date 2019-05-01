@@ -6,18 +6,25 @@ class MergeSort:
     def __init__(self, arr: []):
         self.input_arr = arr
 
-    @staticmethod
-    def merge_sorted_arrays(left_array, right_arr, out_arr_index: int, out_arr: []):
+    @classmethod
+    def update_arr(cls, elem, arr: [], arr_index: int = None):
+        if arr_index:
+            arr[arr_index] = elem
+        else:
+            arr.appemd(elem)
+
+    @classmethod
+    def merge_sorted_arrays(cls, left_array, right_arr, out_arr: [], out_arr_index: int = None):
         arr1_index, arr2_index, out_arr_index = 0, 0, out_arr_index
 
         while arr1_index < len(left_array) and arr2_index < len(right_arr):
             if left_array[arr1_index] < right_arr[arr2_index]:
-                # self.input_arr[out_arr_index] = left_array[arr1_index]
-                out_arr[out_arr_index] = left_array[arr1_index]
+                cls.update_arr(left_array[arr1_index], out_arr, out_arr_index)
+                # out_arr[out_arr_index] = left_array[arr1_index]
                 arr1_index += 1
             else:
-                # self.input_arr[out_arr_index] = right_arr[arr2_index]
-                out_arr[out_arr_index] = right_arr[arr2_index]
+                # out_arr[out_arr_index] = right_arr[arr2_index]
+                cls.update_arr(right_arr[arr2_index], out_arr, out_arr_index)
                 arr2_index += 1
             out_arr_index += 1
 
