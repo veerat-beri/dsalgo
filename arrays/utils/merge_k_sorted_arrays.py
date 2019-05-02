@@ -45,24 +45,29 @@ class MergeKSortedArrays:
         #     temp_merge_arr = [0] * 2*len(self.sorted_arrays[arr_index])
         #     MergeSort.merge_sorted_arrays(self.sorted_arrays[arr_index], self.sorted_arrays[self.k - 1 - arr_index], 0, self.sorted_arrays[arr_index])
         # # return merged_sorted_arr
-        last_arr_index = self.k
-        start_arr_index = 0
-        while last_arr_index != 0:
-            while start_arr_index < last_arr_index:
+        last_sorted_arr_index = self.k - 1
+
+        while last_sorted_arr_index > 0:
+            # last_arr_index
+            # start_arr_index = 0
+            first_sorted_arr_index = 0
+            # last_sorted_arr_index =
+            while first_sorted_arr_index < last_sorted_arr_index:
                 merged_sorted_arr = []
-                first_sorted_arr = self.sorted_arrays[start_arr_index]
-                second_sorted_arr = self.sorted_arrays[last_arr_index]
-                MergeSort.merge_sorted_arrays(first_sorted_arr, second_sorted_arr, merged_sorted_arr)
-                first_sorted_arr = merged_sorted_arr
-                start_arr_index += 1
-                last_arr_index -= 1
 
-                if start_arr_index >= last_arr_index:
-                    last_arr_index = start_arr_index
+                MergeSort.merge_sorted_arrays(self.sorted_arrays[first_sorted_arr_index], self.sorted_arrays[last_sorted_arr_index], merged_sorted_arr)
+                self.sorted_arrays[first_sorted_arr_index] = merged_sorted_arr
+
+                first_sorted_arr_index += 1
+                last_sorted_arr_index -= 1
 
 
 
 
+        print(self.sorted_arrays[0])
+        breakpoint()
+                # if first_sorted_arr_index >= last_sorted_arr_index:
+                #     last_sorted_arr_index = first_sorted_arr_index
 
 
     # Using MinBinaryHeap
