@@ -2,7 +2,6 @@
 # https://www.geeksforgeeks.org/merge-k-sorted-arrays/
 
 from collections import namedtuple
-from math import ceil
 
 from heaps.heap import CustomNodeMinHeap
 from sorting.merge_sort import MergeSort
@@ -29,9 +28,11 @@ class MergeKSortedArrays:
         pushing_elem_col = popped_node.arr_col + 1
         return self._get_new_node(self.sorted_arrays[pushing_elem_row][pushing_elem_col], pushing_elem_row, pushing_elem_col)
 
+    # Using Min-Heap
     def get_merged_arr_using_heap(self):
-        heap = self.get_heap_inst()
+        print('Using Min-Heap')
 
+        heap = self.get_heap_inst()
         while not heap.is_empty():
             popped_node = heap.pop()
             yield popped_node.data
@@ -40,18 +41,13 @@ class MergeKSortedArrays:
             except IndexError:
                 continue
 
+    # Using Merge-sort
     def get_merged_arr_using_sort(self):
-        # for arr_index in range(ceil(self.k/2)):
-        #     temp_merge_arr = [0] * 2*len(self.sorted_arrays[arr_index])
-        #     MergeSort.merge_sorted_arrays(self.sorted_arrays[arr_index], self.sorted_arrays[self.k - 1 - arr_index], 0, self.sorted_arrays[arr_index])
-        # # return merged_sorted_arr
+        print('Using Merge-sort')
         last_sorted_arr_index = self.k - 1
 
         while last_sorted_arr_index > 0:
-            # last_arr_index
-            # start_arr_index = 0
             first_sorted_arr_index = 0
-            # last_sorted_arr_index =
             while first_sorted_arr_index < last_sorted_arr_index:
                 merged_sorted_arr = []
 
@@ -61,28 +57,10 @@ class MergeKSortedArrays:
                 first_sorted_arr_index += 1
                 last_sorted_arr_index -= 1
 
-
-
-
-        print(self.sorted_arrays[0])
-        breakpoint()
-                # if first_sorted_arr_index >= last_sorted_arr_index:
-                #     last_sorted_arr_index = first_sorted_arr_index
-
-
-    # Using MinBinaryHeap
-    # def __get_merged_arr_using_heap(self):
-    #     for node in self.get_smallest_in_sorted_2d_arr():
-    #         yield node
-
-    # Using Sorting
-    # def __get_merged_arr_using_sort(self):
-    #     for node in self.get_smallest_in_merged_arr():
-    #         yield node
+        for elem in self.sorted_arrays[0]:
+            yield elem
 
     def get_merged_array(self, use_min_heap=True):
-        # executing_func = self.__get_merged_arr_using_heap if use_min_heap else self.__get_merged_arr_using_sort
-        # return executing_func()
         executing_func = self.get_merged_arr_using_heap if use_min_heap else self.get_merged_arr_using_sort
         for node in executing_func():
             yield node
@@ -95,7 +73,7 @@ def run():
         [2, 4, 6, 8, ],
         [0, 9, 10, 11, ],
     ]
-    print('Sorted Merged array is: ')
+    print('Sorted Merged array is: \n')
     # for arr_elem in MergeKSortedArrays(arr, 3).get_merged_array():
     for arr_elem in MergeKSortedArrays(arr, 3).get_merged_array(use_min_heap=False):
         print(arr_elem, end=' ')
