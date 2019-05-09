@@ -1,35 +1,24 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/power-set/
 
-from typing import Set
 
-from mathematical.bit_manipulations.utils.get_set_bits_pos import get_set_bits_pos
-
-
-def get_power_set(cet: Set):
-    set_len = len(cet)
-    list_from_set = list(cet)
+def get_power_set(elem_list: []):
+    set_len = len(elem_list)
     for num in range(2**set_len):
-        c_num = num
         power_set_elem = ''
-
-
-        print('num: ', num)
-        for set_bit_pos in get_set_bits_pos(c_num):
-
-
-            print('set_bit_pos: ', set_bit_pos)
-            power_set_elem += list_from_set[set_bit_pos - 1]
+        for elem_index in range(set_len):
+            if (1 << elem_index) & num > 0:
+                power_set_elem += elem_list[elem_index]
 
         yield power_set_elem
 
 
 # driver code
 def run():
-    cet = {'a', 'b', 'c', }
-    for power_set_elem in get_power_set(cet):
-        # print(power_set_elem)
-        pass
+    elem_list = ['a', 'b', 'c', ]
+    for power_set_elem in get_power_set(elem_list):
+        print(power_set_elem)
+        # pass
 
 
 if __name__ == '__main__':
