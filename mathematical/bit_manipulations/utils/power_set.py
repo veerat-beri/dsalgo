@@ -6,9 +6,10 @@ def get_power_set(elem_list: []):
     set_len = len(elem_list)
     for num in range(2**set_len):
         power_set_elem = ''
-        for elem_index in range(set_len):
-            if (1 << elem_index) & num > 0:
-                power_set_elem += elem_list[elem_index]
+        for nth_bit in range(set_len):
+            # check if nth_bit is set in num
+            if (1 << nth_bit) & num > 0:
+                power_set_elem += elem_list[nth_bit]
 
         yield power_set_elem
 

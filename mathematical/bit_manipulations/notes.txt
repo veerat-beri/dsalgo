@@ -35,3 +35,5 @@ To create the two's complement of some number n (in other words, to create the r
 1 & ((~1)+1) => (00000001) => 1
 
 Similarly for 2 & (-2) => (00000010) => 2
+
+Thus, N & -N gives the number corresponding to the rightmost set-bit in the number
