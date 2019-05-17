@@ -6,7 +6,30 @@ from linkedlists.utils import reverse_linked_list
 from stacks import LinkedStack
 
 
-class _GetLLSumUsingLLReversal:
+class _LLSumCalcUtils:
+    def __init__(self, num1: SinglyLinkedList, num2: SinglyLinkedList):
+        self.num1 = num1
+        self.num2 = num2
+
+        self.summed_num = LinkedStack()
+        self._validate_ll(num1)
+        self._validate_ll(num2)
+
+    def _validate_ll(self, ll: SinglyLinkedList):
+        for elem in ll:
+            if isinstance(elem.data, int) and elem.data >= 0:
+                continue
+            raise ValueError('Elems of the LL should be +ve numbers')
+
+    def _get_summed_num_with_carry(self, num1: int, num2: int, previous_carry: int = 0) -> (int, int):
+        """
+        :return: digit in summed-num, carry  # i.e if 9 + 1, then returns (0, 1)
+        """
+        total_sum_of_digits = num1 + num2 + previous_carry
+        return total_sum_of_digits % 10, total_sum_of_digits // 10
+
+
+class _GetLLSumUsingLLReversal(_LLSumCalcUtils):
     def compute_summed_ll(self):
         """
         Using Reverse LL
@@ -38,72 +61,57 @@ class _GetLLSumUsingLLReversal:
         self.summed_num.push(carry)
 
 
-class _GetLLSumUsingRecursionMixin:
-    def compute_sum_using_recursion_with_equal_ll(self, num1_current_node = None, num2_current_node = None):
-        summed_num = self.summed_num
+class _GetLLSumUsingRecursionMixin(_LLSumCalcUtils):
+    def _compute(self, num1_node, num2_node):
+        if num1_node is None and num2_node is None:
+            return 0
 
-        def _compute(num1_node, num2_node):
-            nonlocal summed_num
+        previous_carry = self._compute(num1_node.next, num2_node.next)
+        digit_in_final_sum, new_carry = self._get_summed_num_with_carry(num1_node.data, num2_node.data, previous_carry)
+        self.summed_num.push(digit_in_final_sum)
+        return new_carry
 
-            if num1_node is None and num2_node is None:
-                return 0
-
-            previous_carry = _compute(num1_node.next, num2_node.next)
-            digit_in_final_sum, new_carry = self._get_summed_num_with_carry(num1_node.data, num2_node.data, previous_carry)
-            summed_num.push(digit_in_final_sum)
-            return new_carry
-
-        previous_carry = _compute(num1_current_node or self.num1.head, num2_current_node or self.num2.head)
+    def compute_equal_ll_sum_using_recursion(self, num1_current_node = None, num2_current_node = None):
+        previous_carry = self._compute(num1_current_node or self.num1.head, num2_current_node or self.num2.head)
         if previous_carry:
             self.summed_num.push(previous_carry)
 
-    def _get_sum_using_recursion_with_unequal_ll_util(self, larger_ll_current_node,
-                                                      smaller_ll_current_node,
-                                                      current_pos: int, len_diff: int):
+    def compute_unequal_ll_sum_using_recursion(self, larger_ll_current_node,
+                                               smaller_ll_current_node,
+                                               current_pos: int, len_diff: int):
         if current_pos == len_diff:
-            self.compute_sum_using_recursion_with_equal_ll()
-            return numbers_sum
-        # while :
-        #     larger_ll_current_node =
+            return self._compute(larger_ll_current_node, smaller_ll_current_node)
+
+        previous_carry = self.compute_unequal_ll_sum_using_recursion(larger_ll_current_node.next, smaller_ll_current_node, current_pos + 1, len_diff)
+        digit_in_final_sum, new_carry = self._get_summed_num_with_carry(previous_carry, larger_ll_current_node.data)
+        self.summed_num.push(digit_in_final_sum)
+        return new_carry
 
     def compute_summed_ll(self):
         num1_len = len(self.num1)
         num2_len = len(self.num2)
 
-        if abs(num1_len - num2_len):\
-            self._get_sum_using_recursion_with_unequal_ll_util()
+        if num1_len == num2_len:
+            self.compute_equal_ll_sum_using_recursion()
+
+        elif num1_len > num2_len:
+            self.compute_unequal_ll_sum_using_recursion(self.num1, self.num2, 0, num1_len - num2_len)
 
         else:
-            self.compute_sum_using_recursion_with_equal_ll()
-            return self.summed_num
+            self.compute_unequal_ll_sum_using_recursion(self.num2, self.num1, 0, num2_len - num1_len)
+
+        return self.summed_num
 
 
 class GetLLSum(_GetLLSumUsingLLReversal, _GetLLSumUsingRecursionMixin):
-    def __init__(self, num1: SinglyLinkedList, num2: SinglyLinkedList):
-        self.num1 = num1
-        self.num2 = num2
-
-        self.summed_num = LinkedStack()
-        self._validate_ll(num1)
-        self._validate_ll(num2)
-
-    def _validate_ll(self, ll: SinglyLinkedList):
-        for elem in ll:
-            if isinstance(elem.data, int) and elem.data >= 0:
-                continue
-            raise ValueError('Elems of the LL should be +ve numbers')
-
-    def _get_summed_num_with_carry(self, num1: int, num2: int, previous_carry: int = 0) -> (int, int):
-        """
-        :return: digit in summed-num, carry  # i.e if 9 + 1, then returns (0, 1)
-        """
-        total_sum_of_digits = num1 + num2 + previous_carry
-        return total_sum_of_digits % 10, total_sum_of_digits // 10
+    def __init__(self, **kwargs):
+        self.kwargs = kwargs
 
     def get_numbers_sum(self, use_recursion=False):
-        exec_class = _GetLLSumUsingRecursionMixin() if use_recursion else _GetLLSumUsingLLReversal()
+        exec_class = _GetLLSumUsingRecursionMixin(num) if use_recursion else _GetLLSumUsingLLReversal()
         exec_class.compute_summed_ll()
         return self.summed_num
+
 
 # driver code
 def run():
