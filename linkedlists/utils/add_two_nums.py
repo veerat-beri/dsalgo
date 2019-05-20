@@ -30,7 +30,7 @@ class _LLSumCalcUtils:
 
 
 class _GetLLSumUsingLLReversal(_LLSumCalcUtils):
-    def compute_summed_ll(self):
+    def get_summed_ll(self):
         """
         Using Reverse LL
 
@@ -58,7 +58,9 @@ class _GetLLSumUsingLLReversal(_LLSumCalcUtils):
             reverse_num1_head = reverse_num1_head.next if reverse_num1_head else None
             reverse_num2_head = reverse_num2_head.next if reverse_num2_head else None
 
-        self.summed_num.push(carry)
+        if carry:
+            self.summed_num.push(carry)
+        return self.summed_num
 
 
 class _GetLLSumUsingRecursionMixin(_LLSumCalcUtils):
@@ -87,18 +89,18 @@ class _GetLLSumUsingRecursionMixin(_LLSumCalcUtils):
         self.summed_num.push(digit_in_final_sum)
         return new_carry
 
-    def compute_summed_ll(self):
+    def get_summed_ll(self):
         num1_len = len(self.num1)
         num2_len = len(self.num2)
 
         if num1_len == num2_len:
             self.compute_equal_ll_sum_using_recursion()
 
-        elif num1_len > num2_len:
-            self.compute_unequal_ll_sum_using_recursion(self.num1, self.num2, 0, num1_len - num2_len)
-
         else:
-            self.compute_unequal_ll_sum_using_recursion(self.num2, self.num1, 0, num2_len - num1_len)
+            num1, num2 = (self.num1, self.num2) if num1_len > num2_len else (self.num2, self.num2)
+            previous_carry = self.compute_unequal_ll_sum_using_recursion(num1.head, num2.head, 0, abs(num1_len - num2_len))
+            if previous_carry:
+                self.summed_num.push(previous_carry)
 
         return self.summed_num
 
@@ -106,19 +108,20 @@ class _GetLLSumUsingRecursionMixin(_LLSumCalcUtils):
 class GetLLSum(_GetLLSumUsingLLReversal, _GetLLSumUsingRecursionMixin):
     def __init__(self, **kwargs):
         self.kwargs = kwargs
+        # super().__init__(**kwargs)
 
     def get_numbers_sum(self, use_recursion=False):
-        exec_class = _GetLLSumUsingRecursionMixin(num) if use_recursion else _GetLLSumUsingLLReversal()
-        exec_class.compute_summed_ll()
-        return self.summed_num
+        exec_class = _GetLLSumUsingRecursionMixin(**self.kwargs) if use_recursion else _GetLLSumUsingLLReversal(**self.kwargs)
+        summed_num = exec_class.get_summed_ll()
+        return summed_num
 
 
 # driver code
 def run():
-    # num1 = BuildSinglyLinkedList(list_of_nodes=[6, 4, 9, 5, 7, ]).get_ll()  # represents num = 64957
-    # num2 = BuildSinglyLinkedList(list_of_nodes=[4, 8, ]).get_ll()  # represents num = 48
-    num1 = BuildSinglyLinkedList(list_of_nodes=[5, 6, 3, ]).get_ll()  # represents num = 563
-    num2 = BuildSinglyLinkedList(list_of_nodes=[8, 4, 2, ]).get_ll()  # represents num = 842
+    num1 = BuildSinglyLinkedList(list_of_nodes=[6, 4, 9, 5, 7, ]).get_ll()  # represents num = 64957
+    num2 = BuildSinglyLinkedList(list_of_nodes=[4, 8, ]).get_ll()  # represents num = 48
+    # num1 = BuildSinglyLinkedList(list_of_nodes=[5, 6, 3, ]).get_ll()  # represents num = 563
+    # num2 = BuildSinglyLinkedList(list_of_nodes=[8, 4, 2, ]).get_ll()  # represents num = 842
     print('Given numbers to be summed are: ')
     print('num1: ')
     num1.print_linked_list()
@@ -126,7 +129,7 @@ def run():
     num2.print_linked_list()
 
     # summed_num = GetLLSum(num1, num2).get_numbers_sum(use_recursion=True)
-    summed_num = GetLLSum(num1, num2).get_numbers_sum()
+    summed_num = GetLLSum(num1=num1, num2=num2).get_numbers_sum()
 
     print('Sum of given numbers is: ')
     summed_num.print_stack()
