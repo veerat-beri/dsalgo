@@ -27,6 +27,12 @@ class _LinkedList:
 
         return no_of_nodes_in_list
 
+    def __iter__(self):
+        current_node = self.head
+        while current_node:
+            yield current_node
+            current_node = current_node.next
+
     def _set_head_tail(self, node):
         if not self.tail or not self.head:
             self.tail = node

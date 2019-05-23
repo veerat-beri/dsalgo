@@ -1,0 +1,39 @@
+##########################################################################################
+N-1 => all bits reversed after the rightmost set bit in N
+
+For N=6:
+6 => (110)
+6-1 = 5 => (101)
+
+* Can be used to find whether a number is exact power of 2 or not
+##########################################################################################
+
+N & (N-1) => Unset all bit after rightmost set bit(including it) in N and return equivalent num of the new binary form
+
+For N=6:
+6 => (110)
+6-1 = 5 => (101)
+
+6 & 5 = 4 => (100)
+##########################################################################################
+
+Negative numbers are represented in binary as two's complement representation.
+To create the two's complement of some number n (in other words, to create the representation of -n):
+
+1. Invert all the bits
+2. Add 1
+
+(considering 8-bits only)
+~1 => (11111110)
+~1 + 1 => (11111111)
+1 => (00000001)
+
+ .
+. . -N => (~N) + 1
+
+* 1 & -1 => really means 1 & ((~1)+1)
+1 & ((~1)+1) => (00000001) => 1
+
+Similarly for 2 & (-2) => (00000010) => 2
+
+Thus, N & -N gives the number corresponding to the rightmost set-bit in the number
