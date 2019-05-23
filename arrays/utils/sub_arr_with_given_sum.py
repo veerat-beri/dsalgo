@@ -6,10 +6,10 @@
 # WRONG APPROACH --
 
 # # kadane Algorithm implementation
-# def find_sub_array_with_given_sum(sorted_arrays, req_sum):
+# def find_sub_array_with_given_sum(arr, req_sum):
 #     max_sum_till_point = 0
 #
-#     for elem in sorted_arrays:
+#     for elem in arr:
 #         max_sum_till_point += elem
 #         if max_sum_till_point == req_sum:
 #             print('Yes')
@@ -22,9 +22,9 @@
 #
 #
 # # driver code
-# sorted_arrays = [5, 1, 9, 2, 3]  # failing case.
+# arr = [5, 1, 9, 2, 3]  # failing case.
 # sum = 10
-# sub_array_with_given_sum_exists = find_sub_array_with_given_sum(sorted_arrays, sum)
+# sub_array_with_given_sum_exists = find_sub_array_with_given_sum(arr, sum)
 #
 # # Thus this approach will not work, have to do with sliding window approach.
 

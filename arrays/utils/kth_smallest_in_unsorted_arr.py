@@ -79,9 +79,9 @@ def run():
     arr = [12, 3, 5, 7, 19, ]
     k = 2
     print(f'Given array: {arr} \n')
-    print(f'Kth({k}) smallest num in given sorted_arrays is: {get_kth_smallest_num(arr, k, 1)}')
-    print(f'Kth({k}) smallest num in given sorted_arrays is: {get_kth_smallest_num(arr, k, 2)}')
-    print(f'Kth({k}) smallest num in given sorted_arrays is: {get_kth_smallest_num(arr, k, 3)}')
+    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 1)}')
+    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 2)}')
+    print(f'Kth({k}) smallest num in given arr is: {get_kth_smallest_num(arr, k, 3)}')
 
 
 if __name__ == '__main__':

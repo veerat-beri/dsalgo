@@ -44,7 +44,7 @@ def get_max_index_diff(arr: []):
 # driver code
 def run():
     arr = [34, 8, 10, 3, 2, 80, 30, 33, 1]
-    # sorted_arrays.sort(reverse=True)
+    # arr.sort(reverse=True)
     print(f'Given array: {arr}')
     result = get_max_index_diff(arr)
     if result > 0:

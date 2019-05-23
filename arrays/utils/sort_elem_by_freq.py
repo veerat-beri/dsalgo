@@ -28,7 +28,7 @@ def get_sorted_arr_by_freq(arr: []):
 def run():
     arr = [2, 5, 2, 8, 5, 6, 8, 8]
     sorted_arr = get_sorted_arr_by_freq(arr)
-    print('Sorted sorted_arrays by frequency is: ', sorted_arr, sep='\n')
+    print('Sorted arr by frequency is: ', sorted_arr, sep='\n')
 
 
 if __name__ == '__main__':

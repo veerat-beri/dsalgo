@@ -14,8 +14,8 @@ def find_equilibrium(arr):
 
 def run():
     arr = [10, 5, 3, 6, 1]
-    # sorted_arrays = [1, 2, 3, 4]
-    # sorted_arrays = [-1, 2, -1, -1]
+    # arr = [1, 2, 3, 4]
+    # arr = [-1, 2, -1, -1]
 
     equilibrium_point = find_equilibrium(arr)
     if equilibrium_point:

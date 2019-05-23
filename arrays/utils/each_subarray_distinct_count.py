@@ -44,7 +44,7 @@ def get_each_subarray_distinct_count(arr, subarray_window_size):
 def run():
     window_size = 3 or 4
     arr = [1, 2, 1, 1, 4, 2, 3]
-    # sorted_arrays = [1, 2, 1, 3, 4, 2, 3]
+    # arr = [1, 2, 1, 3, 4, 2, 3]
 
     print('Given Array: ', arr)
     print(f'Distinct elements count in each sub-array of size-{window_size}, is: ')
