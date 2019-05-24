@@ -148,19 +148,18 @@ def run():
     ###############
     # Build Tree
     root = binary_tree.root()
-    # root_left = binary_tree.left(root)
-    # root_right = binary_tree.right(root)
-    #
-    # root_right_right = binary_tree.add_right_child(root_right, 14)
-    # root_right_left = binary_tree.add_left_child(root_right, 6)
-    #
-    # binary_tree.add_left_child(root_right_left, 4)
-    # binary_tree.add_right_child(root_right_left, 7)
-    #
-    # binary_tree.add_left_child(root_right_right, 13)
-    # binary_tree.add_left_child(root_left, 1)
+    root_left = binary_tree.left(root)
+    root_right = binary_tree.right(root)
 
-    root._right._right = binary_tree.get_new_node(6)
+    root_right_right = binary_tree.add_right_child(root_right, 14)
+    root_right_left = binary_tree.add_left_child(root_right, 6)
+
+    binary_tree.add_left_child(root_right_left, 4)
+    binary_tree.add_right_child(root_right_left, 7)
+
+    binary_tree.add_left_child(root_right_right, 13)
+    binary_tree.add_left_child(root_left, 1)
+
     ###############
     # binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
     # binary_tree = BuildLinkedBinaryTree(list_of_nodes=[10, 20, 30, 40, 50, 60, 70], auto_populate=True).get_tree()
