@@ -24,18 +24,36 @@
 #############################################################################################################
 # SOLUTION
 #############################################################################################################
+import sys
+from typing import Union
+
+from mathematical.bit_manipulations.services import get_binary_repr
 
 
-def get_decimal_from_binary(num: int):
-    dup_num = num
-    digit_index = 0
-    decimal_num = 0
-    while dup_num:
-        rem = dup_num % 10
-        dup_num = dup_num // 10
-        decimal_num += (1 << digit_index) * rem
-        digit_index += 1
-    return decimal_num
+class DecimalToBinary:
+    def __init__(self, bin_num: Union[str, int]):
+        self.bin_num = bin_num
+
+    # For small range numbers
+    def _get_decimal_from_binary(self):
+        digit_index = 0
+        decimal_num = 0
+        while self.bin_num:
+            rem = self.bin_num % 10
+            self.bin_num //= 10
+            decimal_num += (1 << digit_index) * rem
+            digit_index += 1
+        return decimal_num
+
+    def _get_decimal_from_binary_in_str(self):
+        bin_num_len = len(self.bin_num)
+        for str_index in range(bin_num_len - 1, -1, -1):
+            self.bin_num[str_index] * (1 << (bin_num_len - 1 - str_index))
+            pass
+
+    def get_decimal_from_binary(self):
+        # return self._get_decimal_from_binary() if len(self.bin_num) <= len(get_binary_repr(sys.maxsize)) else self._get_decimal_from_binary_in_str()
+        return self._get_decimal_from_binary_in_str()
 
 
 # driver code
@@ -44,7 +62,7 @@ def run():
     for _ in range(total_test_cases):
         # Method 1
         ###############
-        print(get_decimal_from_binary(int(input())))
+        print(DecimalToBinary(int(input())).get_decimal_from_binary())
         ###############
         # Method 2
         ###############
@@ -54,4 +72,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
