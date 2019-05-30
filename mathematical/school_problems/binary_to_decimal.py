@@ -24,10 +24,7 @@
 #############################################################################################################
 # SOLUTION
 #############################################################################################################
-import sys
 from typing import Union
-
-from mathematical.bit_manipulations.services import get_binary_repr
 
 
 class DecimalToBinary:
@@ -36,6 +33,7 @@ class DecimalToBinary:
 
     # For small range numbers
     def _get_decimal_from_binary(self):
+        print('Using input as int')
         digit_index = 0
         decimal_num = 0
         while self.bin_num:
@@ -46,14 +44,16 @@ class DecimalToBinary:
         return decimal_num
 
     def _get_decimal_from_binary_in_str(self):
+        print('Using input as string')
+        decimal_num = 0
+        self.bin_num = str(self.bin_num)
         bin_num_len = len(self.bin_num)
         for str_index in range(bin_num_len - 1, -1, -1):
-            self.bin_num[str_index] * (1 << (bin_num_len - 1 - str_index))
-            pass
+            decimal_num += int(self.bin_num[str_index]) * (1 << (bin_num_len - 1 - str_index))
+        return decimal_num
 
-    def get_decimal_from_binary(self):
-        # return self._get_decimal_from_binary() if len(self.bin_num) <= len(get_binary_repr(sys.maxsize)) else self._get_decimal_from_binary_in_str()
-        return self._get_decimal_from_binary_in_str()
+    def get_decimal_from_binary(self, use_str_input=False):
+        return self._get_decimal_from_binary_in_str() if use_str_input else self._get_decimal_from_binary()
 
 
 # driver code

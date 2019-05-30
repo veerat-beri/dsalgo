@@ -34,6 +34,7 @@ def run():
 
     Traversal(bst).print_level_order_traversal()
     Traversal(bst).print_inorder_traversal()
+    Traversal(bst).print_preorder_traversal()
 
 
 if __name__ == '__main__':

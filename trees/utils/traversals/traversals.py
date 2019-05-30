@@ -143,7 +143,7 @@ class Traversal:
 
 # driver code
 def run():
-    binary_tree = BuildLinkedBinaryTree(list_of_nodes=[1, 2, 3, 4, 5, ]).get_tree()
+    binary_tree = BuildLinkedBinaryTree(list_of_nodes=[8, 3, 10, ]).get_tree()
 
     ###############
     # Build Tree
@@ -161,7 +161,7 @@ def run():
     binary_tree.add_left_child(root_left, 1)
 
     ###############
-    # binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
+    binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
     # binary_tree = BuildLinkedBinaryTree(list_of_nodes=[10, 20, 30, 40, 50, 60, 70], auto_populate=True).get_tree()
 
     bt_traversal = Traversal(binary_tree)
