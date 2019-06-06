@@ -91,26 +91,31 @@ class _BinaryHeap:
 
 class MinBinaryHeap(_BinaryHeap):
     def get_min(self):
-        assert len(self), 'Heap cannot be empty'
+        assert len(self), 'Heap is empty'
         return self.heap[self.get_root_index()]
 
     def heapify(self):
         return heapq.heapify(self.heap)
 
     def replace_root(self, elem: int):
-        heapq.heapreplace(self.heap, elem)
+        return heapq.heapreplace(self.heap, elem)
 
 
 class MaxBinaryHeap(_BinaryHeap):
     def get_max(self):
-        assert len(self), 'Heap cannot be empty'
+        assert len(self), 'Heap is empty'
         return self.heap[self.get_root_index()]
 
     def heapify(self):
         return heapq._heapify_max(self.heap)
 
     def replace_root(self, elem: int):
-        heapq._heapreplace_max(self.heap, elem)
+        return heapq._heapreplace_max(self.heap, elem)
+
+    def replace_elem(self, arr_index):
+        assert arr_index < len(self.heap), 'input arr-index out of bounds'
+        self.heap[arr_index] = self.heap[-1]
+        return
 
 
 class _ManualHeap(_BinaryHeap):
