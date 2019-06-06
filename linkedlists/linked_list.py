@@ -1,10 +1,22 @@
 from builtins import NotImplementedError
 
 
+class _LinkedListMixin:
+    def __iter__(self):
+        current_node = self.head
+        while current_node:
+            yield current_node
+            current_node = current_node.next
+
+
 class _LinkedList:
     class _LinkedListNode:
         def __init__(self, data, **kwargs):
-            self.data = data
+            self._data = data
+
+        @property
+        def data(self):
+            return self._data
 
     def __init__(self, head: _LinkedListNode=None, **kwargs):
         self.head = head
@@ -26,12 +38,6 @@ class _LinkedList:
             current_node = current_node.next
 
         return no_of_nodes_in_list
-
-    def __iter__(self):
-        current_node = self.head
-        while current_node:
-            yield current_node
-            current_node = current_node.next
 
     def _set_head_tail(self, node):
         if not self.tail or not self.head:
@@ -62,6 +68,13 @@ class _LinkedList:
             print(current_node.data, f'({id(current_node)})' if with_address else '', end='  ', sep='')
             current_node = current_node.next
         print('\n')
+
+
+class SinglyLinkedListMixin:
+    class _SinglyLinkedListNode(_LinkedList._LinkedListNode):
+        def __init__(self, data, **kwargs):
+            super().__init__(data, **kwargs)
+            self.next = None
 
 
 class SinglyLinkedList(_LinkedList):

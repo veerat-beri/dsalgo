@@ -27,7 +27,7 @@
 from typing import Union
 
 
-class DecimalToBinary:
+class BinaryDecimalConversion:
     def __init__(self, bin_num: Union[str, int]):
         self.bin_num = bin_num
 
@@ -62,7 +62,7 @@ def run():
     for _ in range(total_test_cases):
         # Method 1
         ###############
-        print(DecimalToBinary(int(input())).get_decimal_from_binary())
+        print(BinaryDecimalConversion(int(input())).get_decimal_from_binary())
         ###############
         # Method 2
         ###############
