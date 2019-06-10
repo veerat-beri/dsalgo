@@ -6,7 +6,7 @@ from linkedlists import SinglyLinkedList, BuildSinglyLinkedListWithLoop
 from linkedlists.utils import check_loop_exists
 
 
-def get_ll_loop_len(node_in_loop: SinglyLinkedList.SinglyLinkedListNode):
+def get_ll_loop_len(node_in_loop: SinglyLinkedList.Node):
     current_node = node_in_loop
     visited_nodes = set()
     loop_len = 0

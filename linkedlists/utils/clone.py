@@ -13,7 +13,7 @@ class BuildCustomLinkedList(_BuildLinkedList):
 
 
 class CustomLinkedList(SinglyLinkedList):
-    class CustomNode(SinglyLinkedList.SinglyLinkedListNode):
+    class CustomNode(SinglyLinkedList.Node):
         def __init__(self, data, **kwargs):
             super().__init__(data, **kwargs)
             self.random = None

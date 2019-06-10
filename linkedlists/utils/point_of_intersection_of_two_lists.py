@@ -65,10 +65,10 @@ def run():
 
     ###############
     # Build intersecting Linked-list
-    common_node_1 = SinglyLinkedList.SinglyLinkedListNode(60)
-    common_node_1.next = SinglyLinkedList.SinglyLinkedListNode(70)
-    common_node_1.next.next = SinglyLinkedList.SinglyLinkedListNode(80)
-    new_common_tail = SinglyLinkedList.SinglyLinkedListNode(90)
+    common_node_1 = SinglyLinkedList.Node(60)
+    common_node_1.next = SinglyLinkedList.Node(70)
+    common_node_1.next.next = SinglyLinkedList.Node(80)
+    new_common_tail = SinglyLinkedList.Node(90)
     common_node_1.next.next.next = new_common_tail
 
     singly_linked_list1.tail.next = common_node_1

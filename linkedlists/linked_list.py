@@ -1,15 +1,7 @@
 from builtins import NotImplementedError
 
 
-class _LinkedListMixin:
-    def __iter__(self):
-        current_node = self.head
-        while current_node:
-            yield current_node
-            current_node = current_node.next
-
-
-class _LinkedList:
+class _LinkedListNodeMixin:
     class _LinkedListNode:
         def __init__(self, data, **kwargs):
             self._data = data
@@ -18,7 +10,9 @@ class _LinkedList:
         def data(self):
             return self._data
 
-    def __init__(self, head: _LinkedListNode=None, **kwargs):
+
+class _LinkedList(_LinkedListNodeMixin):
+    def __init__(self, head: _LinkedListNodeMixin._LinkedListNode = None, **kwargs):
         self.head = head
 
         # set tail node
@@ -39,6 +33,12 @@ class _LinkedList:
 
         return no_of_nodes_in_list
 
+    def __iter__(self):
+        current_node = self.head
+        while current_node:
+            yield current_node
+            current_node = current_node.next
+
     def _set_head_tail(self, node):
         if not self.tail or not self.head:
             self.tail = node
@@ -47,13 +47,13 @@ class _LinkedList:
     def _get_new_node(self, node_data):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def insert_at_begin(self, node: _LinkedListNode):
+    def insert_at_begin(self, node: _LinkedListNodeMixin._LinkedListNode):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def insert_at_end(self, node: _LinkedListNode):
+    def insert_at_end(self, node: _LinkedListNodeMixin._LinkedListNode):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def remove(self, node: _LinkedListNode):
+    def remove(self, node: _LinkedListNodeMixin._LinkedListNode):
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def is_empty(self):
@@ -70,21 +70,17 @@ class _LinkedList:
         print('\n')
 
 
-class SinglyLinkedListMixin:
-    class _SinglyLinkedListNode(_LinkedList._LinkedListNode):
+class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):
+    class Node(_LinkedListNodeMixin._LinkedListNode):
         def __init__(self, data, **kwargs):
             super().__init__(data, **kwargs)
             self.next = None
 
 
-class SinglyLinkedList(_LinkedList):
-    class SinglyLinkedListNode(_LinkedList._LinkedListNode):
-        def __init__(self, data, **kwargs):
-            super().__init__(data, **kwargs)
-            self.next = None
+class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
 
     def _get_new_node(self, node_data):
-        return self.SinglyLinkedListNode(node_data)
+        return self.Node(node_data)
 
     def insert_at_begin(self, node_data):
         new_node = self._get_new_node(node_data)
@@ -102,20 +98,22 @@ class SinglyLinkedList(_LinkedList):
             self.tail.next = new_node
             self.tail = new_node
 
-    def remove(self, node: SinglyLinkedListNode):
+    def remove(self, node: SinglyLinkedListNodeMixin.Node):
         pass
 
 
-class DoublyLinkedList(_LinkedList):
-    class DoublyLinkedListNode(SinglyLinkedList.SinglyLinkedListNode):
+class DoublyLinkedListNodeMixin(SinglyLinkedListNodeMixin):
+    class DoublyLinkedListNode(SinglyLinkedListNodeMixin.Node):
         def __init__(self, data, **kwargs):
             super().__init__(data, **kwargs)
             self.previous = None
 
+
+class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
     def _get_new_node(self, node_data):
         return self.DoublyLinkedListNode(node_data)
 
-    def insert_at_begin(self, node_data=None, node: DoublyLinkedListNode = None):
+    def insert_at_begin(self, node_data=None, node: DoublyLinkedListNodeMixin.DoublyLinkedListNode = None):
         assert node or node_data, 'Data or node not provided to be inserted'
 
         new_node = node or self._get_new_node(node_data)
@@ -135,7 +133,7 @@ class DoublyLinkedList(_LinkedList):
             new_node.previous = self.tail
             self.tail = new_node
 
-    def remove(self, node: DoublyLinkedListNode):
+    def remove(self, node: DoublyLinkedListNodeMixin.DoublyLinkedListNode):
         if node.previous is None:  # node is head node
             self.head = node.next
         else:

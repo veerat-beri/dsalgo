@@ -1,8 +1,10 @@
-class LinkedQueue:
-    class _StackNode:
+from linkedlists.linked_list import SinglyLinkedListMixin
+
+
+class LinkedQueue(SinglyLinkedListMixin):
+    class _StackNode(SinglyLinkedListMixin._SinglyLinkedListNode):
         def __init__(self, data):
-            self.next = None
-            self._data = data
+            super().__init__(data)
 
         @property
         def data(self):
