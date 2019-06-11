@@ -44,7 +44,7 @@ class _LinkedList(_LinkedListNodeMixin):
             self.tail = node
             self.head = node
 
-    def _get_new_node(self, node_data):
+    def get_new_node(self, node_data):
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def insert_at_begin(self, node: _LinkedListNodeMixin._LinkedListNode):
@@ -78,12 +78,12 @@ class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):
 
 
 class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
-
-    def _get_new_node(self, node_data):
-        return self.Node(node_data)
+    @classmethod
+    def get_new_node(cls, node_data):
+        return cls.Node(node_data)
 
     def insert_at_begin(self, node_data):
-        new_node = self._get_new_node(node_data)
+        new_node = self.get_new_node(node_data)
         if self.is_empty():
             self._set_head_tail(new_node)
         else:
@@ -91,7 +91,7 @@ class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
             self.head = new_node
 
     def insert_at_end(self, node_data):
-        new_node = self._get_new_node(node_data)
+        new_node = self.get_new_node(node_data)
         if self.is_empty():
             self._set_head_tail(new_node)
         else:
@@ -110,13 +110,13 @@ class DoublyLinkedListNodeMixin(SinglyLinkedListNodeMixin):
 
 
 class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
-    def _get_new_node(self, node_data):
+    def get_new_node(self, node_data):
         return self.DoublyLinkedListNode(node_data)
 
     def insert_at_begin(self, node_data=None, node: DoublyLinkedListNodeMixin.DoublyLinkedListNode = None):
         assert node or node_data, 'Data or node not provided to be inserted'
 
-        new_node = node or self._get_new_node(node_data)
+        new_node = node or self.get_new_node(node_data)
         if self.is_empty():
             self._set_head_tail(new_node)
         else:
@@ -125,7 +125,7 @@ class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
             self.head = new_node
 
     def insert_at_end(self, node_data):
-        new_node = self._get_new_node(node_data)
+        new_node = self.get_new_node(node_data)
         if self.is_empty():
             self._set_head_tail(new_node)
         else:
@@ -148,6 +148,7 @@ class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
 # driver code
 def run():
     from linkedlists.build_linked_list import BuildSinglyLinkedList
+    print('Sample Linked List: ')
     singly_linked_list = BuildSinglyLinkedList(auto_populate=True).get_ll()
 
     singly_linked_list.print_linked_list()

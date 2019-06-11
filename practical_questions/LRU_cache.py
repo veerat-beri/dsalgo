@@ -15,7 +15,7 @@ class LRUCache:
         self.len_of_deque = 0
 
     def get_new_node(self, node_data):
-        return self.deque._get_new_node(node_data)
+        return self.deque.get_new_node(node_data)
 
     def _remove_deque_node(self, node):
         self.deque.remove(node)
