@@ -2,7 +2,7 @@ from builtins import NotImplementedError
 
 
 class _LinkedListNodeMixin:
-    class _LinkedListNode:
+    class Node:
         def __init__(self, data, **kwargs):
             self._data = data
 
@@ -10,9 +10,13 @@ class _LinkedListNodeMixin:
         def data(self):
             return self._data
 
+    @classmethod
+    def get_new_node(cls, node_data):
+        return cls.Node(node_data)
+
 
 class _LinkedList(_LinkedListNodeMixin):
-    def __init__(self, head: _LinkedListNodeMixin._LinkedListNode = None, **kwargs):
+    def __init__(self, head: _LinkedListNodeMixin.Node = None, **kwargs):
         self.head = head
 
         # set tail node
@@ -44,16 +48,13 @@ class _LinkedList(_LinkedListNodeMixin):
             self.tail = node
             self.head = node
 
-    def get_new_node(self, node_data):
+    def insert_at_begin(self, node: _LinkedListNodeMixin.Node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def insert_at_begin(self, node: _LinkedListNodeMixin._LinkedListNode):
+    def insert_at_end(self, node: _LinkedListNodeMixin.Node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def insert_at_end(self, node: _LinkedListNodeMixin._LinkedListNode):
-        raise NotImplementedError('Has to be Implemented by sub class')
-
-    def remove(self, node: _LinkedListNodeMixin._LinkedListNode):
+    def remove(self, node: _LinkedListNodeMixin.Node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def is_empty(self):
@@ -71,17 +72,13 @@ class _LinkedList(_LinkedListNodeMixin):
 
 
 class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):
-    class Node(_LinkedListNodeMixin._LinkedListNode):
+    class Node(_LinkedListNodeMixin.Node):
         def __init__(self, data, **kwargs):
             super().__init__(data, **kwargs)
             self.next = None
 
 
 class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
-    @classmethod
-    def get_new_node(cls, node_data):
-        return cls.Node(node_data)
-
     def insert_at_begin(self, node_data):
         new_node = self.get_new_node(node_data)
         if self.is_empty():
@@ -103,17 +100,14 @@ class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
 
 
 class DoublyLinkedListNodeMixin(SinglyLinkedListNodeMixin):
-    class DoublyLinkedListNode(SinglyLinkedListNodeMixin.Node):
+    class Node(SinglyLinkedListNodeMixin.Node):
         def __init__(self, data, **kwargs):
             super().__init__(data, **kwargs)
             self.previous = None
 
 
 class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
-    def get_new_node(self, node_data):
-        return self.DoublyLinkedListNode(node_data)
-
-    def insert_at_begin(self, node_data=None, node: DoublyLinkedListNodeMixin.DoublyLinkedListNode = None):
+    def insert_at_begin(self, node_data=None, node: DoublyLinkedListNodeMixin.Node = None):
         assert node or node_data, 'Data or node not provided to be inserted'
 
         new_node = node or self.get_new_node(node_data)
@@ -133,7 +127,7 @@ class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
             new_node.previous = self.tail
             self.tail = new_node
 
-    def remove(self, node: DoublyLinkedListNodeMixin.DoublyLinkedListNode):
+    def remove(self, node: DoublyLinkedListNodeMixin.Node):
         if node.previous is None:  # node is head node
             self.head = node.next
         else:

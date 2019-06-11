@@ -1,17 +1,10 @@
-from linkedlists.linked_list import SinglyLinkedListMixin
+from linkedlists.linked_list import SinglyLinkedListNodeMixin
 
 
-class LinkedQueue(SinglyLinkedListMixin):
-    class _StackNode(SinglyLinkedListMixin._SinglyLinkedListNode):
-        def __init__(self, data):
-            super().__init__(data)
-
-        @property
-        def data(self):
-            return self._data
-
+class LinkedQueue(SinglyLinkedListNodeMixin):
     def __init__(self):
-        self._root = None
+        self._head = None
+        self._tail = None
         self._size = 0
 
     def __len__(self):
@@ -24,24 +17,22 @@ class LinkedQueue(SinglyLinkedListMixin):
             node = node.next
 
     @property
-    def top(self):
+    def head(self):
         if self._root:
             return self._root.data
         raise ValueError('Stack is empty!')
 
-    def _create_node(self, node_data):
-        return self._StackNode(node_data)
-
     def is_empty(self):
+        ###############
         # 1st Approach
         # return self.top is None
         ###############
-
         # 2nd Approach
         return len(self) == 0
+        ###############
 
     def push(self, node_data):
-        new_node = self._create_node(node_data)
+        new_node = self.get_new_node(node_data)
         new_node.next = self._root
         self._root = new_node
         self._size += 1
