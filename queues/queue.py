@@ -17,9 +17,15 @@ class LinkedQueue(SinglyLinkedListNodeMixin):
             node = node.next
 
     @property
-    def head(self):
-        if self._root:
-            return self._root.data
+    def front(self):
+        if not self.is_empty():
+            return self._head.data
+        raise ValueError('Stack is empty!')
+
+    @property
+    def rear(self):
+        if not self.is_empty():
+            return self._tail.data
         raise ValueError('Stack is empty!')
 
     def is_empty(self):
@@ -31,7 +37,12 @@ class LinkedQueue(SinglyLinkedListNodeMixin):
         return len(self) == 0
         ###############
 
-    def push(self, node_data):
+    def _set_head_tail(self, node):
+        if not self.tail or not self.head:
+            self.tail = node
+            self.head = node
+
+    def enqueue(self, node_data):
         new_node = self.get_new_node(node_data)
         new_node.next = self._root
         self._root = new_node

@@ -28,14 +28,17 @@ class _LinkedList(_LinkedListNodeMixin):
         else:
             self.tail = None
 
-    def __len__(self):
-        no_of_nodes_in_list = 0
-        current_node = self.head
-        while current_node:
-            no_of_nodes_in_list += 1
-            current_node = current_node.next
+        self._size = 0
 
-        return no_of_nodes_in_list
+    def __len__(self):
+        return self._size
+        # no_of_nodes_in_list = 0
+        # current_node = self.head
+        # while current_node:
+        #     no_of_nodes_in_list += 1
+        #     current_node = current_node.next
+        #
+        # return no_of_nodes_in_list
 
     def __iter__(self):
         current_node = self.head
@@ -48,10 +51,26 @@ class _LinkedList(_LinkedListNodeMixin):
             self.tail = node
             self.head = node
 
-    def insert_at_begin(self, node: _LinkedListNodeMixin.Node):
+    def _insert(self, handle_insert_func, node_data=None, node: _LinkedListNodeMixin.Node = None):
+        assert node or node_data, 'Either of Data or node must be provided'
+        new_node = node or self.get_new_node(node_data)
+
+        if self.is_empty():
+            self._set_head_tail(new_node)
+        else:
+            handle_insert_func(new_node)
+        self._size += 1
+
+    def insert_at_begin(self, node_data=None, node: _LinkedListNodeMixin.Node = None):
+        self._insert(self._handle_insert_at_begin, node_data, node)
+
+    def insert_at_end(self, node_data=None, node: _LinkedListNodeMixin.Node = None):
+        self._insert(self._handle_insert_at_end, node_data, node)
+
+    def _handle_insert_at_begin(self, new_node: _LinkedListNodeMixin.Node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def insert_at_end(self, node: _LinkedListNodeMixin.Node):
+    def _handle_insert_at_end(self, new_node: _LinkedListNodeMixin.Node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def remove(self, node: _LinkedListNodeMixin.Node):
@@ -79,21 +98,31 @@ class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):
 
 
 class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
-    def insert_at_begin(self, node_data):
-        new_node = self.get_new_node(node_data)
-        if self.is_empty():
-            self._set_head_tail(new_node)
-        else:
-            new_node.next = self.head
-            self.head = new_node
+    def _handle_insert_at_begin(self, new_node: SinglyLinkedListNodeMixin.Node):
+        new_node.next = self.head
+        self.head = new_node
 
-    def insert_at_end(self, node_data):
-        new_node = self.get_new_node(node_data)
-        if self.is_empty():
-            self._set_head_tail(new_node)
-        else:
-            self.tail.next = new_node
-            self.tail = new_node
+    def _handle_insert_at_end(self, new_node: SinglyLinkedListNodeMixin.Node):
+        self.tail.next = new_node
+        self.tail = new_node
+
+    # def insert_at_begin(self, node_data):
+    #     new_node = self.get_new_node(node_data)
+    #     if self.is_empty():
+    #         self._set_head_tail(new_node)
+    #     else:
+    #         new_node.next = self.head
+    #         self.head = new_node
+    #     self._size += 1
+
+    # def insert_at_end(self, node_data):
+    #     new_node = self.get_new_node(node_data)
+    #     if self.is_empty():
+    #         self._set_head_tail(new_node)
+    #     else:
+    #         self.tail.next = new_node
+    #         self.tail = new_node
+    #     self._size += 1
 
     def remove(self, node: SinglyLinkedListNodeMixin.Node):
         pass
@@ -107,25 +136,36 @@ class DoublyLinkedListNodeMixin(SinglyLinkedListNodeMixin):
 
 
 class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
-    def insert_at_begin(self, node_data=None, node: DoublyLinkedListNodeMixin.Node = None):
-        assert node or node_data, 'Data or node not provided to be inserted'
+    def _handle_insert_at_begin(self, new_node: SinglyLinkedListNodeMixin.Node):
+        new_node.next = self.head
+        self.head.previous = new_node
+        self.head = new_node
 
-        new_node = node or self.get_new_node(node_data)
-        if self.is_empty():
-            self._set_head_tail(new_node)
-        else:
-            new_node.next = self.head
-            self.head.previous = new_node
-            self.head = new_node
+    def _handle_insert_at_end(self, new_node: SinglyLinkedListNodeMixin.Node):
+        self.tail.next = new_node
+        new_node.previous = self.tail
+        self.tail = new_node
 
-    def insert_at_end(self, node_data):
-        new_node = self.get_new_node(node_data)
-        if self.is_empty():
-            self._set_head_tail(new_node)
-        else:
-            self.tail.next = new_node
-            new_node.previous = self.tail
-            self.tail = new_node
+    # def insert_at_begin(self, node_data=None, node: DoublyLinkedListNodeMixin.Node = None):
+    #     assert node or node_data, 'Data or node not provided to be inserted'
+    #
+    #     new_node = node or self.get_new_node(node_data)
+    #     if self.is_empty():
+    #         self._set_head_tail(new_node)
+    #     else:
+    #         new_node.next = self.head
+    #         self.head.previous = new_node
+    #         self.head = new_node
+    #     self._size += 1
+    #
+    # def insert_at_end(self, node_data):
+    #     new_node = self.get_new_node(node_data)
+    #     if self.is_empty():
+    #         self._set_head_tail(new_node)
+    #     else:
+    #         self.tail.next = new_node
+    #         new_node.previous = self.tail
+    #         self.tail = new_node
 
     def remove(self, node: DoublyLinkedListNodeMixin.Node):
         if node.previous is None:  # node is head node
