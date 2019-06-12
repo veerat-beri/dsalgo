@@ -50,6 +50,13 @@ class _LinkedList(_LinkedListNodeMixin):
             yield current_node
             current_node = current_node.next
 
+    def print_linked_list(self, with_address=False):
+        current_node = self.head
+        while current_node:
+            print(current_node.data, f'({id(current_node)})' if with_address else '', end='  ', sep='')
+            current_node = current_node.next
+        print('\n')
+
     def _set_head_tail(self, node):
         if not self.tail or not self.head:
             self.tail = node
@@ -85,13 +92,6 @@ class _LinkedList(_LinkedListNodeMixin):
         # return len(self) == 0
         # Method 2
         return self.head is None
-
-    def print_linked_list(self, with_address=False):
-        current_node = self.head
-        while current_node:
-            print(current_node.data, f'({id(current_node)})' if with_address else '', end='  ', sep='')
-            current_node = current_node.next
-        print('\n')
 
 
 class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):

@@ -1,20 +1,9 @@
-from linkedlists.linked_list import SinglyLinkedListNodeMixin
+from linkedlists import SinglyLinkedList
 
 
-class LinkedQueue(SinglyLinkedListNodeMixin):
-    def __init__(self):
-        self._head = None
-        self._tail = None
-        self._size = 0
-
-    def __len__(self):
-        return self._size
-
-    def __iter__(self):
-        node = self._root
-        while node:
-            yield node
-            node = node.next
+class LinkedQueue(SinglyLinkedList):
+    del SinglyLinkedList.insert_at_begin
+    del SinglyLinkedList.remove
 
     @property
     def front(self):
