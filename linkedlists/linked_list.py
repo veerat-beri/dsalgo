@@ -10,6 +10,10 @@ class _LinkedListNodeMixin:
         def data(self):
             return self._data
 
+        def reset(self, new_data=None):
+            if new_data:
+                self._data = new_data
+
     @classmethod
     def get_new_node(cls, node_data):
         return cls.Node(node_data)
@@ -96,6 +100,11 @@ class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):
             super().__init__(data, **kwargs)
             self.next = None
 
+        def reset(self, new_data=None, reset_pointers: bool = False):
+            super().reset(new_data)
+            if reset_pointers:
+                self.next = None
+
 
 class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
     def _handle_insert_at_begin(self, new_node: SinglyLinkedListNodeMixin.Node):
@@ -133,6 +142,11 @@ class DoublyLinkedListNodeMixin(SinglyLinkedListNodeMixin):
         def __init__(self, data, **kwargs):
             super().__init__(data, **kwargs)
             self.previous = None
+
+        def reset(self, new_data=None, reset_pointers: bool = False):
+            super().reset(new_data, reset_pointers)
+            if reset_pointers:
+                self.previous = None
 
 
 class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
