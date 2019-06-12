@@ -34,23 +34,16 @@ class LRUCache:
         self.deque.insert_at_begin(node=new_deque_node)
         self.len_of_deque += 1
 
-    def reset_node(self, node: DoublyLinkedList.Node, new_data=None):
-        # if new_data:
-        #     node.data = new_data
-        # node.previous = None
-        # node.next = None
-        node.reset(new_data, reset_pointers=True)
-
     def get_attr(self, attr_key):
         deque_node = self.key_node_map.get(attr_key, None)
         if deque_node:
             self.remove(deque_node)
-            self.reset_node(deque_node)
+            deque_node.reset(reset_pointers=True)
             self.append_left(deque_node)
         else:
             if self.is_deque_full:
                 tail_node = self.pop_right()
-                self.reset_node(tail_node, attr_key)
+                tail_node.reset(attr_key, reset_pointers=True)
                 self.append_left(tail_node)
                 self.key_node_map[attr_key] = tail_node
             else:

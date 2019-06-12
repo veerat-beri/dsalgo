@@ -115,24 +115,6 @@ class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
         self.tail.next = new_node
         self.tail = new_node
 
-    # def insert_at_begin(self, node_data):
-    #     new_node = self.get_new_node(node_data)
-    #     if self.is_empty():
-    #         self._set_head_tail(new_node)
-    #     else:
-    #         new_node.next = self.head
-    #         self.head = new_node
-    #     self._size += 1
-
-    # def insert_at_end(self, node_data):
-    #     new_node = self.get_new_node(node_data)
-    #     if self.is_empty():
-    #         self._set_head_tail(new_node)
-    #     else:
-    #         self.tail.next = new_node
-    #         self.tail = new_node
-    #     self._size += 1
-
     def remove(self, node: SinglyLinkedListNodeMixin.Node):
         pass
 
@@ -160,27 +142,6 @@ class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
         new_node.previous = self.tail
         self.tail = new_node
 
-    # def insert_at_begin(self, node_data=None, node: DoublyLinkedListNodeMixin.Node = None):
-    #     assert node or node_data, 'Data or node not provided to be inserted'
-    #
-    #     new_node = node or self.get_new_node(node_data)
-    #     if self.is_empty():
-    #         self._set_head_tail(new_node)
-    #     else:
-    #         new_node.next = self.head
-    #         self.head.previous = new_node
-    #         self.head = new_node
-    #     self._size += 1
-    #
-    # def insert_at_end(self, node_data):
-    #     new_node = self.get_new_node(node_data)
-    #     if self.is_empty():
-    #         self._set_head_tail(new_node)
-    #     else:
-    #         self.tail.next = new_node
-    #         new_node.previous = self.tail
-    #         self.tail = new_node
-
     def remove(self, node: DoublyLinkedListNodeMixin.Node):
         if node.previous is None:  # node is head node
             self.head = node.next
@@ -191,6 +152,8 @@ class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
             self.tail = node.previous
         else:
             node.next.previous = node.previous
+
+        self._size -= 1
 
 
 # driver code
