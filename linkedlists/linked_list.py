@@ -19,7 +19,7 @@ class _LinkedListNodeMixin:
         return cls.Node(node_data)
 
 
-class _LinkedList(_LinkedListNodeMixin):
+class _BaseLinkedList:
     def __init__(self, head: _LinkedListNodeMixin.Node = None, **kwargs):
         self.head = head
 
@@ -35,27 +35,16 @@ class _LinkedList(_LinkedListNodeMixin):
         self._size = 0
 
     def __len__(self):
+        ###############
+        # Method 1
         return self._size
+        ###############
+        # Method 2
         # no_of_nodes_in_list = 0
-        # current_node = self.head
-        # while current_node:
+        # for _ in self:
         #     no_of_nodes_in_list += 1
-        #     current_node = current_node.next
-        #
         # return no_of_nodes_in_list
-
-    def __iter__(self):
-        current_node = self.head
-        while current_node:
-            yield current_node
-            current_node = current_node.next
-
-    def print_linked_list(self, with_address=False):
-        current_node = self.head
-        while current_node:
-            print(current_node.data, f'({id(current_node)})' if with_address else '', end='  ', sep='')
-            current_node = current_node.next
-        print('\n')
+        ###############
 
     def _set_head_tail(self, node):
         if not self.tail or not self.head:
@@ -72,6 +61,24 @@ class _LinkedList(_LinkedListNodeMixin):
             handle_insert_func(new_node)
         self._size += 1
 
+    def is_empty(self):
+        ###############
+        # Method 1
+        # return len(self) == 0
+        ###############
+        # Method 2
+        return self.head is None
+        ###############
+
+
+class _LinkedList(_BaseLinkedList, _LinkedListNodeMixin):
+    def print_linked_list(self, with_address=False):
+        current_node = self.head
+        while current_node:
+            print(current_node.data, f'({id(current_node)})' if with_address else '', end='  ', sep='')
+            current_node = current_node.next
+        print('\n')
+
     def insert_at_begin(self, node_data=None, node: _LinkedListNodeMixin.Node = None):
         self._insert(self._handle_insert_at_begin, node_data, node)
 
@@ -87,11 +94,13 @@ class _LinkedList(_LinkedListNodeMixin):
     def remove(self, node: _LinkedListNodeMixin.Node):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def is_empty(self):
-        # Method 1
-        # return len(self) == 0
-        # Method 2
-        return self.head is None
+
+class SinglyLinkedListIterMixin:
+    def __iter__(self):
+        current_node = self.head
+        while current_node:
+            yield current_node
+            current_node = current_node.next
 
 
 class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):
@@ -106,7 +115,7 @@ class SinglyLinkedListNodeMixin(_LinkedListNodeMixin):
                 self.next = None
 
 
-class SinglyLinkedList(SinglyLinkedListNodeMixin, _LinkedList):
+class SinglyLinkedList(_LinkedList, SinglyLinkedListNodeMixin, SinglyLinkedListIterMixin):
     def _handle_insert_at_begin(self, new_node: SinglyLinkedListNodeMixin.Node):
         new_node.next = self.head
         self.head = new_node
@@ -131,7 +140,7 @@ class DoublyLinkedListNodeMixin(SinglyLinkedListNodeMixin):
                 self.previous = None
 
 
-class DoublyLinkedList(DoublyLinkedListNodeMixin, _LinkedList):
+class DoublyLinkedList(_LinkedList, DoublyLinkedListNodeMixin, SinglyLinkedListIterMixin):
     def _handle_insert_at_begin(self, new_node: SinglyLinkedListNodeMixin.Node):
         new_node.next = self.head
         self.head.previous = new_node
