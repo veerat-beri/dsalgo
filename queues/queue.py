@@ -1,10 +1,7 @@
-from linkedlists import SinglyLinkedList
+from linkedlists.mixins import SinglyLinkedListIterMixin, SinglyLinkedListNodeMixin, _BaseLinkedListMixin
 
 
-class LinkedQueue(SinglyLinkedList):
-    del SinglyLinkedList.insert_at_begin
-    del SinglyLinkedList.remove
-
+class LinkedQueue(_BaseLinkedListMixin, SinglyLinkedListIterMixin, SinglyLinkedListNodeMixin):
     @property
     def front(self):
         if not self.is_empty():
@@ -17,19 +14,9 @@ class LinkedQueue(SinglyLinkedList):
             return self._tail.data
         raise ValueError('Stack is empty!')
 
-    def is_empty(self):
-        ###############
-        # 1st Approach
-        # return self.top is None
-        ###############
-        # 2nd Approach
-        return len(self) == 0
-        ###############
-
-    def _set_head_tail(self, node):
-        if not self.tail or not self.head:
-            self.tail = node
-            self.head = node
+    def _handle_insert_at_end(self, new_node: SinglyLinkedListNodeMixin.Node):
+        self.tail.next = new_node
+        self.tail = new_node
 
     def enqueue(self, node_data):
         new_node = self.get_new_node(node_data)
