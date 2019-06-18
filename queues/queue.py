@@ -19,10 +19,7 @@ class LinkedQueue(_BaseLinkedListMixin, SinglyLinkedListIterMixin, SinglyLinkedL
         self.tail = new_node
 
     def enqueue(self, node_data):
-        new_node = self.get_new_node(node_data)
-        new_node.next = self._root
-        self._root = new_node
-        self._size += 1
+        self._insert(self._handle_insert_at_end, node_data)
 
     def _pop(self):
         if not self.is_empty():
