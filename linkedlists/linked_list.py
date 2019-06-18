@@ -37,8 +37,9 @@ class SinglyLinkedList(_LinkedListMixin, SinglyLinkedListNodeMixin, SinglyLinked
         if node_found:
             previous_node.next = node.next
             del node
-
-        self._size -= 1
+            self._size -= 1
+        else:
+            raise Exception('Given node not found!')
 
 
 class DoublyLinkedList(_LinkedListMixin, DoublyLinkedListNodeMixin, SinglyLinkedListIterMixin):
