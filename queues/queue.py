@@ -22,18 +22,17 @@ class LinkedQueue(_BaseLinkedListMixin, SinglyLinkedListIterMixin, SinglyLinkedL
         self._insert(self._handle_insert_at_end, node_data)
 
     def _pop(self):
-        if not self.is_empty():
-            popped_node = self._root
-            self._root = self._root.next
-            self._size -= 1
-            return popped_node
+        popped_node = self.head
+        self.head = self.head.next
+        self._size -= 1
+        return popped_node
 
     def pop(self):
         if self.is_empty():
             raise ValueError('Can not perform pop() operation as stack is empty!')
         return self._pop().data
 
-    def print_stack(self):
+    def print_q(self):
         for node in self:
             print(node.data, end=' ')
 

@@ -45,11 +45,10 @@ class LinkedStack:
         self._size += 1
 
     def _pop(self):
-        if not self.is_empty():
-            popped_node = self._root
-            self._root = self._root.next
-            self._size -= 1
-            return popped_node
+        popped_node = self._root
+        self._root = self._root.next
+        self._size -= 1
+        return popped_node
 
     def pop(self):
         if self.is_empty():
