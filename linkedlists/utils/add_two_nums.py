@@ -101,7 +101,7 @@ class _GetLLSumUsingRecursionMixin(_LLSumCalcUtils):
         return self.summed_num
 
 
-class GetLLSum(_GetLLSumUsingLLReversal, _GetLLSumUsingRecursionMixin):
+class GetLLSum:
     def __init__(self, **kwargs):
         self.kwargs = kwargs
 

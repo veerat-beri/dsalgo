@@ -5,13 +5,13 @@ class LinkedQueue(_BaseLinkedListMixin, SinglyLinkedListIterMixin, SinglyLinkedL
     @property
     def front(self):
         if not self.is_empty():
-            return self._head.data
+            return self.head.data
         raise ValueError('Stack is empty!')
 
     @property
     def rear(self):
         if not self.is_empty():
-            return self._tail.data
+            return self.tail.data
         raise ValueError('Stack is empty!')
 
     def _handle_insert_at_end(self, new_node: SinglyLinkedListNodeMixin.Node):
@@ -32,7 +32,7 @@ class LinkedQueue(_BaseLinkedListMixin, SinglyLinkedListIterMixin, SinglyLinkedL
             raise ValueError('Can not perform pop() operation as stack is empty!')
         return self._pop().data
 
-    def print_q(self):
+    def print_queue(self):
         for node in self:
             print(node.data, end=' ')
 

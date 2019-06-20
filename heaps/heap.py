@@ -112,10 +112,10 @@ class MaxBinaryHeap(_BinaryHeap):
     def replace_root(self, elem: int):
         return heapq._heapreplace_max(self.heap, elem)
 
-    def replace_elem(self, arr_index):
-        assert arr_index < len(self.heap), 'input arr-index out of bounds'
-        replaced_elem = self.heap[arr_index]
-        self.heap[arr_index] = self.heap[-1]
+    def replace_elem(self, heap_arr_index):
+        assert heap_arr_index < len(self.heap), 'input arr-index out of bounds'
+        replaced_elem = self.heap[heap_arr_index]
+        self.heap[heap_arr_index] = self.heap[-1]
         heapq._siftup_max(self.heap, 0)
         return replaced_elem
 

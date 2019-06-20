@@ -8,6 +8,7 @@ from heaps.heap import MaxBinaryHeap
 
 def get_sliding_window_max(window_size: int, arr: List[int]):
     # Using Heap
+    # time Complexity: O((K + LogK)*(N - K + 1) + K)
     def _get_sliding_window_max_using_heap():
         # Build Heap
         max_heap = MaxBinaryHeap(arr[:window_size])
