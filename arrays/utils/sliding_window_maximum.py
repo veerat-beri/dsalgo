@@ -14,29 +14,28 @@ class SlidingWindowMax:
 
     # Time Complexity: O((K + LogK)*(N - K + 1))
     def _get_sliding_window_max_using_heap(self):
-        # Build Heap
-        # max_heap = MaxBinaryHeap(arr[:window_size])
-        # for arr_index in range(window_size, len(arr)):
-        #     yield max_heap.pop()
-        #     max_heap.push(arr[arr_index])
         pass
 
     # Time Complexity: O(K*(N - K + 1))
     def _using_naive_two_nested_loops(self):
         pass
 
-    def get_sliding_window_max_using_deque(self):
+    # Time Complexity: O(2N)
+    def _get_sliding_window_max_using_deque(self):
         current_window_useful_elem_indexes = deque()
+        """
+        current_window_useful_elem_indexes saves useful elements' indexes in ascending order of their value.
+        For e.g for arr= [8, 5, 10, 7, 9, 4, 15, 12, 90, 13] and k=4,
+        It would be:
+        - [3, 2] for 1st window (7, 10)
+        - [4, 2] for 2nd window (9, 10) and so on
+        """
         for arr_index in range(self.window_size):
             while current_window_useful_elem_indexes and self.arr[arr_index] > self.arr[current_window_useful_elem_indexes[0]]:
                 current_window_useful_elem_indexes.popleft()
             current_window_useful_elem_indexes.appendleft(arr_index)
 
         for arr_index in range(self.window_size, self.arr_len):
-
-
-
-            print(current_window_useful_elem_indexes)
             yield self.arr[current_window_useful_elem_indexes[-1]]
             removing_elem_index = arr_index - self.window_size
             while current_window_useful_elem_indexes and removing_elem_index >= current_window_useful_elem_indexes[-1]:
@@ -48,15 +47,23 @@ class SlidingWindowMax:
 
         yield self.arr[current_window_useful_elem_indexes[-1]]
 
+    def get_sliding_window_max(self, **kwargs):
+        if kwargs.get('use_deque'):
+            return self._get_sliding_window_max_using_deque()
+        else:
+            return self._get_sliding_window_max_using_deque()
+
 
 # driver code
 def run():
-    # arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ]
+    # arr = [1, 2, 3, 1, 4, 5, 2, 3, 6, ]
+    # window_size = 3
     arr = [8, 5, 10, 7, 9, 4, 15, 12, 90, 13]
-    window_size = 3
+    window_size = 4
     print(f'Given Array: {arr}')
-    print(f'Window size: {window_size}')
-    for elem in SlidingWindowMax(arr, window_size).get_sliding_window_max_using_deque():
+    # print(f'Window size: {window_size}')
+    print(f'Greatest elem in each subarray of window size={window_size}, are: ')
+    for elem in SlidingWindowMax(arr, window_size).get_sliding_window_max():
         print(elem, end=' ')
 
 
