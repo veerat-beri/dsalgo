@@ -12,7 +12,7 @@ def get_sorted_arr_set_0_1_2(arr: []):
     twos_index = arr_len - 1
     while ones_index <= twos_index:
         # "<=" is required instead of obvious "<", as both zeros_index and twos_index
-        # are advanced 1 extra, each time and their (zeros_index/twos_index) lastest element will get
+        # are advanced 1 extra, each time and their (zeros_index/twos_index) last element will get
         # skipped from checking, if "<" is used
 
         if arr[ones_index] == 0:
