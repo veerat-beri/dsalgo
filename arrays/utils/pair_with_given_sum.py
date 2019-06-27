@@ -9,8 +9,8 @@ class PairExists:
         self.arr = arr
         self.sum_of_pair = sum_of_pair
 
+    # Hash based Approach
     def _using_hashing(self):
-        # Hash based Approach
         # Time Complexity: O(n)
         # Space Complexity: O(n)
 
@@ -24,6 +24,8 @@ class PairExists:
             hash_set.add(elem)
 
     def _using_sorting(self):
+        # Time Complexity: O(N*logN + N)
+        # Space Complexity: O(1)
         self.arr.sort()
         start_index = 0
         end_index = len(self.arr) - 1
@@ -50,9 +52,9 @@ def run():
     pair = PairExists(arr, sum_of_pair).check_pair_exists()
     # pair = PairExists(arr, sum_of_pair).check_pair_exists(use_sorting=True)
     if pair:
-        print('Yes, pair exist:({}, {}) with sum = {}'.format(pair[0], pair[1], sum_of_pair))
+        print(f'Yes, pair exist:({pair[0]}, {pair[1]}) with sum = {sum_of_pair}')
     else:
-        print('No pair exists with given sum')
+        print(f'No pair exists with given sum({sum_of_pair})')
 
 
 if __name__ == '__main__':
