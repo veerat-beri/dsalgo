@@ -61,8 +61,8 @@ def run():
     arr = [8, 5, 10, 7, 9, 4, 15, 12, 90, 13]
     window_size = 4
     print(f'Given Array: {arr}')
-    # print(f'Window size: {window_size}')
     print(f'Greatest elem in each subarray of window size={window_size}, are: ')
+
     for elem in SlidingWindowMax(arr, window_size).get_sliding_window_max():
         print(elem, end=' ')
 

@@ -3,7 +3,6 @@
 
 
 from collections import namedtuple
-
 from heaps.heap import CustomNodeMinHeap
 
 
