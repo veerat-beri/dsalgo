@@ -5,6 +5,8 @@ from stacks import BuildLinkedStack
 
 
 # Using Stack
+# Time Complexity: O(N)
+# Space Complexity: O(N)
 def get_next_greater_elem(arr: []):
     next_greater_elem_stack = BuildLinkedStack().build()
     intermediate_processing_stack = BuildLinkedStack().build()
