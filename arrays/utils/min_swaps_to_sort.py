@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/minimum-number-swaps-required-sort-array/
 
 
-# Time-Complexity: O(N*logN + N)
+# Time-Complexity: O(N*logN + 2N)
 # Space-Complexity: O(N)
 def get_min_swaps_count(arr: []):
     enumerated_arr = list(enumerate(arr))
