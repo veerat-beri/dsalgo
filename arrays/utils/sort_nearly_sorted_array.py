@@ -5,6 +5,7 @@
 import heapq
 
 
+# Time Complexity: O(K + (N - K + 1)* LogK)
 def get_sorted_arr_from_k_sorted(arr: list, k):
     """
     Generator, which returns elements in completely sorted array.
@@ -20,8 +21,7 @@ def get_sorted_arr_from_k_sorted(arr: list, k):
     heapq.heapify(heap)
 
     for index in range(k + 1, len(arr)):
-        yield heapq.heappop(heap)
-        heapq.heappush(heap, arr[index])
+        yield heapq.heapreplace(heap, arr[index])
 
     while heap:
         yield heapq.heappop(heap)
