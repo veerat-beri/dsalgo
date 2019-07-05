@@ -1,5 +1,5 @@
 # Problem Statement
-# https://leetcode.com/articles/recover-binary-search-tree/
+# https://www.geeksforgeeks.org/fix-two-swapped-nodes-of-bst/
 
 
 from trees import BuildLinkedBinaryTree
@@ -11,12 +11,13 @@ class RecoverBST:
     def __init__(self, incorrect_bst: LinkedBinarySearchTree):
         self.incorrect_bst = incorrect_bst
 
-    def _set_swap_nodes(self, node):
+    def _get_swapped_nodes(self, node):
         previous_node = None
         swap_node_1 = None
         swap_node_2 = None
 
         def _using_recursive(node):
+            nonlocal swap_node_1, swap_node_2, previous_node
             if node is None:
                 return
 
@@ -24,18 +25,23 @@ class RecoverBST:
 
             if previous_node:
                 is_not_bst = previous_node.data > node.data
-                if is_not_bst:
+                if is_not_bst and not (swap_node_1 and swap_node_2):
                     if not swap_node_1:
                         swap_node_1 = previous_node
                     elif not swap_node_2:
                         swap_node_2 = node
+                else:
+                    return
 
-            self.previous_node = node
+            previous_node = node
             _using_recursive(self.incorrect_bst.right(node))
 
-    def get_swapped_nodes(self):
-        self._set_swap_nodes(self.incorrect_bst.root())
-        self.swap_node_2.data, self.swap_node_1.data = self.swap_node_1.data, self.swap_node_2.data
+        _using_recursive(node)
+        return swap_node_1, swap_node_2
+
+    def fix_bst(self):
+        swap_node_1, swap_node_2 = self._get_swapped_nodes(self.incorrect_bst.root())
+        swap_node_2.data, swap_node_1.data = swap_node_1.data, swap_node_2.data
 
 
 # driver code
@@ -47,7 +53,7 @@ def run():
 
     print('Initial', end=' ')
     Traversal(bst).print_inorder_traversal()
-    RecoverBST(bst).get_swapped_nodes()
+    RecoverBST(bst).fix_bst()
     print('After swapping incorrect nodes', end=' ')
     Traversal(bst).print_inorder_traversal()
 
