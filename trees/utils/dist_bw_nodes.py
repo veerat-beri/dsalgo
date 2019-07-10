@@ -5,7 +5,7 @@ from trees import LinkedBinaryTree, BuildLinkedBinaryTree
 from trees.utils import get_LCA_in_BT, Traversal
 
 
-# Time Complexity: O(2N)
+# Time Complexity: O(3N)
 def get_dist_bw_nodes(tree: LinkedBinaryTree, node_1_data, node_2_data):
     lca_node = get_LCA_in_BT(tree, node_1_data, node_2_data)
 
