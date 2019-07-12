@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/find-excel-column-name-given-number/
 
 
-from strings.service import get_relative_char
+from strings.services import get_relative_char
 
 
 def get_name_from_num(num: int):
