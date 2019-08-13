@@ -175,6 +175,9 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
     def left(self, node):
         return node._left
 
+    def is_leaf(self, node):
+        return not node._left and not node._right
+
     def element(self, node: BinaryTreeNode):
         if node is not None:
             return node._data

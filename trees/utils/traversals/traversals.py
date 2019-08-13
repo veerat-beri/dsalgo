@@ -4,7 +4,7 @@
 
 from trees import LinkedBinaryTree
 from trees.build_tree import BuildLinkedBinaryTree
-from trees.utils.traversals.diagonal_traversal import diagonal_traversal
+from trees.utils.traversals.diagonal import diagonal_traversal
 
 
 def print_bfs(binary_tree=None, bt_node=None):

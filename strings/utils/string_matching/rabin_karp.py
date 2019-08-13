@@ -31,8 +31,8 @@ class RabinKarpStringMatch:
 
     def get_pattern_occurrences(self):
         pattern_hash, text_hash_so_far = self.get_pattern_text_hash_values()
-        for str_index in range(self.text_str_len - self.pattern_str_len + 1):
-            if pattern_hash == text_hash_so_far:
+        # for str_index in range(self.text_str_len - self.pattern_str_len + 1):
+        #     if pattern_hash == text_hash_so_far:
                 # for char in
 
 
