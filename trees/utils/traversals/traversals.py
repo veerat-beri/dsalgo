@@ -5,6 +5,7 @@
 from trees import LinkedBinaryTree
 from trees.build_tree import BuildLinkedBinaryTree
 from trees.utils.traversals.diagonal import diagonal_traversal
+from trees.utils.traversals.outer_boundary import BoundaryTraversal
 
 
 def print_bfs(binary_tree=None, bt_node=None):
@@ -54,6 +55,13 @@ class Traversal:
         print('\nDiagonal Traversal: ')
         for diagonal_nodes_list in diagonal_traversal(self.binary_tree, bt_node):
             print([node.data for node in diagonal_nodes_list])
+        print('\n')
+
+    def print_boundary_traversal(self, bt_node=None):
+        # Boundary Traversal (Anti-clockwise)
+        print('\nBoundary Traversal: ')
+        for boundary_node in BoundaryTraversal(self.binary_tree, bt_node).boundary_traversal():
+            print(boundary_node.data, end=' ')
         print('\n')
 
     # def print_pictorial_repr(self):
