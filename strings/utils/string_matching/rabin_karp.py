@@ -14,12 +14,18 @@ class RabinKarpStringMatch:
         self.h = self.__get_h_value()
 
     def __get_h_value(self):
-        h = 0
-        for _ in range(self.pattern_str_len):
+        """
+        :return: equivalent of => pow(NO_OF_CHARS, pattern_str_len - 1, PRIME_NUM)
+        """
+        ##############################
+        h = 1
+        for _ in range(self.pattern_str_len - 1):
             h = (h * self.NO_OF_CHARS) % self.PRIME_NUM
         return h
+        ##############################
+        # return pow(self.NO_OF_CHARS, self.pattern_str_len - 1, self.PRIME_NUM)
 
-    def get_pattern_text_hash_values(self):
+    def get_hash_values(self):
         pattern_hash = 0
         text_hash_so_far = 0
 
@@ -29,11 +35,23 @@ class RabinKarpStringMatch:
 
         return pattern_hash, text_hash_so_far
 
+    def check_text_window(self, text_window_start_index):
+        for str_index in range(self.pattern_str_len):
+            if self.text_str[text_window_start_index + str_index] != self.pattern_str[str_index]:
+                return False
+        return True
+
     def get_pattern_occurrences(self):
-        pattern_hash, text_hash_so_far = self.get_pattern_text_hash_values()
-        # for str_index in range(self.text_str_len - self.pattern_str_len + 1):
-        #     if pattern_hash == text_hash_so_far:
-                # for char in
+        pattern_occurrences_indexes = []
+        pattern_hash, text_hash_so_far = self.get_hash_values()
+        for str_index in range(self.text_str_len - self.pattern_str_len + 1):
+            if pattern_hash == text_hash_so_far:
+                if self.check_text_window(str_index):
+                    pattern_occurrences_indexes.append(str_index)
+
+
+
+
 
 
 

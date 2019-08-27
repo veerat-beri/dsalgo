@@ -2,9 +2,6 @@
 # https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/
 
 from trees import LinkedBinaryTree, BuildLinkedBinaryTree
-from trees.utils import Traversal
-from trees.utils.views import left_view, right_view
-from trees.utils.views.bottom_view import bottom_view
 
 
 class BoundaryTraversal:
@@ -63,7 +60,7 @@ class BoundaryTraversal:
 # driver code
 def run():
     # -------------------- Create Tree -------------------- #
-    # binary_tree = BuildLinkedBinaryTree(auto_populate=True).get_tree()
+    binary_tree = BuildLinkedBinaryTree(auto_populate=True).get_tree()
 
     binary_tree = BuildLinkedBinaryTree(list_of_nodes=[20, 8, 22, 4, 12, ]).get_tree()
     binary_tree._root._right._right = binary_tree.get_new_node(25)
@@ -71,7 +68,6 @@ def run():
     binary_tree._root._left._right._left = binary_tree.get_new_node(10)
 
     # -------------------- -------------------- #
-    Traversal(binary_tree).print_preorder_traversal()
     print('Boundary Nodes traversal: ')
     for boundary_node in BoundaryTraversal(binary_tree).boundary_traversal():
         print(boundary_node.data, end=' ')
