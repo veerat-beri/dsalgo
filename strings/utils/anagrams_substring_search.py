@@ -1,10 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/anagram-substring-search-search-permutations/
 
-from collections import defaultdict
-from copy import copy
-
-
 # This Approach did not work, due to ambiguity in judging whether
 # to consider chars from previous window(in case pattern chars are matching successively)
 # or not consider them (when previous window has chars which do not belong to pattern string)
@@ -55,20 +51,11 @@ from copy import copy
 from strings.utils.string_matching.rabin_karp import RabinKarpStringMatch
 
 
-class AnagramsSearch(RabinKarpStringMatch):
-    def __init__(self, pattern_str, text_str, ):
-        self.pattern_str = pattern_str
-        self.text_str = text_str
-        self.pattern_str_len = len(pattern_str)
-        self.patter_str_chars_count = defaultdict(int)
-        self.required_chars_count = dict()
-
-    def pattern_matches(self):
-        # No need to check for exact pattern match any combination of pattern chars would work
+class AnagramSubstringSearch(RabinKarpStringMatch):
+    def _pattern_matches(self, text_window_start_index):
+        # No need to check for exact pattern match as any combination of pattern chars would work
         return True
 
-    def get_all_permuted_pattern_indexes(self):
-        RabinKarpStringMatch()
 
 # driver code
 def run():
@@ -76,7 +63,9 @@ def run():
     text_str = 'BACDGABCDA'
     # pattern_str = 'AABA'
     # text_str = 'AAABABAA'
-    AnagramSubstringSearch(pattern_str, text_str).get_all_anagrams_pos()
+    for substring_index in AnagramSubstringSearch(pattern_str, text_str).get_pattern_occurrence_indexes():
+        # print(substring_index)
+        pass
 
 
 if __name__ == '__main__':
