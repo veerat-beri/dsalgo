@@ -91,7 +91,7 @@ class _BinaryHeap:
 
 class MinBinaryHeap(_BinaryHeap):
     def get_min(self):
-        assert len(self), 'Heap is empty'
+        assert len(self), 'Heap cannot be empty'
         return self.heap[self.get_root_index()]
 
     def heapify(self):
@@ -103,7 +103,7 @@ class MinBinaryHeap(_BinaryHeap):
 
 class MaxBinaryHeap(_BinaryHeap):
     def get_max(self):
-        assert len(self), 'Heap is empty'
+        assert len(self), 'Heap cannot be empty'
         return self.heap[self.get_root_index()]
 
     def heapify(self):
