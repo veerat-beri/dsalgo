@@ -33,7 +33,6 @@ def get_bst_inorder_successor(bst: LinkedBinarySearchTree, node: LinkedBinarySea
 
     given_node = node
     assert_only_one_arg_is_present('Either of Data or node must be provided', node, node_data)
-    # assert given_node or node_data, 'Either of Node or Node-data must be provided'
 
     if not given_node:
         given_node = bst.get_node(node_data)
