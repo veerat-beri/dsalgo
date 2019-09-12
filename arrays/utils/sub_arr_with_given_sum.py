@@ -31,7 +31,7 @@
 ############################################################
 
 # Sliding window approach
-# Seems to be O(n2) approach, but is O(n) approach.
+# Seems to be O(n^2) approach, but is O(n) approach.
 def get_sub_array_with_given_sum(arr, given_sum):
     if not len(arr):
         return False

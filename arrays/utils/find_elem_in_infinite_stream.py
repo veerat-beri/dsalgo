@@ -18,7 +18,7 @@ def get_elem_index_in_infinite_stream(stream: [], num: int):
 # driver code
 def run():
     stream = [3, 5, 7, 9, 10, 90, 100, 130, 140, 160, 170, ]
-    num = 10
+    # num = 10
     num = 11
     # num = 3
     num_index = get_elem_index_in_infinite_stream(stream, num)

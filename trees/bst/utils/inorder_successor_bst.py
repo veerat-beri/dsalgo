@@ -2,6 +2,7 @@
 # https://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/
 
 
+from base.services import assert_only_one_arg_is_present
 from trees.bst import LinkedBinarySearchTree, BuildLinkedBinarySearchTree
 from trees.utils import Traversal
 
@@ -31,7 +32,7 @@ def get_bst_inorder_successor(bst: LinkedBinarySearchTree, node: LinkedBinarySea
         return given_node_right_ancestor
 
     given_node = node
-    assert given_node or node_data, 'Either of Node or Node-data must be provided'
+    assert_only_one_arg_is_present('Either of Data or node must be provided', node, node_data)
 
     if not given_node:
         given_node = bst.get_node(node_data)

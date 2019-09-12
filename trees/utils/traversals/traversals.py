@@ -4,7 +4,8 @@
 
 from trees import LinkedBinaryTree
 from trees.build_tree import BuildLinkedBinaryTree
-from trees.utils.traversals.diagonal_traversal import diagonal_traversal
+from trees.utils.traversals.diagonal import diagonal_traversal
+from trees.utils.traversals.outer_boundary import BoundaryTraversal
 
 
 def print_bfs(binary_tree=None, bt_node=None):
@@ -54,6 +55,13 @@ class Traversal:
         print('\nDiagonal Traversal: ')
         for diagonal_nodes_list in diagonal_traversal(self.binary_tree, bt_node):
             print([node.data for node in diagonal_nodes_list])
+        print('\n')
+
+    def print_boundary_traversal(self, bt_node=None):
+        # Boundary Traversal (Anti-clockwise)
+        print('\nBoundary Traversal: ')
+        for boundary_node in BoundaryTraversal(self.binary_tree, bt_node).boundary_traversal():
+            print(boundary_node.data, end=' ')
         print('\n')
 
     # def print_pictorial_repr(self):
@@ -143,26 +151,25 @@ class Traversal:
 
 # driver code
 def run():
-    binary_tree = BuildLinkedBinaryTree(list_of_nodes=[1, 2, 3, 4, 5, ]).get_tree()
+    binary_tree = BuildLinkedBinaryTree(list_of_nodes=[8, 3, 10, ]).get_tree()
 
     ###############
     # Build Tree
     root = binary_tree.root()
-    # root_left = binary_tree.left(root)
-    # root_right = binary_tree.right(root)
-    #
-    # root_right_right = binary_tree.add_right_child(root_right, 14)
-    # root_right_left = binary_tree.add_left_child(root_right, 6)
-    #
-    # binary_tree.add_left_child(root_right_left, 4)
-    # binary_tree.add_right_child(root_right_left, 7)
-    #
-    # binary_tree.add_left_child(root_right_right, 13)
-    # binary_tree.add_left_child(root_left, 1)
+    root_left = binary_tree.left(root)
+    root_right = binary_tree.right(root)
 
-    root._right._right = binary_tree.get_new_node(6)
+    root_right_right = binary_tree.add_right_child(root_right, 14)
+    root_right_left = binary_tree.add_left_child(root_right, 6)
+
+    binary_tree.add_left_child(root_right_left, 4)
+    binary_tree.add_right_child(root_right_left, 7)
+
+    binary_tree.add_left_child(root_right_right, 13)
+    binary_tree.add_left_child(root_left, 1)
+
     ###############
-    # binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
+    binary_tree = BuildLinkedBinaryTree(list_of_nodes=['60', '70', ], auto_populate=True).get_tree()
     # binary_tree = BuildLinkedBinaryTree(list_of_nodes=[10, 20, 30, 40, 50, 60, 70], auto_populate=True).get_tree()
 
     bt_traversal = Traversal(binary_tree)

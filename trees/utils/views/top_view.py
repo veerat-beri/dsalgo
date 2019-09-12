@@ -45,10 +45,7 @@ def top_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
             return
 
         first_node_in_hd = horizontal_distance_first_node.get(node_hd)
-        if first_node_in_hd:
-            if first_node_in_hd.level > node_level:
-                horizontal_distance_first_node[node_hd] = get_named_node_tuple(node, node_level)
-        else:
+        if not first_node_in_hd or first_node_in_hd.level > node_level:
             horizontal_distance_first_node[node_hd] = get_named_node_tuple(node, node_level)
 
         _top_view_dfs(tree.right(node), node_level + 1, node_hd + 1)
@@ -77,4 +74,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-

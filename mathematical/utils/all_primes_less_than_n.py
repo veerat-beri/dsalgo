@@ -3,8 +3,10 @@
 
 
 # Sieve of Eratosthenes
+# Time Complexity:
+# Space Complexity: O(N)
 def get_all_primes(upper_limit_num: int) -> list:
-    assert upper_limit_num >= 0, '-ve nos are not allowed, try with their absolute valus!'
+    assert upper_limit_num >= 0, '-ve nos are not allowed, try with their absolute values!'
 
     is_prime = [True] * (upper_limit_num + 1)
 

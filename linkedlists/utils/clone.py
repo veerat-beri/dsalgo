@@ -13,12 +13,12 @@ class BuildCustomLinkedList(_BuildLinkedList):
 
 
 class CustomLinkedList(SinglyLinkedList):
-    class CustomNode(SinglyLinkedList.SinglyLinkedListNode):
+    class CustomNode(SinglyLinkedList.Node):
         def __init__(self, data, **kwargs):
             super().__init__(data, **kwargs)
             self.random = None
 
-    def _get_new_node(self, node_data):
+    def get_new_node(self, node_data):
         return self.CustomNode(node_data)
 
     def print_linked_list(self, **kwargs):
@@ -44,7 +44,7 @@ class CloneLinkedList:
     def __clone_data(self):
         current_node = self.linked_list.head
         while current_node:
-            new_node = self.linked_list._get_new_node(current_node.data)
+            new_node = self.linked_list.get_new_node(current_node.data)
             self.old_node_new_node_map[current_node] = new_node
             current_node = current_node.next
 

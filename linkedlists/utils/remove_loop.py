@@ -6,7 +6,7 @@ from linkedlists import SinglyLinkedList, BuildSinglyLinkedListWithLoop
 from linkedlists.utils import check_loop_exists
 
 
-def remove_loop(singly_linked_list: SinglyLinkedList, node_in_loop: SinglyLinkedList.SinglyLinkedListNode):
+def remove_loop(singly_linked_list: SinglyLinkedList, node_in_loop: SinglyLinkedList.Node):
     slow_ptr = singly_linked_list.head
     fast_ptr = node_in_loop
 
@@ -33,9 +33,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
-
-
-
-
-

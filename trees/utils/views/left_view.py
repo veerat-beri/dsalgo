@@ -82,11 +82,9 @@ def left_view(tree: LinkedBinaryTree, traversal_choice=LinkedBinaryTree.BFS):
             return
 
         first_node_in_level = level_first_node.get(node_level)
-        if first_node_in_level:
-            if first_node_in_level[1] > node_hd:
-                level_first_node[node_level] = node, node_hd
-        else:
+        if not first_node_in_level or first_node_in_level[1] > node_hd:
             level_first_node[node_level] = node, node_hd
+
         _left_view_dfs(tree.left(node), node_level + 1, node_hd - 1)
         _left_view_dfs(tree.right(node), node_level + 1, node_hd + 1)
 
@@ -103,7 +101,7 @@ def run():
     tree = BuildLinkedBinaryTree().get_diamond_tree()
 
     print('Left-view: ')
-    for node in left_view(tree):
+    for node in left_view(tree, LinkedBinaryTree.DFS):
         print(tree.element(node), end=' ')
 
     # print('\n\nBFS: ')
@@ -113,4 +111,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-

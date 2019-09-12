@@ -18,7 +18,7 @@ def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: Si
     # Iterative solution
     def _get_sorted_merged_ll_iterative(current_node_of_ll_1, current_node_of_ll_2):
         new_ll = SinglyLinkedList()
-        new_ll.head = SinglyLinkedList.SinglyLinkedListNode(None)
+        new_ll.head = SinglyLinkedList.get_new_node(None)
         current_node_of_new_ll = new_ll.head
 
         while current_node_of_ll_1 and current_node_of_ll_2:

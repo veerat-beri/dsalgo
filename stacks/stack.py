@@ -23,7 +23,9 @@ class LinkedStack:
 
     @property
     def top(self):
-        return self._root
+        if self._root:
+            return self._root.data
+        raise ValueError('Stack is empty!')
 
     def _create_node(self, node_data):
         return self._StackNode(node_data)
@@ -43,11 +45,10 @@ class LinkedStack:
         self._size += 1
 
     def _pop(self):
-        if not self.is_empty():
-            popped_node = self._root
-            self._root = self._root.next
-            self._size -= 1
-            return popped_node
+        popped_node = self._root
+        self._root = self._root.next
+        self._size -= 1
+        return popped_node
 
     def pop(self):
         if self.is_empty():
@@ -57,6 +58,9 @@ class LinkedStack:
     def print_stack(self):
         for node in self:
             print(node.data, end=' ')
+
+    def __repr__(self):
+        return ', '.join([str(node.data) for node in self])
 
 
 # driver code

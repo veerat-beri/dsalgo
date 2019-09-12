@@ -14,14 +14,14 @@ def is_bt_bst(bt: LinkedBinaryTree, use_inorder=True):
     # Using min, max values
     # Time complexity: O(N)
     # Space complexity: O(1)
-    def _is_bst(node, MAX_VALUE = sys.maxsize, MIN_VALUE = -sys.maxsize) -> bool:
+    def _use_max_min(node, MAX_VALUE = sys.maxsize, MIN_VALUE = -sys.maxsize) -> bool:
         if node is None:
             return True
 
         if node.data > MAX_VALUE or node.data < MIN_VALUE:
             return False
 
-        return _is_bst(bt.left(node), node.data - 1, MIN_VALUE) and _is_bst(bt.right(node), MAX_VALUE, node.data + 1)
+        return _use_max_min(bt.left(node), node.data - 1, MIN_VALUE) and _use_max_min(bt.right(node), MAX_VALUE, node.data + 1)
 
     ###########################################################################
     # Using Inorder traversal
@@ -29,12 +29,12 @@ def is_bt_bst(bt: LinkedBinaryTree, use_inorder=True):
 
     previous_node_data = None
 
-    def _is_bst_using_inorder(node):
+    def _use_inorder(node):
         nonlocal previous_node_data
         if node is None:
             return True
 
-        if not _is_bst_using_inorder(bt.left(node)):
+        if not _use_inorder(bt.left(node)):
             return False
 
         if previous_node_data and previous_node_data > node.data:
@@ -42,10 +42,10 @@ def is_bt_bst(bt: LinkedBinaryTree, use_inorder=True):
 
         previous_node_data = node.data
 
-        return _is_bst_using_inorder(bt.right(node))
+        return _use_inorder(bt.right(node))
     ###########################################################################
 
-    executing_func = _is_bst_using_inorder if use_inorder else _is_bst
+    executing_func = _use_inorder if use_inorder else _use_max_min
     return executing_func(bt.root())
 
 

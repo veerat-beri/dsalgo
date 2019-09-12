@@ -21,6 +21,7 @@ def get_lps_arr(pattern_string: str):
     return lps
 
 
+# Time Complexity: O(N + M)
 def get_all_pattern_occurrences(pattern_str: str, search_str: str, pattern_len: int):
     lps_arr = get_lps_arr(pattern_str)
     search_index = pattern_index = 0

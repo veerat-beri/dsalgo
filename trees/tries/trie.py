@@ -2,7 +2,7 @@
 # https://www.geeksforgeeks.org/trie-insert-and-search/
 
 
-from strings.service import get_relative_ascii, get_relative_char
+from strings.services import get_relative_ascii, get_relative_char
 from trees.tree import BinaryTree
 
 

@@ -63,7 +63,7 @@ class BinaryTree(Tree):
             raise NotImplementedError('Has to be Implemented by sub class')
 
     def __iter__(self):
-        # making default iteration of tree in in-order
+        # making default iteration of tree to be in-order
         for node in self.in_order():
             yield node
 
@@ -174,6 +174,9 @@ class LinkedBinaryTree(LinkedBinaryTreeTraversalMixin, BinaryTree):
 
     def left(self, node):
         return node._left
+
+    def is_leaf(self, node):
+        return not node._left and not node._right
 
     def element(self, node: BinaryTreeNode):
         if node is not None:
