@@ -4,10 +4,6 @@ from arrays.services import swap_arr_elem
 
 
 class _BinaryHeap:
-    # class HeapNode(LinkedBinaryTree.BinaryTreeNode):
-    #     def __init__(self, data, left=None, right=None, **kwargs):
-    #         super().__init__(data, left, right, **kwargs)
-
     def __init__(self, arr: [] = None):
         self._size = len(arr)
         self.heap = self._get_heap(arr)
@@ -120,6 +116,7 @@ class MaxBinaryHeap(_BinaryHeap):
         return replaced_elem
 
 
+# Ref: http://interactivepython.org/courselib/static/pythonds/Trees/BinaryHeapImplementation.html
 class _ManualHeap(_BinaryHeap):
     def _get_heap(self, arr):
         return [0] + (arr or [])
