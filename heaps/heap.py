@@ -5,8 +5,8 @@ from arrays.services import swap_arr_elem
 
 class _BinaryHeap:
     def __init__(self, arr: [] = None):
-        self._size = len(arr)
         self.heap = self._get_heap(arr)
+        self._size = len(self.heap)
         self.heapify()
 
     def _get_heap(self, arr):
@@ -31,13 +31,21 @@ class _BinaryHeap:
     def is_empty(self):
         return not self._size
 
+    def _push(self, elem):
+        raise NotImplementedError('Has to be Implemented by sub class')
+
+    def _pop(self, elem):
+        raise NotImplementedError('Has to be Implemented by sub class')
+
     def pop(self):
         self._size -= 1
-        return heapq.heappop(self.heap)
+        return self._pop()
+        # return heapq.heappop(self.heap)
 
     def push(self, elem):
         self._size += 1
-        return heapq.heappush(self.heap, elem)
+        return self._push(elem)
+        # return heapq.heappush(self.heap, elem)
 
     @staticmethod
     def get_parent_index(child_index):
@@ -169,7 +177,6 @@ class _ManualHeap(_BinaryHeap):
     def get_right_child_index(parent_index: int):
         return parent_index * 2 + 1
 
-    # def push(self, elem: int):
     def push(self, elem):
         self.heap.append(elem)
         self._push()
