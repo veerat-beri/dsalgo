@@ -32,19 +32,12 @@ class RunningStreamMedian:
             else:
                 self.max_heap.push(elem)
         else:
-
-
-
             if elem > previous_median:
                 self.min_heap.push(elem)
                 elem_inserted_in = self.min_heap
             else:
-                print('before push:', elem, self.min_heap, self.max_heap)
                 self.max_heap.push(elem)
-                print('after push:', self.max_heap)
-                print(self.max_heap.get_max())
 
-            print(elem_inserted_in.root)
             are_heap_len_equal = False
 
         return are_heap_len_equal, elem_inserted_in

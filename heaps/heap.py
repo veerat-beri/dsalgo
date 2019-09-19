@@ -31,21 +31,23 @@ class _BinaryHeap:
     def is_empty(self):
         return not self._size
 
-    def _push(self, elem):
+    def _push(self):
         raise NotImplementedError('Has to be Implemented by sub class')
 
-    def _pop(self, elem):
+    def _pop(self):
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def pop(self):
+        # if self.is_empty():
+        #     print('Heap is empty')
+        #     raise IndexError
         self._size -= 1
         return self._pop()
-        # return heapq.heappop(self.heap)
 
     def push(self, elem):
         self._size += 1
-        return self._push(elem)
-        # return heapq.heappush(self.heap, elem)
+        self.heap.append(elem)
+        return self._push()
 
     @staticmethod
     def get_parent_index(child_index):
@@ -104,6 +106,12 @@ class MinBinaryHeap(_BinaryHeap):
     def replace_root(self, elem: int):
         return heapq.heapreplace(self.heap, elem)
 
+    def _push(self):
+        return heapq._siftdown(self.heap, 0, len(self.heap)-1)
+
+    def _pop(self):
+        return heapq.heappop(self.heap)
+
 
 class MaxBinaryHeap(_BinaryHeap):
     def get_max(self):
@@ -122,6 +130,12 @@ class MaxBinaryHeap(_BinaryHeap):
         self.heap[heap_arr_index] = self.heap[-1]
         heapq._siftup_max(self.heap, 0)
         return replaced_elem
+
+    def _push(self):
+        return heapq._siftdown_max(self.heap, 0, len(self.heap) - 1)
+
+    def _pop(self):
+        return heapq._heappop_max(self.heap)
 
 
 # Ref: http://interactivepython.org/courselib/static/pythonds/Trees/BinaryHeapImplementation.html
