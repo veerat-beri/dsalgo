@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/median-of-stream-of-integers-running-integers/
+# https://www.geeksforgeeks.org/median-of-stream-of-running-integers-using-stl/
 
 from heaps.heap import MinBinaryHeap, MaxBinaryHeap
 
@@ -59,6 +60,8 @@ class RunningStreamMedian:
 def run():
     # arr = [5, 10, 15, ]
     arr = [5, 15, 10, 20, 3, ]
+
+    print(f'Medians for Running stream {arr} are:')
     for median in RunningStreamMedian(arr).get_median():
         print(median)
 
