@@ -13,17 +13,17 @@ def is_pos_feasible(row, col, board, board_size):
     for pos in range(col):
         if board[row][pos] == 1:
             return False
-    for (rowNo, colNo) in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[rowNo][colNo]:
+    for (row_no, col_no) in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[row_no][col_no]:
             return False
-    for (rowNo, colNo) in zip(range(row, board_size), range(col, -1, -1)):
-        if board[rowNo][colNo]:
+    for (row_no, col_no) in zip(range(row, board_size), range(col, -1, -1)):
+        if board[row_no][col_no]:
             return False
     return True
 
 
 def get_empty_board(board_size):
-    return [[0] * board_size for row in range(board_size)]
+    return [[0] * board_size for _ in range(board_size)]
 
 
 def backtrack(board_size):

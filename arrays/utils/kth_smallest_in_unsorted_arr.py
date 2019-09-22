@@ -28,7 +28,6 @@ def get_kth_smallest_num(arr: [], k, execution_method = 1):
     def _use_max_heap():
         print('Using MAX-Heap..')
 
-        # heap = MaxBinaryHeap(sorted_arrays[:k])
         heap = ManualMaxHeap(arr[:k])
         for arr_index in range(k, arr_len):
             elem = arr[arr_index]

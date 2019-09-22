@@ -33,12 +33,10 @@ class BuildArraySegmentTree(_BuildSegmentTree):
         lower_half_range_arr_sum = self._build_tree(low, ArraySegmentTree.get_range_mid(low, high), self._tree.get_left_node_index(tree_arr_index))
         upper_half_range_arr_sum = self._build_tree(ArraySegmentTree.get_range_mid(low, high) + 1, high, self._tree.get_right_node_index(tree_arr_index))
 
-        self._tree.add_node(tree_arr_index, low, high, lower_half_range_arr_sum + upper_half_range_arr_sum)
-        return lower_half_range_arr_sum + upper_half_range_arr_sum
+        node_sum_value = lower_half_range_arr_sum + upper_half_range_arr_sum
+        self._tree.add_node(tree_arr_index, low, high, node_sum_value)
+        return node_sum_value
 
     def get_tree(self):
         self._build_tree(0, len(self.input_arr) - 1, 0)
         return self._tree
-
-
-
