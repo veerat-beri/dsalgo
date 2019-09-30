@@ -6,26 +6,27 @@ from typing import List
 
 # Recursive Approach
 def get_total_arrangements(caps_collections: List[List[int]]):
-    possible_arrangements_count = 0
     total_cap_collections = len(caps_collections)
 
-    def _process_possible_arrangements(selected_caps_set, collection_index):
-        nonlocal possible_arrangements_count
-
+    def _process_possible_arrangements(selected_caps_set, collection_index, possible_arrangements_count):
         if collection_index >= total_cap_collections:
-            possible_arrangements_count += 1
-            return
+            return possible_arrangements_count + 1
 
         caps_collection = caps_collections[collection_index]
         for cap in caps_collection:
             if cap in selected_caps_set:
                 continue
             selected_caps_set.add(cap)
-            _process_possible_arrangements(selected_caps_set, collection_index + 1)
+            possible_arrangements_count = _process_possible_arrangements(selected_caps_set, collection_index + 1, possible_arrangements_count)
             selected_caps_set.remove(cap)
+        return possible_arrangements_count
 
-    _process_possible_arrangements(set(), 0)
-    return possible_arrangements_count
+    return _process_possible_arrangements(set(), 0, 0)
+
+############################################################
+# DP approach is covered in DP section
+# /DP/utils/bitmasking/n_caps.py
+############################################################
 
 
 # driver code
@@ -36,6 +37,7 @@ def run():
         [5, 100, ],
     ]
 
+    print(f'Caps collections: {caps_collections}')
     print(f'Total number of ways to select unique cap from each set: {get_total_arrangements(caps_collections)}')
 
 
