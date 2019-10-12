@@ -90,8 +90,8 @@ class CheckArrIsHeap:
 
 # driver code
 def run():
-    heap = [90, 15, 10, 7, 12, 2]
-    # heap = [65, 91, ]
+    # heap = [90, 15, 10, 7, 12, 2]
+    heap = [65, 91, ]
     print(f'Given arr: {heap}')
 
     if CheckArrIsHeap(heap, CheckArrIsHeap.MAX, CheckArrIsHeap.RECURSIVE).do_arr_repr_heap():
