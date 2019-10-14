@@ -2,6 +2,8 @@
 # https://www.geeksforgeeks.org/find-element-given-index-number-rotations/
 
 
+# Time Complexity: O(no of rotations)
+# Space Complexity: O(1)
 def get_new_index_after_rotations(arr: [], rotations_arr: [], searched_index: int):
     assert searched_index in range(len(arr)), 'searched_index in not in arr range'
 

@@ -6,9 +6,9 @@ from heaps.heap import ManualMinHeap, ManualMaxHeap
 from sorting.quick_sort import get_pivot_index
 
 
-def get_kth_smallest_num(arr: [], k, execution_method = 1):
+def get_kth_smallest_num(arr: [], k, execution_method=1):
     # Using Min Heap
-    # Time-complexity: O(N + k*log2 k)
+    # Time-complexity: O(N + k*log2 N)
     arr_len = len(arr)
     assert k <= arr_len, 'k can not be greater than sorted_arrays-len'
 

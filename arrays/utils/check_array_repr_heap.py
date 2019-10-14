@@ -32,6 +32,8 @@ from heaps.heap import MaxBinaryHeap, MinBinaryHeap
 #     return False
 
 
+# Time Complexity: O(N)
+# Space Complexity: O(1) (not considering recursion stack or iteration queue space)
 class CheckArrIsHeap:
     MAX = MaxBinaryHeap
     MIN = MinBinaryHeap
