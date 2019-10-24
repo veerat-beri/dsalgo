@@ -6,7 +6,7 @@ from arrays.services import swap_arr_elem
 class _BinaryHeap:
     def __init__(self, arr: [] = None):
         self.heap = self._get_heap(arr)
-        self._size = len(self.heap)
+        self._size = len(arr)
         self.heapify()
 
     def _get_heap(self, arr):
