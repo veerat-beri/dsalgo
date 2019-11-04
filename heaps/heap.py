@@ -4,13 +4,13 @@ from arrays.services import swap_arr_elem
 
 
 class _BinaryHeap:
-    def __init__(self, arr: [] = None):
+    def __init__(self, arr: [] = []):
         self.heap = self._get_heap(arr)
         self._size = len(arr)
         self.heapify()
 
     def _get_heap(self, arr):
-        return arr[:] if arr else []
+        return arr[:]
 
     @property
     def parent(self):
@@ -38,14 +38,11 @@ class _BinaryHeap:
         raise NotImplementedError('Has to be Implemented by sub class')
 
     def pop(self):
-        # if self.is_empty():
-        #     print('Heap is empty')
-        #     raise IndexError
-        self._size -= 1
-        return self._pop()
+        min_elem = self.root
+        self._pop()
+        return min_elem
 
     def push(self, elem):
-        self._size += 1
         self.heap.append(elem)
         return self._push()
 
@@ -107,9 +104,11 @@ class MinBinaryHeap(_BinaryHeap):
         return heapq.heapreplace(self.heap, elem)
 
     def _push(self):
-        return heapq._siftdown(self.heap, 0, len(self.heap)-1)
+        self._size += 1
+        return heapq._siftdown(self.heap, 0, len(self.heap) - 1)
 
     def _pop(self):
+        self._size -= 1
         return heapq.heappop(self.heap)
 
 
@@ -132,17 +131,20 @@ class MaxBinaryHeap(_BinaryHeap):
         return replaced_elem
 
     def _push(self):
+        self._size += 1
         return heapq._siftdown_max(self.heap, 0, len(self.heap) - 1)
 
     def _pop(self):
+        self._size -= 1
         return heapq._heappop_max(self.heap)
 
 
 # Ref: http://interactivepython.org/courselib/static/pythonds/Trees/BinaryHeapImplementation.html
 class _ManualHeap(_BinaryHeap):
     def _get_heap(self, arr):
-        return [0] + (arr or [])
+        return [0] + arr
 
+    # "_percolate_down" -> "_siftup" in heapq
     def _percolate_down(self, elem_index: int):
         raise NotImplementedError('Has to be Implemented by sub class')
 
@@ -165,12 +167,23 @@ class _ManualHeap(_BinaryHeap):
         self.heap[self.get_root_index()] = elem
         self._percolate_down(self.get_root_index())
 
+    # "_percolate_up" -> "_siftdown" in heapq
     def _percolate_up(self, elem_index: int):
-        while self.get_parent_index(elem_index):
-            parent_index = self.get_parent_index(elem_index)
-            if self._is_swap_needed(parent_index, elem_index):
-                swap_arr_elem(parent_index, elem_index, self.heap)
-            elem_index = parent_index
+        # Recursive Approach
+        ############################################################
+        parent_index = self.get_parent_index(elem_index)
+        if parent_index and self._is_swap_needed(elem_index, parent_index):
+            swap_arr_elem(parent_index, elem_index, self.heap)
+            self._percolate_up(parent_index)
+        ############################################################
+        # Iterative Approach
+        ############################################################
+        # while self.get_parent_index(elem_index):
+        #     parent_index = self.get_parent_index(elem_index)
+        #     if self._is_swap_needed(parent_index, elem_index):
+        #         swap_arr_elem(parent_index, elem_index, self.heap)
+        #     elem_index = parent_index
+        ############################################################
 
     def _is_swap_needed(self, parent_index, child_index):
         raise NotImplementedError('Has to be Implemented by sub class')
@@ -190,18 +203,6 @@ class _ManualHeap(_BinaryHeap):
     @staticmethod
     def get_right_child_index(parent_index: int):
         return parent_index * 2 + 1
-
-    def push(self, elem):
-        self.heap.append(elem)
-        self._push()
-
-    def pop(self):
-        if self.is_empty():
-            print('Heap is empty')
-            raise IndexError
-        min_elem = self.root
-        self._pop()
-        return min_elem
 
     def heapify(self):
         self._build_heap(self.get_parent_index(len(self)))

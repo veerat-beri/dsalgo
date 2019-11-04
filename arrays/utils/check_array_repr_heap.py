@@ -94,12 +94,13 @@ class CheckArrIsHeap:
 def run():
     # heap = [90, 15, 10, 7, 12, 2]
     heap = [65, 91, ]
+    heap_type = CheckArrIsHeap.MAX
     print(f'Given arr: {heap}')
 
-    if CheckArrIsHeap(heap, CheckArrIsHeap.MAX, CheckArrIsHeap.RECURSIVE).do_arr_repr_heap():
+    if CheckArrIsHeap(heap, heap_type, CheckArrIsHeap.RECURSIVE).do_arr_repr_heap():
         print('Represents Heap')
     else:
-        print('It does not represent Heap')
+        print('It does not represent {} Heap'.format(repr(heap_type)))
 
 
 if __name__ == '__main__':
