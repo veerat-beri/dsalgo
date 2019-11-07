@@ -225,7 +225,11 @@ class ManualMinHeap(_ManualHeap):
         return self.get_left_child_index(parent_index)
 
     def _percolate_down(self, elem_index: int):
+
+
+        print('in original')
         while self.get_left_child_index(elem_index) <= len(self):
+            print(elem_index)
             min_child_index = self._get_min_child_index(elem_index)
             if self._is_swap_needed(elem_index, min_child_index):
                 swap_arr_elem(elem_index, min_child_index, self.heap)
