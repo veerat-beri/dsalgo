@@ -1,4 +1,5 @@
 import heapq
+import operator
 
 from arrays.services import swap_arr_elem
 
@@ -141,16 +142,18 @@ class MaxBinaryHeap(_BinaryHeap):
 
 # Ref: http://interactivepython.org/courselib/static/pythonds/Trees/BinaryHeapImplementation.html
 class _ManualHeap(_BinaryHeap):
+    def __repr__(self):
+        return str(self.heap[1:])
+
     def _get_heap(self, arr):
         return [0] + arr
 
-    # "_percolate_down" -> "_siftup" in heapq
-    def _percolate_down(self, elem_index: int):
-        raise NotImplementedError('Has to be Implemented by sub class')
-
     def _build_heap(self, elem_index: int):
         while elem_index:
+            # Why `_percolate_down` is more efficient than `_percolate_up` for building heap:
+            # https://stackoverflow.com/questions/9755721/how-can-building-a-heap-be-on-time-complexity
             self._percolate_down(elem_index)
+
             elem_index -= 1
 
     def _pop(self):
@@ -167,12 +170,20 @@ class _ManualHeap(_BinaryHeap):
         self.heap[self.get_root_index()] = elem
         self._percolate_down(self.get_root_index())
 
+    def _get_required_child_index(self, elem_index):
+        left_child_index = self.get_left_child_index(elem_index)
+        right_child_index = self.get_right_child_index(elem_index)
+
+        if right_child_index <= self._size:
+            return self.COMPARATOR_FUNC(left_child_index, right_child_index, key=lambda arr_index: self.heap[arr_index])
+        return left_child_index
+
     # "_percolate_up" -> "_siftdown" in heapq
     def _percolate_up(self, elem_index: int):
         # Recursive Approach
         ############################################################
         parent_index = self.get_parent_index(elem_index)
-        if parent_index and self._is_swap_needed(elem_index, parent_index):
+        if parent_index and self._is_swap_needed(child_index=elem_index, parent_index=parent_index):
             swap_arr_elem(parent_index, elem_index, self.heap)
             self._percolate_up(parent_index)
         ############################################################
@@ -185,8 +196,29 @@ class _ManualHeap(_BinaryHeap):
         #     elem_index = parent_index
         ############################################################
 
+    # "_percolate_down" -> "_siftup" in heapq
+    def _percolate_down(self, elem_index: int):
+        ############################################################
+        # Iterative Approach
+        ############################################################
+        # while self.get_left_child_index(elem_index) <= len(self):
+        #     min_child_index = self._get_required_child_index(elem_index)
+        #     if self._is_swap_needed(elem_index, min_child_index):
+        #         swap_arr_elem(elem_index, min_child_index, self.heap)
+        #     elem_index = min_child_index
+        ############################################################
+        # Recursive Approach
+        ############################################################
+        if self.get_left_child_index(elem_index) > len(self):
+            return
+        child_index = self._get_required_child_index(elem_index)
+        if self._is_swap_needed(child_index=child_index, parent_index=elem_index):
+            swap_arr_elem(child_index, elem_index, self.heap)
+            self._percolate_down(child_index)
+        ############################################################
+
     def _is_swap_needed(self, parent_index, child_index):
-        raise NotImplementedError('Has to be Implemented by sub class')
+        return self.COMPARATOR_OPERATOR(self.heap[child_index], self.heap[parent_index])
 
     @staticmethod
     def get_root_index():
@@ -209,31 +241,8 @@ class _ManualHeap(_BinaryHeap):
 
 
 class ManualMinHeap(_ManualHeap):
-    def _is_swap_needed(self, parent_index, child_index):
-        return self.heap[parent_index] > self.heap[child_index]
-
-    def __get_min_child_index(self, parent_index: int):
-        left_child = self.get_left_child(parent_index)
-        right_child = self.get_right_child(parent_index)
-        return self.get_left_child_index(
-            parent_index) if left_child < right_child else self.get_right_child_index(parent_index)
-
-    def _get_min_child_index(self, parent_index: int):
-        # Assuming parent has at least left-child
-        if self.get_right_child_index(parent_index) <= self._size:
-            return self.__get_min_child_index(parent_index)
-        return self.get_left_child_index(parent_index)
-
-    def _percolate_down(self, elem_index: int):
-
-
-        print('in original')
-        while self.get_left_child_index(elem_index) <= len(self):
-            print(elem_index)
-            min_child_index = self._get_min_child_index(elem_index)
-            if self._is_swap_needed(elem_index, min_child_index):
-                swap_arr_elem(elem_index, min_child_index, self.heap)
-            elem_index = min_child_index
+    COMPARATOR_FUNC = min
+    COMPARATOR_OPERATOR = operator.lt
 
     def get_min(self):
         assert len(self), 'Heap cannot be empty'
@@ -241,27 +250,8 @@ class ManualMinHeap(_ManualHeap):
 
 
 class ManualMaxHeap(_ManualHeap):
-    def _is_swap_needed(self, parent_index, child_index):
-        return self.heap[parent_index] < self.heap[child_index]
-
-    def __get_max_child_index(self, parent_index: int):
-        left_child = self.get_left_child(parent_index)
-        right_child = self.get_right_child(parent_index)
-        return self.get_left_child_index(parent_index) if left_child > right_child else self.get_right_child_index(
-            parent_index)
-
-    def _get_max_child_index(self, parent_index: int):
-        # Assuming parent has at least left-child
-        if self.get_right_child_index(parent_index) <= self._size:
-            return self.__get_max_child_index(parent_index)
-        return self.get_left_child_index(parent_index)
-
-    def _percolate_down(self, elem_index: int):
-        while self.get_left_child_index(elem_index) <= len(self):
-            max_child_index = self._get_max_child_index(elem_index)
-            if self._is_swap_needed(elem_index, max_child_index):
-                swap_arr_elem(elem_index, max_child_index, self.heap)
-            elem_index = max_child_index
+    COMPARATOR_FUNC = max
+    COMPARATOR_OPERATOR = operator.gt
 
     def get_max(self):
         assert len(self), 'Heap cannot be empty'
@@ -272,8 +262,16 @@ class CustomNodeMinHeap(ManualMinHeap):
     def _is_swap_needed(self, parent_index, child_index):
         return self.heap[parent_index].data > self.heap[child_index].data
 
-    def __get_min_child_index(self, parent_index: int):
-        left_child = self.get_left_child(parent_index)
-        right_child = self.get_right_child(parent_index)
-        return self.get_left_child_index(
-            parent_index) if left_child.data < right_child.data else self.get_right_child_index(parent_index)
+    def _get_required_child_index(self, elem_index):
+        left_child_index = self.get_left_child_index(elem_index)
+        right_child_index = self.get_right_child_index(elem_index)
+
+        if right_child_index <= self._size:
+            return self.COMPARATOR_FUNC(left_child_index, right_child_index, key=lambda arr_index: self.heap[arr_index].data)
+        return left_child_index
+
+    # def __get_min_child_index(self, parent_index: int):
+    #     left_child = self.get_left_child(parent_index)
+    #     right_child = self.get_right_child(parent_index)
+    #     return self.get_left_child_index(
+    #         parent_index) if left_child.data < right_child.data else self.get_right_child_index(parent_index)
