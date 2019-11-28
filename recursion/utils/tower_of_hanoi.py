@@ -2,24 +2,32 @@
 # https://www.geeksforgeeks.org/c-program-for-tower-of-hanoi/
 
 
-def shift_n_disks(no_of_disks):
-    def _shift_n_disks(remaining_disks, aux_pillar, from_pillar, to_pillar):
-        if remaining_disks == 1:
-            print('moving disk=1 from pillar={} to second-pillar={}'.format(from_pillar, to_pillar))
-            return
+def shift_n_disks(disk_num, aux_pillar, from_pillar, to_pillar):
+    if disk_num == 1:
+        print('moving disk=1 from {} to {}'.format(from_pillar, to_pillar))
+        return
 
-        _shift_n_disks(remaining_disks-1, to_pillar, from_pillar, aux_pillar)
-        print('move disk={} from pillar={} to pillar={}'.format(remaining_disks, from_pillar, to_pillar))
-        _shift_n_disks(remaining_disks-1, from_pillar, aux_pillar, to_pillar)
-        print('move disk={} from pillar={} to pillar={}'.format(remaining_disks, from_pillar, to_pillar))
-
-    _shift_n_disks(no_of_disks, 'A', 'B', 'C')
+    shift_n_disks(disk_num-1, to_pillar, from_pillar, aux_pillar)
+    print('move disk={} from {} to {}'.format(disk_num, from_pillar, to_pillar))
+    shift_n_disks(disk_num-1, from_pillar, aux_pillar, to_pillar)
 
 
 # driver code
 def run():
-    print('Main pillar={}, Aux pillar={}, To pillar={}'.format('A', 'B', 'C'))
-    shift_n_disks(3)
+    #                |                   |                   |
+    #                |                   |                   |
+    #                -                   |                   |
+    #               ---                  |                   |
+    #              -----                 |                   |
+    #            _________           _________           _________
+    #         A (Source pillar)    B (Aux pillar)    C (Destination pillar)
+
+    from_pillar = 'A'
+    aux_pillar = 'B'
+    to_pillar = 'C'
+
+    print('Main pillar={}, Aux pillar={}, To pillar={}'.format(from_pillar, aux_pillar, to_pillar))
+    shift_n_disks(3, aux_pillar, from_pillar, to_pillar)
 
 
 if __name__ == '__main__':
