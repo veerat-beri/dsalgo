@@ -9,62 +9,88 @@ class StringPermutations:
         self.str_len = len(string)
         self.string = string
 
-    def handle_permuted_str(self, permuted_string: str):
-        # print(permuted_string)
-        yield permuted_string
-
     # Time Complexity: O(N * N!)
     # This will give duplicate results for strings having repeated characters.
-    def _get_all_permutations_with_duplicates(self, str_so_far: str, fixed_index: int):
+    def _get_all_permutations_with_duplicates(self, str_so_far: str, fixed_index: int = 0):
         if fixed_index == self.str_len - 1:
-            # self.handle_permuted_str(str_so_far)
             yield str_so_far
             return
 
         for str_index in range(fixed_index, self.str_len):
             if fixed_index != str_index and str_so_far[str_index] == str_so_far[fixed_index]:
-
-
-                print('Duplicate', fixed_index, str_index)
                 continue
-
-
-            print('Normally', fixed_index, str_index, str_so_far)
             swapped_str = swap_chars(str_so_far, fixed_index, str_index)
-            print('after swap:', swapped_str)
             for string in self._get_all_permutations_with_duplicates(swapped_str, fixed_index + 1):
                 yield string
 
-    def _get_all_permutations_without_duplicates(self):
+    def _get_all_permutations_without_duplicates(self, *args):
         #############################################
         # Method 1, using set
-        # Time Complexity: O(N * N! + N), here "+ N" is for final result set traversal
+        # Time Complexity: O(N * N!)
         # Space Complexity: O(N + log N), here log N is Stack-space
         unique_permutations = set()
 
-        # Monkey Patching
-        # self.handle_permuted_str = lambda permuted_string: unique_permutations.add(permuted_string)
-
-        self._get_all_permutations_with_duplicates(self.string, 0)
-
-        # for permuted_str in unique_permutations:
-        #     print(permuted_str)
+        for string in self._get_all_permutations_with_duplicates(self.string):
+            if string in unique_permutations:
+                continue
+            unique_permutations.add(string)
+            yield string
         #############################################
 
-    def get_all_permutations(self):
-        # self._get_all_permutations_with_duplicates(self.string, 0)
-        # self._get_all_permutations_without_duplicates()
+    def print_all_permutations(self):
         count = 1
-        for string in self._get_all_permutations_with_duplicates(self.string, 0):
+        for string in self._get_all_permutations_without_duplicates(self.string):
+            print(count, string)
+            count += 1
+
+
+# Problem Statement
+# https://www.geeksforgeeks.org/generate-all-the-binary-strings-of-n-bits/
+class StringOfNBits:
+    def __init__(self, n):
+        self.str_len = n
+
+    def get_strings_of_n_bits(self, str_so_far='', str_index=-1):
+        if str_index >= self.str_len - 1:
+            yield str_so_far
+            return
+
+        ############################################################
+        # Recursive Approach-1
+        ############################################################
+        for string in self.get_strings_of_n_bits(str_so_far + '0', str_index + 1):
+            yield string
+
+        for string in self.get_strings_of_n_bits(str_so_far + '1', str_index + 1):
+            yield string
+
+        ############################################################
+        # Recursive Approach-2
+        # (Wrong, as it skips each str-index once and consider once and we do not need to skip any index)
+        ############################################################
+        # for index in range(str_index + 1, self.str_len):
+        #     for string in self.get_strings_of_n_bits(str_so_far + '0', index):
+        #         yield string
+        #     for string in self.get_strings_of_n_bits(str_so_far + '1', index):
+        #         yield string
+        ############################################################
+
+    def print_all_permutations(self):
+        count = 1
+        for string in self.get_strings_of_n_bits():
             print(count, string)
             count += 1
 
 
 # driver code
 def run():
-    string = 'abcc'
-    print(f'All permutations of the string={string} are: \n')
-    StringPermutations(string).get_all_permutations()
+    # string = 'abcc'
+    # print(f'All permutations of the string={string} are: \n')
+    # StringPermutations(string).print_all_permutations()
+
+    n = 4
+    print(f'\nAll strings of {n}-bits are: \n')
+    StringOfNBits(n).print_all_permutations()
 
 
 if __name__ == '__main__':

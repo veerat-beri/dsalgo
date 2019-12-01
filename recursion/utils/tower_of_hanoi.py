@@ -25,9 +25,10 @@ def run():
     from_pillar = 'A'
     aux_pillar = 'B'
     to_pillar = 'C'
+    num_of_disks = 64
 
-    print('Main pillar={}, Aux pillar={}, To pillar={}'.format(from_pillar, aux_pillar, to_pillar))
-    shift_n_disks(3, aux_pillar, from_pillar, to_pillar)
+    print('Main pillar={}, Aux pillar={}, To pillar={}\n'.format(from_pillar, aux_pillar, to_pillar))
+    shift_n_disks(num_of_disks, aux_pillar, from_pillar, to_pillar)
 
 
 if __name__ == '__main__':
