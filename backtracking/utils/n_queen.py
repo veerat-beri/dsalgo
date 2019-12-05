@@ -1,12 +1,7 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/
 
-
-def print_board(board, board_size):
-    for i in range(board_size):
-        for j in range(board_size):
-            print(board[i][j], end=' ')
-        print(end='\n')
+from arrays.services import print_matrix, create_matrix
 
 
 def is_pos_feasible(row, col, board, board_size):
@@ -22,12 +17,8 @@ def is_pos_feasible(row, col, board, board_size):
     return True
 
 
-def get_empty_board(board_size):
-    return [[0] * board_size for _ in range(board_size)]
-
-
 def backtrack(board_size):
-    board = get_empty_board(board_size)
+    board = create_matrix(board_size, board_size)
 
     def _backtrack(col, board):
         if col >= board_size:
@@ -48,7 +39,7 @@ def run():
     are_queens_set, board = backtrack(board_size)
     if are_queens_set:
         print('Board status after setting N queens is: ')
-        print_board(board, board_size)
+        print_matrix(board)
     else:
         print('Solution doe not exists!')
 
