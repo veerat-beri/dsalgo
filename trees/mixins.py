@@ -7,11 +7,6 @@ class LinkedBinaryTreeTraversalMixin:
     BFS = 'BFS'
     DFS = 'DFS'
 
-    TRAVERSAL_CHOICES = (
-        (BFS, 'BREADTH FIRST SEARCH'),
-        (DFS, 'DEPTH FIRST SEARCH'),
-    )
-
     def _subtree_preorder(self, node):
         ###############
         # 1st Approach

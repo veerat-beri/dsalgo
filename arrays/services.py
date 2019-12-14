@@ -2,8 +2,14 @@ def swap_arr_elem(index1: int, index2: int, arr: list):
     arr[index1], arr[index2] = arr[index2], arr[index1]
 
 
-def print_matrix(board):
-    for row in board:
+def iter_matrix(matrix):
+    for row in matrix:
+        for elem in row:
+            yield elem
+
+
+def print_matrix(matrix):
+    for row in matrix:
         for elem in row:
             print(elem, end=' ')
         print()

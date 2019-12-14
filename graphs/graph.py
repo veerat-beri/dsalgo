@@ -1,37 +1,63 @@
 from collections import deque
 
 
-class _BaseGraph:
+class Graph:
     DIRECTED = 'directed'
     UNDIRECTED = 'undirected'
 
-    TYPE_CHOICES = (
-        (DIRECTED, 'DIRECTED'),
-        (UNDIRECTED, 'UNDIRECTED'),
-    )
+    class Vertex:
+        __slots__ = '_element'
 
-    class GraphNode:
         def __init__(self, data):
-            self._data = data
-            self._adj_nodes = list()
+            self._element = data
+
+        def __hash__(self):
+            return hash(id(self))
 
         @property
-        def data(self):
-            return self._data
+        def element(self):
+            return self._element
+
+    class Edge:
+        __slots__ = '_element', '_origin', '_destination'
+
+        def __init__(self, source_vertex, destination_vertex, element=None):
+            self._origin = source_vertex
+            self._destination = destination_vertex
+            self._element = element
+
+        def __hash__(self):
+            return hash((self._origin, self._destination))
+
+        def opposite(self, vertex):
+            return self._destination if vertex is self._origin else self._origin
+
+        def endpoints(self):
+            return self._origin, self._destination
 
         @property
-        def adjacent_nodes(self):
-            return self._adj_nodes
+        def element(self):
+            return self._element
 
-    def __init__(self, no_of_nodes, graph_type=):
-        self.graph = {}
-        self._size = 0
+    def __init__(self, directed=False):
+        self._outgoing_edges = {}
+        self._incoming_edges = {} if directed else self._outgoing_edges
 
-    def __len__(self):
-        return self._size
+    @property
+    def is_directed(self):
+        return self._incoming_edges is not self._outgoing_edges
 
-class AdjacencyGraph:
-    pass
+    @property
+    def vertex_count(self):
+        return len(self._outgoing_edges)
+
+    def vertices(self):
+        return list(self._outgoing_edges)
+
+    @property
+    def edge_count(self):
+        total_edges = sum(len(self._outgoing_edges[vertex]) for vertex in self._outgoing_edges)
+        return total_edges//2 if self.is_directed else total_edges
 
     # def get_new_node(self, node_data):
     #     return self.GraphNode(node_data)
