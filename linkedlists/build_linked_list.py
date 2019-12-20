@@ -2,7 +2,7 @@ from linkedlists.linked_list import SinglyLinkedList, DoublyLinkedList
 
 
 class _BuildLinkedList:
-    def __init__(self, list_of_nodes: [int]=None, insert_at_end=True, auto_populate=False, **kwargs):
+    def __init__(self, list_of_nodes: [int] = None, insert_at_end=True, auto_populate=False, **kwargs):
         self.insert_at_end = insert_at_end
         self._linked_list = self._get_ll_instance()
 

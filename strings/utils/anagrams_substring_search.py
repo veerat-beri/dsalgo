@@ -47,7 +47,7 @@ class AnagramSubstringSearch:
         self.__update_text_window_extra_chars_count(char, -1, text_window_extra_chars_count)
 
     def __reset_text_window_extra_chars_count(self):
-        return copy(self.pattern_char_count_dict)
+        return dict(self.pattern_char_count_dict)
 
     def __get_patter_str_chars_count(self):
         patter_str_chars_count = defaultdict(int)
