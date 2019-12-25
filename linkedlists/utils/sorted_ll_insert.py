@@ -14,6 +14,9 @@ def insert_in_sorted_ll(singly_linked_list: SinglyLinkedList, new_node_data: int
     if not current_node:
         singly_linked_list.head = new_node
 
+    ############################################################
+    # Code handling Method 1
+    ############################################################
     # Head is larger than current node
     elif current_node.data > new_node_data:
         new_node.next = singly_linked_list.head
@@ -26,6 +29,23 @@ def insert_in_sorted_ll(singly_linked_list: SinglyLinkedList, new_node_data: int
 
         new_node.next = current_node.next
         current_node.next = new_node
+    ############################################################
+    # Code handling Method 2
+    ############################################################
+    # else:
+    #     previous_node = None
+    #     while current_node and current_node.data < new_node_data:
+    #         previous_node = current_node
+    #         current_node = current_node.next
+    #
+    #     new_node.next = current_node
+    #
+    #     if previous_node:
+    #         previous_node.next = new_node
+    #     # Head is larger than current node
+    #     else:
+    #         singly_linked_list.head = new_node
+    ############################################################
 
 
 # driver code

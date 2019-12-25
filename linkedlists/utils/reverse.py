@@ -7,7 +7,7 @@ from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 ######################################
 # Iterative approach
-
+######################################
 def reverse_linked_list(linked_list: SinglyLinkedList):
     current_node = linked_list.head
     previous_node = None
@@ -20,12 +20,21 @@ def reverse_linked_list(linked_list: SinglyLinkedList):
 
     return previous_node
 
+
 ######################################
 # Recursive Approach
+######################################
+def reverse_linked_list_recursive(linked_list: SinglyLinkedList):
+    def reverse_linked_list(current_node: SinglyLinkedList.Node, previous_node: SinglyLinkedList.Node = None):
+        if not current_node:
+            return previous_node
 
+        next_node = current_node.next
+        current_node.next = previous_node
+        return reverse_linked_list(next_node, current_node)
 
-# def reverse_linked_list(linked_list: SinglyLinkedList):
-#     pass
+    return reverse_linked_list(linked_list.head)
+
 
 ######################################
 
@@ -44,4 +53,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
