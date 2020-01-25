@@ -1,18 +1,11 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/
 
-
+from base import closing_opening_parenthesis_pairs
 from stacks.build_stack import BuildLinkedStack
 
 
 def are_parentheses_balanced(expression_str: str):
-
-    closing_opening_parenthesis_pairs = {
-        '}': '{',
-        ']': '[',
-        ')': '(',
-        '>': '<',
-    }
     opening_parentheses = set(closing_opening_parenthesis_pairs.values())
 
     stack = BuildLinkedStack().build()
@@ -30,7 +23,7 @@ def are_parentheses_balanced(expression_str: str):
 
 # driver code
 def run():
-    str_expression = "{()}[]"
+    str_expression = '{()}[]'
     print(f'Given str_expression: {str_expression}')
 
     if are_parentheses_balanced(str_expression):

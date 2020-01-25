@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/merge-two-sorted-linked-lists/
+# https://leetcode.com/problems/merge-two-sorted-lists/
 
 
 from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
@@ -82,10 +83,10 @@ def run():
     print('Sorted Linked list-2: ')
     singly_ll_2.print_linked_list()
 
-    new_sorted_mergd_ll = SinglyLinkedList(head=get_sorted_merged_ll(singly_ll_1, singly_ll_2))
+    new_sorted_merged_ll = SinglyLinkedList(head=get_sorted_merged_ll(singly_ll_1, singly_ll_2))
 
     print('New sorted Linked list after merge: ')
-    new_sorted_mergd_ll.print_linked_list()
+    new_sorted_merged_ll.print_linked_list()
 
 
 if __name__ == '__main__':

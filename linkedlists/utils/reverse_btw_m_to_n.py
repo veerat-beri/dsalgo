@@ -1,10 +1,14 @@
 # Problem Statement
 # https://leetcode.com/problems/reverse-linked-list-ii/
+# https://www.geeksforgeeks.org/reverse-sublist-linked-list/
 
 from linkedlists import SinglyLinkedList, BuildSinglyLinkedList
 
 
 def reverse_from_m_to_n(head: SinglyLinkedList.Node, m: int, n: int) -> SinglyLinkedList.Node:
+    if m == n:
+        return head
+
     current_node = head
     reverse_ll_elem_count = n - m + 1
     node_before_mth_node = None

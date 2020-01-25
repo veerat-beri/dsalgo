@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/merge-k-sorted-arrays/
+# https://leetcode.com/problems/merge-sorted-array/
 
 from collections import namedtuple
 
