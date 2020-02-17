@@ -1,32 +1,41 @@
 # Problem Statement
-# https://www.geeksforgeeks.org/array-rotation/
+# https://leetcode.com/problems/rotate-array/
 
-
+from typing import List
 from mathematical.school_problems import get_gcd
 
 
-# Efficient Juggling Algorithm
-# Time Complexity: O(N) OR O( gcd(n, d)*(n//d + 1) )
-# Space Complexity: O(1)
-def get_rotated_arr(arr: [], total_rotations: int):
-    assert arr, 'Array could not be empty'
+class RotateArray:
+    def __init__(self, total_rotations: int):
+        self.total_rotations = total_rotations
 
-    arr_len = len(arr)
-    for rotation_set_index in range(get_gcd(arr_len, total_rotations)):
-        set_first_rotated_elem = arr[rotation_set_index]
-        previous_rotated_index = rotation_set_index
-        while 1:
-            next_rotating_index = total_rotations + previous_rotated_index
-            if next_rotating_index >= arr_len:
-                next_rotating_index = next_rotating_index - arr_len
-            if next_rotating_index == rotation_set_index:
-                break
+    # https://www.geeksforgeeks.org/program-for-array-rotation-continued-reversal-algorithm/
+    def _using_arr_reversal(self):
+        pass
 
-            arr[previous_rotated_index] = arr[next_rotating_index]
-            previous_rotated_index = next_rotating_index
+    # Efficient Juggling Algorithm
+    # Time Complexity: O(N) OR O( gcd(n, d)*(n//d + 1) )
+    # Space Complexity: O(1)
+    # https://www.geeksforgeeks.org/array-rotation/
+    def get_rotated_arr(self, arr: []):
+        assert arr, 'Array could not be empty'
 
-        arr[previous_rotated_index] = set_first_rotated_elem
-    return arr
+        arr_len = len(arr)
+        for rotation_set_index in range(get_gcd(arr_len, self.total_rotations)):
+            set_first_rotated_elem = arr[rotation_set_index]
+            previous_rotated_index = rotation_set_index
+            while 1:
+                next_rotating_index = self.total_rotations + previous_rotated_index
+                if next_rotating_index >= arr_len:
+                    next_rotating_index = next_rotating_index - arr_len
+                if next_rotating_index == rotation_set_index:
+                    break
+
+                arr[previous_rotated_index] = arr[next_rotating_index]
+                previous_rotated_index = next_rotating_index
+
+            arr[previous_rotated_index] = set_first_rotated_elem
+        return arr
 
 
 # driver code
