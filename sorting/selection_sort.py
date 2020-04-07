@@ -1,10 +1,10 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/selection-sort/
 
-
 from arrays.services import swap_arr_elem
 
 
+# Not Stable: Example = [2, 2, 1]
 def get_sorted_arr(arr: []):
     arr_len = len(arr)
     for arr_index in range(arr_len - 1):

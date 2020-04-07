@@ -19,7 +19,7 @@ def get_name_from_num(num: int):
             num = num // 26 - 1
         else:
             # name_string[str_index] = _get_char(rem)
-            name_string.append(get_relative_char(rem, use_upper_case=True))
+            name_string.append(get_relative_char(rem - 1, use_upper_case=True))
             num = num // 26
 
         # str_index += 1
@@ -29,8 +29,8 @@ def get_name_from_num(num: int):
 
 # driver code
 def run():
-    # col_num = 702
-    col_num = 26
+    col_num = 80
+    # col_num = 26
     print(f'Column name for the column number {col_num} is: {get_name_from_num(col_num)}')
 
 

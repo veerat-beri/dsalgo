@@ -6,7 +6,7 @@
 from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 
-def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: SinglyLinkedList=None, head_1=None, head_2=None, use_heads=False, **kwargs):
+def get_sorted_merged_ll(linked_list_1: SinglyLinkedList = None, linked_list_2: SinglyLinkedList = None, head_1 = None, head_2 = None, use_heads = False, **kwargs):
     current_node_of_ll_1 = head_1 if use_heads else linked_list_1.head
     current_node_of_ll_2 = head_2 if use_heads else linked_list_2.head
 
@@ -35,6 +35,7 @@ def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: Si
 
         ###############
         # Insert remaining nodes, in case given two linked lists are of unequal length.
+        # TODO: Optimize below code
         while current_node_of_ll_2:
             current_node_of_new_ll.next = current_node_of_ll_2
             current_node_of_ll_2 = current_node_of_ll_2.next

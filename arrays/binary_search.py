@@ -20,7 +20,7 @@ def binary_search(arr, start, end, key):
 def run():
     arr = [10, 20, 30, 40, 50, 60]
     key = 50
-    res = binary_search(arr, 0, len(arr), key)
+    res = binary_search(arr, 0, len(arr) - 1, key)
     if res is not None:
         print('{} found at: '.format(key), res)
     else:

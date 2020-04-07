@@ -38,7 +38,7 @@ def get_floor_index_in_sorted_array(arr: [], searched_num):
 # driver code
 def run():
     arr = [1, 2, 4, 6, 10, 12, 14]
-    searched_num = 7
+    searched_num = 0
 
     print(f'Floor of {searched_num} in given array is: ')
     floor_index = get_floor_index_in_sorted_array(arr, searched_num)

@@ -51,7 +51,7 @@ class MergeSort:
     def _merge_sorted_arrays(self, low: int, mid: int, high: int):
         left_array = self.input_arr[low: mid + 1]
         right_arr = self.input_arr[mid + 1: high + 1]
-        self.merge_sorted_arrays(left_array, right_arr, low, self.input_arr)
+        self.merge_sorted_arrays(left_array, right_arr, self.input_arr, low)
 
     def sort_arr(self, low, high):
         if low >= high:
