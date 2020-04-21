@@ -1,8 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
 
-
-# logic ref: https://runestone.academy/runestone/books/published/pythonds/BasicDS/InfixPrefixandPostfixExpressions.html
 from base import closing_opening_parenthesis_pairs
 from stacks import BuildLinkedStack
 
@@ -36,6 +34,7 @@ class ExpressionConversion:
     def validate_prefix_expr(self):
         pass
 
+    # Logic: https://runestone.academy/runestone/books/published/pythonds/BasicDS/InfixPrefixandPostfixExpressions.html
     def infix_to_postfix(self, debug_mode=True):
         self.validate_infix_expr()
 

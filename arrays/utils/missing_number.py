@@ -7,7 +7,7 @@ class MissingNumber:
         self.arr = arr
         self.n = len(arr)
 
-    # Time Complexity: O()
+    # Time Complexity: O(2N)
     def get_missing_number(self):
         given_arr_xor = self.arr[0]
 

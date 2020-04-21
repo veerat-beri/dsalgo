@@ -19,6 +19,7 @@ class NextGreaterElement(GreaterElementMixin):
 # driver code
 def run():
     arr = [11, 13, 21, 3, ]
+    # arr = [10, 5, 8, 11, 3, ]
     print(f'Given array: \n{arr}')
     print(f'Next Greater elements in given array: \n{NextGreaterElement(arr).get_next_greater_elem()}')
 

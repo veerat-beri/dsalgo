@@ -20,10 +20,10 @@ class GreaterElementMixin:
         for elem in self.get_arr_traversal():
             while not self.intermediate_processing_stack.is_empty() and self.intermediate_processing_stack.top < elem:
                 self.intermediate_processing_stack.pop()
-            if self.intermediate_processing_stack.is_empty():
-                ans_arr.push(-1)
-            else:
-                ans_arr.push(self.intermediate_processing_stack.top)
+
+            # Push next greater elem in stack if exists
+            ans_arr.push(-1 if self.intermediate_processing_stack.is_empty() else self.intermediate_processing_stack.top)
+
             self.intermediate_processing_stack.push(elem)
 
         return ans_arr

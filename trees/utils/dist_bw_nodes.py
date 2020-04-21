@@ -16,11 +16,11 @@ def get_dist_bw_nodes(tree: LinkedBinaryTree, node_1_data, node_2_data):
     node_1_lca_dist = 0
     node_2_lca_dist = 0
 
-    for node, node_level in lca_rooted_tree.bfs():
+    for (node, node_level, _) in lca_rooted_tree.bfs():
         if node.data == node_1_data:
             node_1_lca_dist = node_level
             break
-    for node, node_level in lca_rooted_tree.bfs():
+    for (node, node_level, _) in lca_rooted_tree.bfs():
         if node.data == node_2_data:
             node_2_lca_dist = node_level
             break
