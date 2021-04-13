@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/given-an-array-a-and-a-number-x-check-for-pair-in-a-with-sum-as-x/
+# https://leetcode.com/problems/two-sum/
 
 from typing import List
 

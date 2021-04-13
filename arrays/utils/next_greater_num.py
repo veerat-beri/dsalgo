@@ -76,6 +76,7 @@ def run():
     num = '28765'
     # num = '321'
     num = '231'
+    num = '7895'
     num_arr = list(map(int, num))
     next_greater_num = get_next_greater_num(num_arr)
     # next_greater_num = get_next_greater_num(num_arr, use_time_optimised=True)

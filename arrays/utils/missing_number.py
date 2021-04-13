@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/find-the-missing-number/
+# https://leetcode.com/problems/missing-number/
 
 
 class MissingNumber:
