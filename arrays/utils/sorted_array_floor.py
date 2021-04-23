@@ -23,8 +23,8 @@ def get_floor_index_in_sorted_array(arr: [], searched_num):
         if searched_num < arr[mid] and mid > 0 and searched_num >= arr[mid - 1]:
             return mid - 1
 
-        if searched_num > arr[mid] and mid < arr_len and searched_num <= arr[mid + 1]:
-            return mid
+        # if searched_num > arr[mid] and mid < arr_len and searched_num <= arr[mid + 1]:
+        #     return mid
         ##############################
 
         if arr[mid] < searched_num:

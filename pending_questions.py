@@ -10,3 +10,10 @@
 # https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
 # https://www.geeksforgeeks.org/backtracking-set-1-the-knights-tour-problem/
 # https://www.geeksforgeeks.org/shortest-path-in-a-binary-maze/
+
+
+# https://www.geeksforgeeks.org/find-the-two-repeating-elements-in-a-given-array/
+# https://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/
+# https://www.geeksforgeeks.org/find-the-smallest-positive-number-missing-from-an-unsorted-array/
+
+# https://www.geeksforgeeks.org/given-an-array-of-numbers-arrange-the-numbers-to-form-the-biggest-number/
