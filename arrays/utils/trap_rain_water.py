@@ -2,6 +2,8 @@
 # https://www.geeksforgeeks.org/trapping-rain-water/
 # https://leetcode.com/problems/trapping-rain-water/
 
+from typing import List
+
 
 def get_trapped_water_volume(elevation_map):
     #############################################
@@ -26,8 +28,38 @@ def get_trapped_water_volume(elevation_map):
 
     return total_trapped_water
 
-    #############################################
-    # Space Optimized Solution
+
+#############################################
+# Space Optimized Solution
+#############################################
+def get_trapped_water_volume_optimized(height: List[int]) -> int:
+    arr_len = len(height)
+
+    left_ptr = 0
+    right_ptr = arr_len - 1
+
+    left_max = 0
+    right_max = 0
+    trapped_water_units = 0
+
+    while left_ptr < right_ptr:
+        if height[left_ptr] < height[right_ptr]:
+            if height[left_ptr] >= left_max:
+                left_max = height[left_ptr]
+            else:
+                trapped_water_units += left_max - height[left_ptr]
+
+            left_ptr += 1
+
+        else:
+            if height[right_ptr] >= right_max:
+                right_max = height[right_ptr]
+            else:
+                trapped_water_units += right_max - height[right_ptr]
+
+            right_ptr -= 1
+
+    return trapped_water_units
 
 
 # driver code

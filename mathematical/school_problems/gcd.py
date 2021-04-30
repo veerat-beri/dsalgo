@@ -19,8 +19,8 @@ def get_gcd(num1, num2):
 
 # driver code
 def run():
-    num1 = 12
-    num2 = 3
+    num1 = 16
+    num2 = 20
     print(f'Gcd of {num1} and {num2} is:', get_gcd(num1, num2))
 
 
