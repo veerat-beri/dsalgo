@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/
+# https://leetcode.com/problems/search-in-rotated-sorted-array/
 
 from arrays import binary_search
 

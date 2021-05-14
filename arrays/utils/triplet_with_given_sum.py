@@ -25,7 +25,7 @@ class TripletWithGivenSum(PairWithGivenSum):
 
     # Sorting based Approach
     def _using_sorting(self, required_sum):
-        # Time Complexity: O(N*logN + N^2) ~ O(N^2)
+        # Time Complexity: O(N*logN + N^2) ~= O(N^2)
         # Space Complexity: O(1)
         self.arr.sort()
         arr_index = 0

@@ -101,4 +101,4 @@ celerybeat-schedule.db
 competitions_questions/*
 !competitions_questions/.keep
 
-practise*.py
+#practise*.py
