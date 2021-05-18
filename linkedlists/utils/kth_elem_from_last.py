@@ -1,3 +1,7 @@
+# Problem Statement
+# https://www.geeksforgeeks.org/nth-node-from-the-end-of-a-linked-list/
+# https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
 from linkedlists import SinglyLinkedList, BuildSinglyLinkedList
 
 

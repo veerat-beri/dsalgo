@@ -1,6 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/
-
+# https://leetcode.com/problems/delete-n-nodes-after-m-nodes-of-a-linked-list/
 
 from linkedlists import SinglyLinkedList, BuildSinglyLinkedList
 

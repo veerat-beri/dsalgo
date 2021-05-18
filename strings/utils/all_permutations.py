@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+# https://leetcode.com/problems/permutations/solution/
 
 from strings.services import swap_chars
 
@@ -19,7 +20,9 @@ class StringPermutations:
         for str_index in range(fixed_index, self.str_len):
             if fixed_index != str_index and str_so_far[str_index] == str_so_far[fixed_index]:
                 continue
+
             swapped_str = swap_chars(str_so_far, fixed_index, str_index)
+
             for string in self._get_all_permutations_with_duplicates(swapped_str, fixed_index + 1):
                 yield string
 
