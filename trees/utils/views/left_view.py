@@ -12,10 +12,9 @@ from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 #
 #     ###############
 #     # 1st Approach: BFS
-#     def _left_view(node: BinaryTree.BinaryTreeNode, traversal_level):
+#     def _left_view(node: BinaryTree.BinaryTreeNode, traversal_level=0):
 #         bfs_queue = deque()
-#         bfs_queue.append((node, 0))
-#         yield node
+#         bfs_queue.append((node, 1))
 #
 #         while bfs_queue:
 #             node, node_level = bfs_queue.popleft()
@@ -36,7 +35,7 @@ from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 #                 bfs_queue.append((child, node_level + 1))
 #             ###############
 #
-#     for node in _left_view(tree.root(), 0):
+#     for node in _left_view(tree.root()):
 #         yield node
 #
 

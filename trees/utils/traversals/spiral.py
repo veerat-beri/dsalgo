@@ -1,28 +1,24 @@
-# Problem Statement
-# https://www.geeksforgeeks.org/zigzag-tree-traversal/
-
 from collections import deque
+from trees import LinkedBinaryTree, BuildLinkedBinaryTree
 
-from trees import BuildLinkedBinaryTree, LinkedBinaryTree
 
-
-def zigzag_traversal(binary_tree: LinkedBinaryTree, append_right_first=False, use_stacks=False):
+class SpiralTraversalMixin:
     ############################################################
     # Using 2 stacks
-    def _zigzag_traversal(root_node: LinkedBinaryTree.BinaryTreeNode):
+    def _using_stacks(self, root_node: LinkedBinaryTree.BinaryTreeNode):
         print('Using Stacks..')
 
         current_level_nodes = []
         next_level_nodes = []
 
         current_level_nodes.append(root_node)
-        flag = append_right_first
+        flag = self.append_right_first
 
         while current_level_nodes:
             current_node = current_level_nodes.pop(-1)
             yield current_node, flag
 
-            for child_node in binary_tree.children(current_node, reverse_iter=True if flag else False):
+            for child_node in self.binary_tree.children(current_node, reverse_iter=True if flag else False):
                 next_level_nodes.append(child_node)
 
             if not current_level_nodes:
@@ -31,10 +27,10 @@ def zigzag_traversal(binary_tree: LinkedBinaryTree, append_right_first=False, us
 
     ############################################################
     # Using 1 Deque
-    def _zig_zag_traversal(root_node: LinkedBinaryTree.BinaryTreeNode):
+    def _using_deque(self, root_node: LinkedBinaryTree.BinaryTreeNode):
         print('Using Deque..')
 
-        flag = append_right_first
+        flag = self.append_right_first
         bfs_queue = deque([root_node, None] if not flag else [None, root_node])
 
         while len(bfs_queue) > 1:
@@ -45,7 +41,7 @@ def zigzag_traversal(binary_tree: LinkedBinaryTree, append_right_first=False, us
                     flag = not flag
                     continue
 
-                for child_node in binary_tree.children(current_node, reverse_iter=True):
+                for child_node in self.binary_tree.children(current_node, reverse_iter=True):
                     bfs_queue.appendleft(child_node)
             else:
                 current_node = bfs_queue.popleft()
@@ -54,15 +50,26 @@ def zigzag_traversal(binary_tree: LinkedBinaryTree, append_right_first=False, us
                     flag = not flag
                     continue
 
-                for child_node in binary_tree.children(current_node):
+                for child_node in self.binary_tree.children(current_node):
                     bfs_queue.append(child_node)
 
             yield current_node, flag
     ############################################################
 
-    executing_func = _zigzag_traversal if use_stacks else _zig_zag_traversal
-    for node in executing_func(binary_tree.root()):
-        yield node
+
+# Problem Statement
+# https://www.geeksforgeeks.org/level-order-traversal-in-spiral-form/
+# https://www.geeksforgeeks.org/zigzag-tree-traversal/
+class SpiralTraversal(SpiralTraversalMixin):
+    def __init__(self, binary_tree: LinkedBinaryTree, append_right_first=False, use_stacks=False):
+        self.binary_tree = binary_tree
+        self.append_right_first = append_right_first
+        self.use_stacks = use_stacks
+
+    def traverse_nodes(self):
+        executing_func = self._using_stacks if self.use_stacks else self._using_deque
+        for node in executing_func(self.binary_tree.root()):
+            yield node
 
 
 # driver code
@@ -73,7 +80,16 @@ def run():
 
     print('ZigZag Traversal of above tree is: ')
     append_right_first = False
-    for node, level_bool in zigzag_traversal(binary_tree=binary_tree, append_right_first=append_right_first):
+    for node, level_bool in SpiralTraversal(binary_tree=binary_tree, append_right_first=append_right_first).traverse_nodes():
+        if level_bool != append_right_first:
+            print('\n', '=' * 15, sep='')
+            append_right_first = level_bool
+        print(node.data, end=' ')
+
+    print('\n\nSpiral Traversal of above tree is: ')
+    append_right_first = True
+    for node, level_bool in SpiralTraversal(binary_tree=binary_tree,
+                                            append_right_first=append_right_first).traverse_nodes():
         if level_bool != append_right_first:
             print('\n', '=' * 15, sep='')
             append_right_first = level_bool

@@ -30,6 +30,7 @@ def get_bst_inorder_predecessor(bst: LinkedBinarySearchTree, node: LinkedBinaryS
 
         return given_node_left_ancestor
 
+    # Ref: https://algorithmsandme.com/inorder-predecessor-in-binary-search-tree/
     def get_bst_inorder_predecessor_from_key():
         possible_inorder_predecessor = None
 

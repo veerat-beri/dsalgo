@@ -32,26 +32,28 @@
 
 # Sliding window approach
 # Seems to be O(n^2) approach, but is O(n) approach.
-def get_sub_array_with_given_sum(arr, given_sum):
-    if not len(arr):
-        return False
-
+def get_sub_array_with_given_sum(arr, given_sum) -> tuple:
+    arr_len = len(arr)
     start_of_sub_array = 0
     current_sum = arr[0]
     index = 1
 
-    while index <= len(arr):
-        while current_sum > given_sum and start_of_sub_array <= index:
+    while index <= arr_len:
+        while current_sum > given_sum and start_of_sub_array < index:
             current_sum -= arr[start_of_sub_array]
             start_of_sub_array += 1
 
         if current_sum == given_sum:
-            return True, (start_of_sub_array, index)
+            return start_of_sub_array, index
 
-        current_sum += arr[index]
+        if index < arr_len:
+            current_sum += arr[index]
         index += 1
 
-    return False
+    return ()
+
+# Problem Statement
+# https://www.geeksforgeeks.org/find-subarray-with-given-sum-in-array-of-integers/
 
 
 # driver code
@@ -60,10 +62,9 @@ def run():
     given_sum = 33
     print('Given Array: ', arr)
 
-    arr_exists = get_sub_array_with_given_sum(arr, given_sum)
-    if arr_exists:
-        start_pos, end_pos = arr_exists[1][0], arr_exists[1][1]
-        print(f'Sub array with sum({given_sum}) is: ', arr[start_pos: end_pos])
+    sub_arr_indices = get_sub_array_with_given_sum(arr, given_sum)
+    if sub_arr_indices:
+        print(f'Sub array with sum({given_sum}) is: ', arr[sub_arr_indices[0]: sub_arr_indices[1]])
 
 
 if __name__ == '__main__':

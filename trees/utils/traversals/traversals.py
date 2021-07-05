@@ -12,7 +12,7 @@ def print_bfs(binary_tree=None, bt_node=None):
     current_node_level = 0
     assert binary_tree or bt_node, 'Neither of node or binary-tree is provided'
 
-    for (node, node_level) in binary_tree.bfs(bt_node):
+    for (node, node_level, _) in binary_tree.bfs(bt_node):
         if node_level > current_node_level:
             print('\n=============')
             current_node_level = node_level

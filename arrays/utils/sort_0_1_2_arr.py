@@ -5,7 +5,8 @@
 # Time Complexity: O(N) (Single Traversal)
 # Space Complexity: O(1)
 # Using Dutch National Flag Algorithm, or 3-way Partitioning
-def get_sorted_arr_set_0_1_2(arr: []):
+# other ref: http://users.monash.edu/~lloyd/tildeAlgDS/Sort/Flag/
+def segregate_0_1_2(arr: []):
     arr_len = len(arr)
     zeros_index = 0
     ones_index = 0
@@ -30,8 +31,9 @@ def get_sorted_arr_set_0_1_2(arr: []):
 # driver code
 def run():
     arr = [0, 1, 1, 0, 1, 2, 1, 2, 2, 0, 0, 1]
-    print(f'Given array: {arr}')
-    print(f'array after sorting is: {get_sorted_arr_set_0_1_2(arr)}')
+    print(f'Given array: \n{arr}')
+    segregate_0_1_2(arr)
+    print(f'\nArray after segregating 0s, 1s and 2s: \n{arr}')
 
 
 if __name__ == '__main__':

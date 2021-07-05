@@ -23,13 +23,10 @@ class RecoverBST:
 
             _using_recursive(self.incorrect_bst.left(node))
 
-            if previous_node:
-                is_not_bst = previous_node.data > node.data
-                if is_not_bst and not (swap_node_1 and swap_node_2):
-                    if not swap_node_1:
-                        swap_node_1 = previous_node
-                    elif not swap_node_2:
-                        swap_node_2 = node
+            if previous_node and previous_node.data >= node.data:
+                swap_node_2 = node
+                if not swap_node_1:
+                    swap_node_1 = previous_node
                 else:
                     return
 

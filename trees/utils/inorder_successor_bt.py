@@ -16,7 +16,7 @@ def get_bt_inorder_successor(binary_tree: LinkedBinaryTree, node: LinkedBinaryTr
         given_node_data = given_node.data
         given_node_right_ancestor = None
 
-        def _get_bt_inorder_successor(current_node)-> bool:
+        def _get_bt_inorder_successor(current_node) -> bool:
             nonlocal given_node_right_ancestor
             if current_node is None:
                 return False

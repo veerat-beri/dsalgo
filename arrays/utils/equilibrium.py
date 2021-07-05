@@ -2,14 +2,16 @@
 # https://www.geeksforgeeks.org/equilibrium-index-of-an-array/
 
 
-# O(1) space and O(N) time solution
+# Time Complexity: O(N)
+# Space Complexity: O(1)
 def find_equilibrium(arr):
     arr_sum = sum(arr)
-    sum_when_traversing_from_left = 0
+    sum_so_far = 0
     for index in range(len(arr)):
-        if arr_sum - sum_when_traversing_from_left - arr[index] == sum_when_traversing_from_left:
-            return arr[index], index
-        sum_when_traversing_from_left += arr[index]
+        elem = arr[index]
+        if sum_so_far == arr_sum - sum_so_far - elem:
+            return index + 1
+        sum_so_far += elem
 
 
 def run():
@@ -17,9 +19,9 @@ def run():
     # arr = [1, 2, 3, 4]
     # arr = [-1, 2, -1, -1]
 
-    equilibrium_point = find_equilibrium(arr)
-    if equilibrium_point:
-        print(f'Equilibrium point is: {equilibrium_point[0]} \nat index {equilibrium_point[1]}')
+    equilibrium_index = find_equilibrium(arr)
+    if equilibrium_index:
+        print(f'Equilibrium point in {arr} is: \n{arr[equilibrium_index]} at index {equilibrium_index}')
     else:
         print('No Equilibrium exists!')
 

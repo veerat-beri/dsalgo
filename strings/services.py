@@ -9,11 +9,11 @@ def get_relative_ascii(char, use_upper_case=False) -> int:
 
 
 def swap_chars(string: str, swap_index_1: int, swap_index_2: int):
+    if swap_index_1 == swap_index_2:
+        return string
+
     smaller_index = swap_index_1 if swap_index_1 < swap_index_2 else swap_index_2
     larger_index = smaller_index ^ swap_index_1 ^ swap_index_2
-    new_str = string
 
-    if smaller_index != larger_index:
-        new_str = string[:smaller_index] + string[larger_index] + \
-                  string[smaller_index + 1: larger_index] + string[smaller_index] + string[larger_index + 1:]
-    return new_str
+    return string[:smaller_index] + string[larger_index] + string[smaller_index + 1: larger_index] + \
+        string[smaller_index] + string[larger_index + 1:]

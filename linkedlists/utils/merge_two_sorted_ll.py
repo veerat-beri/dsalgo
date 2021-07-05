@@ -1,11 +1,12 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/merge-two-sorted-linked-lists/
+# https://leetcode.com/problems/merge-two-sorted-lists/
 
 
 from linkedlists import BuildSinglyLinkedList, SinglyLinkedList
 
 
-def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: SinglyLinkedList=None, head_1=None, head_2=None, use_heads=False, **kwargs):
+def get_sorted_merged_ll(linked_list_1: SinglyLinkedList = None, linked_list_2: SinglyLinkedList = None, head_1 = None, head_2 = None, use_heads = False, **kwargs):
     current_node_of_ll_1 = head_1 if use_heads else linked_list_1.head
     current_node_of_ll_2 = head_2 if use_heads else linked_list_2.head
 
@@ -34,6 +35,7 @@ def get_sorted_merged_ll(linked_list_1: SinglyLinkedList=None, linked_list_2: Si
 
         ###############
         # Insert remaining nodes, in case given two linked lists are of unequal length.
+        # TODO: Optimize below code
         while current_node_of_ll_2:
             current_node_of_new_ll.next = current_node_of_ll_2
             current_node_of_ll_2 = current_node_of_ll_2.next
@@ -82,10 +84,10 @@ def run():
     print('Sorted Linked list-2: ')
     singly_ll_2.print_linked_list()
 
-    new_sorted_mergd_ll = SinglyLinkedList(head=get_sorted_merged_ll(singly_ll_1, singly_ll_2))
+    new_sorted_merged_ll = SinglyLinkedList(head=get_sorted_merged_ll(singly_ll_1, singly_ll_2))
 
     print('New sorted Linked list after merge: ')
-    new_sorted_mergd_ll.print_linked_list()
+    new_sorted_merged_ll.print_linked_list()
 
 
 if __name__ == '__main__':

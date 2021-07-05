@@ -1,5 +1,6 @@
 # Problem Statement
 # https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/
+# https://leetcode.com/problems/search-in-rotated-sorted-array/
 
 from arrays import binary_search
 
@@ -29,7 +30,7 @@ def get_arr_elem(arr: [], key: int):
     if pivoted_index:
         if arr[pivoted_index] == key:
             return pivoted_index
-        if key > arr[0]:
+        if key >= arr[0]:
             return binary_search(arr, 0, pivoted_index - 1, key)
         return binary_search(arr, pivoted_index + 1, arr_len - 1, key)
 
@@ -68,11 +69,12 @@ def get_arr_elem_optimised(arr: [], key: int):
 # driver code
 def run():
     arr = [5, 6, 7, 8, 9, 10, 1, 2, 3]
-    key = 3
-    elem_index = get_arr_elem_optimised(arr, key)
+    key = 5
+    # elem_index = get_arr_elem_optimised(arr, key)
+    elem_index = get_arr_elem(arr, key)
     print(f'Given array: {arr}')
 
-    if elem_index:
+    if elem_index is not None:
         print(f'Given element({key}) is found at index: {elem_index}')
     else:
         print(f'Element({key}) not found in arr')
